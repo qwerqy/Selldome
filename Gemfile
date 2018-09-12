@@ -30,6 +30,9 @@ gem 'jbuilder', '~> 2.5'
 # Clearance
 gem 'clearance'
 
+# Figaro
+gem 'figaro'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
