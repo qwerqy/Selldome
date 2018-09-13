@@ -1,3 +1,7 @@
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+</head>
 <div class="text-field form-group">
   <%= form.label :first_name %>
   <%= form.text_field :first_name, type: 'first_name', class: 'form-control' %>
@@ -10,18 +14,13 @@
 
 <div class="text-field form-group">
   <%= form.label :birthday %>
-  <%= form.date_select :birthday,
-  {
-    order: [:month, :day, :year],
-    prompt: {
-      day: 'Select day',
-      month: 'Select month',
-      year: 'Select year'
-    },
-    start_year: Date.today.year - 18, end_year: Date.today.year - 100
-  },
-  {required: true} %>
+  <%= form.text_field :birthday, type: 'birthday', class: 'form-control', id: 'datepicker'%>
 </div>
+
+<!-- <div class="text-field form-group">
+  <%= form.label :birthday %>
+  <%= form.text_field :birthday, type: 'birthday'%>
+</div> -->
 
 <div class="text-field form-group">
   <%= form.label :email %>
@@ -37,3 +36,9 @@
   <%= form.label :password %>
   <%= form.password_field :password, class: 'form-control' %>
 </div>
+
+<script>
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+</script>
