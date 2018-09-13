@@ -1,6 +1,12 @@
-<div id="clearance" class="sign-in">
-  <h2><%= t(".title") %></h2>
+<head>
+   <%= stylesheet_link_tag "sessions" if controller_name == "sessions" %>
+</head>
 
-  <%= render partial: '/sessions/form' %>
+<div class="container" id="signInBox">
+  <div id="clearance" class="sign-in">
+    <h2><%= t(".title") %></h2>
 
+    <%= render partial: '/sessions/form' %>
+
+  </div>
 </div>

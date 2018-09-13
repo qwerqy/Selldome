@@ -1,23 +1,23 @@
 <%= form_for :session, url: session_path do |form| %>
-  <div class="text-field">
+  <div class="text-field form-group">
     <%= form.label :email %>
-    <%= form.text_field :email, type: 'email' %>
+    <%= form.text_field :email, type: 'email', class: 'form-control' %>
   </div>
 
-  <div class="password-field">
+  <div class="password-field form-group">
     <%= form.label :password %>
-    <%= form.password_field :password %>
+    <%= form.password_field :password, class: 'form-control' %>
   </div>
 
-  <div class="submit-field">
-    <%= form.submit %>
+  <div class="submit-field list-inline">
+    <%= form.submit 'Sign In', class: 'btn btn-primary list-inline-item'%>
+    <%= link_to "Sign in with Google", "/auth/google_oauth2", class: 'btn btn-danger list-inline-item' %>
   </div>
 
-  <div class="other-links">
+  <div class="other-links list-inline mt-3">
     <% if Clearance.configuration.allow_sign_up? %>
-      <%= link_to t(".sign_up"), sign_up_path %>
-      <%= link_to "Sign in with Google", "/auth/google_oauth2" %>
+      <%= link_to t(".sign_up"), sign_up_path, class: 'list-inline-item' %>
     <% end %>
-    <%= link_to t(".forgot_password"), new_password_path %>
+    <%= link_to t(".forgot_password"), new_password_path, class: 'list-inline-item' %>
   </div>
 <% end %>
