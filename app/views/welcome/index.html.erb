@@ -1,2 +1,12 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<head>
+   <%= stylesheet_link_tag "welcome" if controller_name == "welcome" %>
+</head>
+
+<%= render partial: "shared/navbar-index" %>
+
+<div id="landingText" class="container">
+  <h1>I selldome go anywhere, so I am always here. </br>Thank  you, Selldome.</h1>
+  <form class="form my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+  </form>
+</div>
