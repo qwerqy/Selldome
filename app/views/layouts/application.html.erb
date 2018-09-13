@@ -6,8 +6,11 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </head>
 <body>
-
-  
+  <% if content_for?(:navbar) %>
+    <%= yield(:navbar) %>
+<% else %>
+  <%= render partial: "shared/navbar" %>
+<% end %>
 
   <div id="flash">
     <% flash.each do |key, value| -%>

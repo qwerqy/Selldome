@@ -2,8 +2,9 @@
    <%= stylesheet_link_tag "welcome" if controller_name == "welcome" %>
 </head>
 
-<%= render partial: "shared/navbar-index" %>
-
+<% content_for :navbar do %>
+  <%= render partial: "shared/navbar-index" %>
+<% end %>
 <div id="landingText" class="container">
   <h1>I selldome go anywhere, so I am always here. </br>Thank  you, Selldome.</h1>
   <form class="form my-2 my-lg-0">
