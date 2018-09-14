@@ -2,6 +2,8 @@
   <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
   <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
+
+<%= form_for @user do |form| %>
 <div class="text-field form-group">
   <%= form.label :first_name %>
   <%= form.text_field :first_name, type: 'first_name', class: 'form-control' %>
@@ -31,6 +33,11 @@
   <%= form.label :password %>
   <%= form.password_field :password, class: 'form-control' %>
 </div>
+
+<div class="submit-field form-group">
+  <%= form.submit "Sign Up", class: 'btn' %>
+</div>
+<% end %>
 
 <script>
     $('#datepicker').datepicker({
