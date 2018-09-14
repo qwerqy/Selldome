@@ -1,0 +1,16 @@
+<head>
+   <%= stylesheet_link_tag "home" if controller_name == "home" %>
+</head>
+<div class="container-fluid background-keep my-5 p-0">
+  <!-- Explore Selldome -->
+  <%= render partial: '/home/explore'%>
+
+  <!-- Home -->
+  <%= render partial: '/home/homes'%>
+
+  <!-- Restaurant -->
+  <%= render partial: '/home/restaurants'%>
+
+  <!-- Cafes -->
+  <%= render partial: '/home/cafes'%>
+</div>
