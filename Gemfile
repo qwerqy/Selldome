@@ -40,6 +40,9 @@ gem 'autoprefixer-rails'
 
 gem 'jquery-rails'
 
+# Act As Taggable
+gem 'acts-as-taggable-on'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
