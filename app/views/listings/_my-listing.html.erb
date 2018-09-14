@@ -1,0 +1,27 @@
+<div id="listings">
+  <% Listing.all.each do |listing| %>
+    <% if listing.user_id == current_user.id %>
+      <div class="card col-3 shadow">
+        <div class="card-body">
+          <h2 class="card-title"><%= listing.name %></h2>
+          <p class="card-text">
+            <%= simple_format truncate(listing.description, length: 300) %>
+          </p>
+          <p class="card-subtitle text-muted">
+            <%= listing.location %>
+          </p>
+          <p class="card-text">
+            <%= listing.property_type%>
+          </p>
+          <p class="card-text">
+            RM<%= listing.price%>
+          </p>
+          <p class="card-text">
+            <%= listing.size%>
+          </p>
+          <p class="font-weight-bold text-muted">Tags: <%= listing.tag_list %></p>
+        </div>
+      </div>
+    <% end %>
+<% end %>
+</div>
