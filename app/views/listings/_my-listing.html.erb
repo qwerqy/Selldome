@@ -1,7 +1,8 @@
 <div id="listings">
+  <div class="row">
   <% Listing.all.each do |listing| %>
     <% if listing.user_id == current_user.id %>
-      <div class="card col-3 shadow">
+      <div class="card col-3 shadow m-3">
         <div class="card-body">
           <h2 class="card-title"><%= listing.name %></h2>
           <p class="card-text">
@@ -23,5 +24,6 @@
         </div>
       </div>
     <% end %>
-<% end %>
+  <% end %>
+  </div>
 </div>
