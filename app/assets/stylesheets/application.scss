@@ -1,0 +1,74 @@
+@import "bootstrap";
+
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+body {
+  color: #424242;
+}
+
+#signInBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)!important;
+  width: 30%!important;
+}
+
+#signUpBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)!important;
+  width: 30%!important;
+}
+
+#navbar {
+  outline-style: solid;
+  outline-color: #eeeeee;
+  outline-width: medium;
+}
+
+#navbar a {
+  text-decoration: none;
+  color: #424242;
+  // font-weight: bold;
+}
+
+.tag-container {
+  width: 200px;
+}
+
+.tag-container p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+.background-keep {
+  width: 90%;
+  margin: auto;
+
+}
+
+.first {
+  margin-left: 0!important;
+}
+
+.last {
+  margin-right: 0!important;
+}

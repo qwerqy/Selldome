@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'welcome/index'
+  get 'home/index'
+
+  root 'welcome#index'
+
+
   resources :passwords, controller: "passwords", only: [:create, :new]
   resource :session, controller: "sessions", only: [:create]
 
@@ -9,9 +15,7 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
   end
 
-  get 'welcome/index'
 
-  root 'welcome#index'
 
   get "/sign_in" => "sessions#new", as: "sign_in"
   delete "/sign_out" => "sessions#destroy", as: "sign_out"
