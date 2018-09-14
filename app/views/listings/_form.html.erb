@@ -1,0 +1,40 @@
+<%= form_for @listing do |form| %>
+<div class="text-field form-group">
+  <%= form.label :name %>
+  <%= form.text_field :name, placeholder: 'Your property name...', type: 'name', class: 'form-control' %>
+</div>
+
+<div class="text-field form-group">
+  <%= form.label :location %>
+  <%= form.text_field :location, placeholder: 'Your property location...', type: 'location', class: 'form-control' %>
+</div>
+
+<div class="text-field form-group">
+  <%= form.label :price %>
+  <%= form.text_field :price, placeholder: 'How much is rent per month...', type: 'price', class: 'form-control' %>
+</div>
+
+<div class="text-field form-group">
+  <%= form.label :property_type %>
+  <%= form.text_field :property_type, placeholder: 'Your property type...', type: 'property_type', class: 'form-control' %>
+</div>
+
+<div class="text-field form-group">
+  <%= form.label :description %>
+  <%= form.text_field :description, placeholder: 'Describe something about your listing...', type: 'description', class: 'form-control' %>
+</div>
+
+<div class="text-field form-group">
+  <%= form.label :size %>
+  <%= form.text_field :size, placeholder: 'How big is your unit...', type: 'size', class: 'form-control' %>
+</div>
+
+<div class='text-field form-group'>
+    <%= form.label :tag_list, 'Tags (separated by commas)' %><br/>
+    <%= form.text_field :tag_list, type: 'tag_list', class: 'form-control' %>
+</div>
+
+<div class="submit-field form-group">
+  <%= form.submit "Create", class: 'btn' %>
+</div>
+<% end %>
