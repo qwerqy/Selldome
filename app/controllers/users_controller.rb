@@ -13,6 +13,22 @@ class UsersController < Clearance::UsersController
     end
   end
 
+  def edit
+    if current_user
+      @user = User.find(params[:id])
+    else
+      redirect_to root_path
+    end
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update.attributes(user_params)
+      redirect_to @user
+    else
+      render :edit
+    end
+  end
   private
 
   def user_from_params
