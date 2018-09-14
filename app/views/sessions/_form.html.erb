@@ -16,8 +16,8 @@
 
   <div class="other-links list-inline mt-3">
     <% if Clearance.configuration.allow_sign_up? %>
-      <%= link_to t(".sign_up"), sign_up_path, class: 'list-inline-item' %>
+      <%= link_to 'Sign Up', sign_up_path , remote: true, data: { target: '#signUpBox', toggle: 'modal' }, class: 'list-inline-item'%>
     <% end %>
-    <%= link_to t(".forgot_password"), new_password_path, class: 'list-inline-item' %>
+      <%= link_to t(".forgot_password"), new_password_path, class: 'list-inline-item' %>
   </div>
 <% end %>
