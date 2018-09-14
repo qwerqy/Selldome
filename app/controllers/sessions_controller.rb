@@ -20,4 +20,17 @@ class SessionsController < Clearance::SessionsController
     sign_in(user)
     redirect_to @next, :notice => @notice
   end
+
+  def new
+   # render template: "sessions/new"
+   respond_to do |format|
+     format.html
+     format.js
+   end
+  end
+
+  def url_after_destroy
+    root_url
+  end
+
 end
