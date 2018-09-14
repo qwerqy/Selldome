@@ -10,13 +10,11 @@
         <a class="nav-link font-weight-bold" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <div id="header" class="btn">
-          <% if signed_in? -%>
-            <%= button_to(t(".sign_out"), sign_out_path, method: :delete, class: "btn p-0 bg-transparent font-weight-bold") %>
-          <% else -%>
-            <%= link_to t(".sign_in"), sign_in_path, class: "btn p-0 font-weight-bold" %>
-          <% end -%>
-        </div>
+        <% if signed_in? -%>
+          <%= button_to(t(".sign_out"), sign_out_path, method: :delete, class: "btn p-0 bg-transparent font-weight-bold") %>
+        <% else -%>
+          <%= link_to 'Sign In', sign_in_path , remote: true, data: { target: '#modal-signin', toggle: 'modal' }, class: 'font-weight-bold nav-link'%>
+        <% end -%>
       </li>
     </ul>
   </div>
