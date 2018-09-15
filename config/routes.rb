@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/my-listings/new' => 'listings#new', as: "new_listing"
   post '/my-listings(.:format)' => 'listings#create'
   get '/my-listings/:id/edit' => 'listings#edit', as: "edit_listing"
+  get '/get_property_from_place_type' => 'listings#property_from_place_type'
 
   # Password Route
   resources :passwords, controller: "passwords", only: [:create, :new]
