@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/home' => 'home#index', as: "home"
 
   # Listings Routes
-  resources :listings, controller: "listings", only: [:create, :update]
+  resources :listings, controller: "listings", only: [:destroy, :create, :update]
   get '/my-listings' => 'listings#index', as: "my_listings"
   get '/my-listings/new' => 'listings#new', as: "new_listing"
   post '/my-listings(.:format)' => 'listings#create'
