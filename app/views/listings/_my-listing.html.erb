@@ -20,9 +20,11 @@
           <p class="card-text">
             <%= listing.size%>
           </p>
-          <p class="font-weight-bold text-muted">Tags: <%= listing.tag_list %></p>
+          <hr>
+            <a class="" href="/my-listings/<%=listing.id%>/edit">Edit</a>
+            <p class="mt-2 text-muted">Tags: <%= listing.tag_list %></p>
+          </div>
         </div>
-      </div>
     <% end %>
   <% end %>
   </div>
