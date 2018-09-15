@@ -6,7 +6,7 @@
 <%= form_for @user do |form| %>
 <div class="text-field form-group">
   <%= form.label :first_name %>
-  <%= form.text_field :first_name, type: 'first_name', class: 'form-control' %>
+  <%= form.text_field :first_name, type: 'first_name', placeholder: '', class: 'form-control' %>
 </div>
 
 <div class="text-field form-group">
@@ -17,11 +17,6 @@
 <div class="text-field form-group">
   <%= form.label :birthday %>
   <%= form.text_field :birthday, type: 'birthday', class: 'form-control', id: 'datepicker'%>
-</div>
-
-<div class="text-field form-group">
-  <%= form.label :country %>
-  <%= form.country_select :country, type: 'country', class: 'form-control'%>
 </div>
 
 <div class="text-field form-group">
@@ -40,7 +35,7 @@
 </div>
 
 <div class="submit-field form-group">
-  <%= form.submit "Sign Up", class: 'btn' %>
+  <%= form.submit "Save Changes", class: 'btn' %>
 </div>
 <% end %>
 
