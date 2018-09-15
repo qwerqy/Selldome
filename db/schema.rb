@@ -27,11 +27,18 @@ ActiveRecord::Schema.define(version: 2018_09_14_095506) do
 
   create_table "listings", force: :cascade do |t|
     t.string "name"
-    t.string "location"
+    t.integer "place_type"
+    t.string "property_type"
+    t.string "room_number"
+    t.string "bathroom_number"
+    t.string "guest_number"
+    t.string "country"
+    t.string "state"
+    t.string "city"
+    t.string "zipcode"
+    t.string "address"
     t.decimal "price"
     t.string "description"
-    t.string "size"
-    t.string "property_type"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -70,7 +77,9 @@ ActiveRecord::Schema.define(version: 2018_09_14_095506) do
     t.string "last_name"
     t.date "birthday"
     t.string "email", null: false
+    t.integer "gender"
     t.string "phone"
+    t.string "country"
     t.string "encrypted_password", limit: 128, null: false
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128, null: false
