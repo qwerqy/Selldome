@@ -21,7 +21,7 @@
 
 <div class="text-field form-group">
   <%= form.label :description %>
-  <%= form.text_area :description, placeholder: 'Describe something about your listing...', type: 'description', class: 'form-control' %>
+  <%= form.text_area :description, placeholder: 'Describe something about your listing...', type: 'description', class: 'form-control', input_html: {'rows': 5} %>
 </div>
 
 <div class="text-field form-group">
@@ -35,6 +35,6 @@
 </div>
 
 <div class="submit-field form-group">
-  <%= form.submit "Create", class: 'btn' %>
+  <%= form.submit "Save Changes", class: 'btn' %>
 </div>
 <% end %>
