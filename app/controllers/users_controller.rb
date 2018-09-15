@@ -13,9 +13,15 @@ class UsersController < Clearance::UsersController
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+    render template: 'users/profile'
+  end
+
   def edit
     if current_user
       @user = User.find(params[:id])
+      render template: 'users/edit'
     else
       redirect_to root_path
     end
@@ -23,8 +29,8 @@ class UsersController < Clearance::UsersController
 
   def update
     @user = User.find(params[:id])
-    if @user.update.attributes(user_params)
-      redirect_to @user
+    if @user.update_attributes(user_params)
+      redirect_to profile_path
     else
       render :edit
     end
@@ -34,6 +40,8 @@ class UsersController < Clearance::UsersController
   def user_from_params
     first_name = user_params.delete(:first_name)
     last_name = user_params.delete(:last_name)
+    country = user_params.delete(:country)
+    gender = user_params.delete(:gender)
     birthday = user_params.delete(:birhday)
     email = user_params.delete(:email)
     password = user_params.delete(:password)
@@ -41,6 +49,8 @@ class UsersController < Clearance::UsersController
     Clearance.configuration.user_model.new(user_params).tap do |user|
       user.first_name = first_name
       user.last_name = last_name
+      user.country = country
+      user.gender = country
       user.birthday = birthday
       user.email = email
       user.password = password
@@ -52,6 +62,8 @@ class UsersController < Clearance::UsersController
         .permit(
           :first_name,
           :last_name,
+          :country,
+          :gender,
           :birthday,
           :email,
           :phone,

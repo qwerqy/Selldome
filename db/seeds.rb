@@ -1,24 +1,48 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Seed Users
+user = {}
+user['password'] = 'asdf'
+user['password_confirmation'] = 'asdf'
 
-User.create(first_name: 'Amin', last_name: 'Roslan', email: 'amnrsln@gmail.com', phone: '0123456789', password: 'amin123')
+ActiveRecord::Base.transaction do
+  20.times do
+    user['first_name'] = Faker::Name.first_name
+    user['last_name'] = Faker::Name.last_name
+    user['email'] = Faker::Internet.email
+    user['gender'] = rand(1..2)
+    user['phone'] = Faker::PhoneNumber.phone_number
+    user['country'] = Faker::Address.country
+    user['birthday'] = Faker::Date.between(50.years.ago, Date.today)
 
-Listing.create(
-  name: 'Studio Unit, M-City',
-  location: 'M-City, Jalan Ampang, Kuala Lumpur',
-  price: 1200,
-  description: "Like a megapolis of people and trees rising up in the air,
-  M City certainly makes an impression. Poised to be the next property hotspot,
-  M City will set a new benchmark as the most iconic tower in the Ampang area.
-  With parks, streams and sky bridges high up in the air,
-  the most exciting garden city development in Kuala Lumpur creates an all-new natural living experience.
-  Its location on the Embassy Row @ Jalan Ampang makes it particularly appealing to the thriving local and
-  international community. And by being just 5km away from KLCC, you won’t be far away from the epicentre of
-  Malaysia’s premier economic landmark.",
-  size: '1200sqf'
-)
+    User.create(user)
+  end
+end
+
+# Seed Listings
+listing = {}
+uids = []
+User.all.each { |u| uids << u.id }
+
+ActiveRecord::Base.transaction do
+  40.times do
+    listing['name'] = Faker::App.name
+    listing['place_type'] = rand(1..3)
+    listing['property_type'] = ["House", "Entire Floor", "Condominium", "Villa", "Townhouse", "Castle", "Treehouse", "Igloo", "Yurt", "Cave", "Chalet", "Hut", "Tent", "Other"].sample
+
+    listing['room_number'] = rand(0..5)
+    listing['bathroom_number'] = rand(1..6)
+    listing['guest_number'] = rand(1..10)
+
+    listing['country'] = Faker::Address.country
+    listing['state'] = Faker::Address.state
+    listing['city'] = Faker::Address.city
+    listing['zipcode'] = Faker::Address.zip_code
+    listing['address'] = Faker::Address.street_address
+
+    listing['price'] = rand(80..500)
+    listing['description'] = Faker::Hipster.sentence
+
+    listing['user_id'] = uids.sample
+
+    Listing.create(listing)
+  end
+end

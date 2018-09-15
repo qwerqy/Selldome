@@ -43,6 +43,12 @@ gem 'jquery-rails'
 # Act As Taggable
 gem 'acts-as-taggable-on'
 
+# Faker
+gem 'faker'
+
+# Country-Select
+gem 'country_select', '~> 3.1'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

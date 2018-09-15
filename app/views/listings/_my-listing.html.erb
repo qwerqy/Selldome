@@ -9,7 +9,6 @@
             <%= simple_format truncate(listing.description, length: 300) %>
           </p>
           <p class="card-subtitle text-muted">
-            <%= listing.location %>
           </p>
           <p class="card-text">
             <%= listing.property_type%>
@@ -18,11 +17,12 @@
             RM<%= listing.price%>
           </p>
           <p class="card-text">
-            <%= listing.size%>
           </p>
-          <p class="font-weight-bold text-muted">Tags: <%= listing.tag_list %></p>
+          <hr>
+            <a class="" href="/my-listings/<%=listing.id%>/edit">Edit</a>
+            <p class="mt-2 text-muted">Tags: <%= listing.tag_list %></p>
+          </div>
         </div>
-      </div>
     <% end %>
   <% end %>
   </div>
