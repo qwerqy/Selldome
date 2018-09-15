@@ -14,6 +14,12 @@
   <%= form.text_field :last_name, type: 'last_name', class: 'form-control' %>
 </div>
 
+<div class="field form-group">
+  <%= form.label :gender %></br>
+  <span class="option p-3">Male<span> <%= form.radio_button :gender, 1 %>
+  <span class="option p-3">Female<span> <%= form.radio_button :gender, 2 %>
+</div>
+
 <div class="text-field form-group">
   <%= form.label :birthday %>
   <%= form.text_field :birthday, type: 'birthday', class: 'form-control', id: 'datepicker'%>
