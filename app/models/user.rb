@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include Clearance::User
+
   has_many :authentications, dependent: :destroy
   has_many :listings
 
@@ -20,5 +21,9 @@ class User < ApplicationRecord
  def google_token
    x = self.authentications.find_by(provider: 'google_oauth2')
    return x.token unless x.nil?
+ end
+
+ def name
+   "#{self.first_name} #{self.last_name}"
  end
 end
