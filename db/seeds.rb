@@ -1,7 +1,7 @@
 # Seed Users
 user = {}
 user['password'] = 'asdf'
-user['password_confirmation'] = 'asdf'
+# user['password_confirmation'] = 'asdf'
 
 ActiveRecord::Base.transaction do
   20.times do
