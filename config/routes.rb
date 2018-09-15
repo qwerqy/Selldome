@@ -6,11 +6,11 @@ Rails.application.routes.draw do
   get '/home' => 'home#index', as: "home"
 
   # Listings Routes
-  resources :listings, controller: "listings", only: [:create]
+  resources :listings, controller: "listings", only: [:create, :update]
   get '/my-listings' => 'listings#index', as: "my_listings"
   get '/my-listings/new' => 'listings#new', as: "new_listing"
-  post '/my-listing(.:format)' => 'listings#create'
-  get '/my-listing/:id/edit' => 'listing#edit', as: "edit_listing"
+  post '/my-listings(.:format)' => 'listings#create'
+  get '/my-listings/:id/edit' => 'listings#edit', as: "edit_listing"
 
   # Password Route
   resources :passwords, controller: "passwords", only: [:create, :new]
@@ -22,7 +22,8 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
   end
   get "/sign_up" => "users#new", as: "sign_up"
-  get "/edit_user" => "users#edit", as: "edit_user"
+  get "/profile/:id" => "users#show", as: "profile"
+  get "/profile/:id/edit" => "users#edit", as: "user_edit"
 
   # Sessions Routes
   resource :session, controller: "sessions", only: [:create]
