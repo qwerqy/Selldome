@@ -39,6 +39,12 @@ class ListingsController < ApplicationController
     end
   end
 
+  def destroy
+    @listing = Listing.find(params[:id])
+    @listing.destroy
+    redirect_to my_listings_path
+  end
+
   def property_from_place_type
     place = params[:place_type]
     if place == '1'
