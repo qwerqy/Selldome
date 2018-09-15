@@ -4,9 +4,83 @@
   <%= form.text_field :name, placeholder: 'Your property name...', type: 'name', class: 'form-control' %>
 </div>
 
-<div class="text-field form-group">
-  <%= form.label :location %>
-  <%= form.text_field :location, placeholder: 'Your property location...', type: 'location', class: 'form-control' %>
+<div class="field form-group">
+  <%= form.label :place_type %>
+  <select class="form-control" name='listing[place_type]' id='listing_place_type'>
+    <option value="0">Select One</option>
+    <option value="1">Apartment</option>
+    <option value="2">House</option>
+    <option value="3">Secondary Unit</option>
+    <option value="4">Unique Space</option>
+    <option value="5">Boutique Hotel</option>
+    <option value="6">Restaurant</option>
+    <option value="7">Cafe</option>
+  </select>
+</div>
+
+<div class="field form-group">
+  <%= form.label :property_type %>
+  <%= form.select :property_type, options_for_select(['Select']), { include_blank: true} , {id: 'listing_property_type', class: "form-control" } %>
+</div>
+
+<div class="field form-group">
+  <%= form.label :room_number %>
+  <select class="form-control" name='listing[room_number]' id='listing_room_number'>
+    <option value="Studio">Studio</option>
+    <% i = 0 %>
+    <% while i <= 50 do%>
+    <option value='<%= i %>'><%= i %></option>
+    <% i += 1 %>
+    <% end %>
+  </select>
+</div>
+
+<div class="field form-group">
+  <%= form.label :bathroom_number %>
+  <select class="form-control" name='listing[bathroom_number]' id='listing_bathroom_number'>
+    <% i = 0 %>
+    <% while i <= 10 do%>
+    <option value='<%= i %>'><%= i %></option>
+    <% i += 1 %>
+    <% end %>
+  </select>
+</div>
+
+<div class="field form-group">
+  <%= form.label :guest_number %>
+  <select class="form-control" name='listing[guest_number]' id='listing_guest_number'>
+    <% i = 0 %>
+    <% while i <= 15 do%>
+    <option value='<%= i %>'><%= i %></option>
+    <% i += 1 %>
+    <% end %>
+    <option value="16+">16+</option>
+  </select>
+</div>
+
+<div class="field form-group">
+  <%= form.label :country %>
+  <%= form.country_select :country, priority_countries = ["United States"], options = {}, html_options = {:class => "form-control", :id => "listing_country"} %>
+</div>
+
+<div class="field form-group">
+  <%= form.label :state %>
+  <%= form.text_field :state, placeholder: 'State', type: 'state', class: 'form-control' %>
+</div>
+
+<div class="field form-group">
+  <%= form.label :city %>
+  <%= form.text_field :city, placeholder: 'City', type: 'city', class: 'form-control' %>
+</div>
+
+<div class="field form-group">
+  <%= form.label :zipcode %>
+  <%= form.text_field :zipcode, placeholder: 'Zipcode', type: 'zipcode', class: 'form-control' %>
+</div>
+
+<div class="field form-group">
+  <%= form.label :address %>
+  <%= form.text_field :address, placeholder: 'Address', type: 'address', class: 'form-control' %>
 </div>
 
 <div class="text-field form-group">
@@ -14,19 +88,10 @@
   <%= form.text_field :price, placeholder: 'How much is rent per month...', type: 'price', class: 'form-control' %>
 </div>
 
-<div class="text-field form-group">
-  <%= form.label :property_type %>
-  <%= form.text_field :property_type, placeholder: 'Your property type...', type: 'property_type', class: 'form-control' %>
-</div>
 
 <div class="text-field form-group">
   <%= form.label :description %>
-  <%= form.text_area :description, placeholder: 'Describe something about your listing...', type: 'description', class: 'form-control', input_html: {'rows': 5} %>
-</div>
-
-<div class="text-field form-group">
-  <%= form.label :size %>
-  <%= form.text_field :size, placeholder: 'How big is your unit...', type: 'size', class: 'form-control' %>
+  <%= form.text_area :description, placeholder: 'Describe something about your listing...', type: 'description', class: 'form-control' %>
 </div>
 
 <div class='text-field form-group'>

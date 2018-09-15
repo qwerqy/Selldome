@@ -8,19 +8,19 @@
   <%= form.label :place_type %>
   <select class="form-control" name='listing[place_type]' id='listing_place_type'>
     <option value="0">Select One</option>
-    <option value="Apartment">Apartment</option>
-    <option value="House">House</option>
-    <option value="Secondary Unit">Secondary Unit</option>
-    <option value="Unique Space">Unique Space</option>
-    <option value="Boutique Hotel">Boutique Hotel</option>
-    <option value="Restaurant">Restaurant</option>
-    <option value="Cafe">Cafe</option>
+    <option value="1">Apartment</option>
+    <option value="2">House</option>
+    <option value="3">Secondary Unit</option>
+    <option value="4">Unique Space</option>
+    <option value="5">Boutique Hotel</option>
+    <option value="6">Restaurant</option>
+    <option value="7">Cafe</option>
   </select>
 </div>
 
 <div class="field form-group">
   <%= form.label :property_type %>
-  <%= render partial: 'listings/form-property-type'%>
+  <%= form.select :property_type, options_for_select(['Select']), { include_blank: true} , {id: 'listing_property_type', class: "form-control" } %>
 </div>
 
 <div class="field form-group">
@@ -65,18 +65,22 @@
 
 <div class="field form-group">
   <%= form.label :state %>
+  <%= form.text_field :state, placeholder: 'State', type: 'state', class: 'form-control' %>
 </div>
 
 <div class="field form-group">
   <%= form.label :city %>
+  <%= form.text_field :city, placeholder: 'City', type: 'city', class: 'form-control' %>
 </div>
 
 <div class="field form-group">
   <%= form.label :zipcode %>
+  <%= form.text_field :zipcode, placeholder: 'Zipcode', type: 'zipcode', class: 'form-control' %>
 </div>
 
 <div class="field form-group">
   <%= form.label :address %>
+  <%= form.text_field :address, placeholder: 'Address', type: 'address', class: 'form-control' %>
 </div>
 
 <div class="text-field form-group">
