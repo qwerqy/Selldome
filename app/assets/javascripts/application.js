@@ -18,32 +18,38 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-$(document).ready(function(){
-  $('#listing_place_type').change(function(){
-    let type = $(this).val();
-    if (type == 'Apartment') {
-      $('#listing_property_type').html($('#listing_property_type_apartment').html())
+  $(document).on("turbolinks:load", function() {
+    function populate_property_type(place) {
+      $.get('/get_property_from_place_type', {place_type: place}, function(data){
+        let $property_type = $('#listing_property_type');
+        $property_type.empty();
+        for (i = 0; i < data.property_type.length; i++) {
+          $property_type.append("<option value='" + data.property_type[i] + "'>" + data.property_type[i] + '</option>');
+        }
+      }, "json");
     }
-    else if (type == 'House') {
-      $('#listing_property_type').html($('#listing_property_type_house').html())
-    }
-    else if (type == 'Secondary Unit') {
-      $('#listing_property_type').html($('#listing_property_type_secondary_unit').html())
-    }
-    else if (type == 'Unique Space') {
-      $('#listing_property_type').html($('#listing_property_type_unique_space').html())
-    }
-    else if (type == 'Boutique Hotel') {
-      $('#listing_property_type').html($('#listing_property_type_boutique_hotel').html())
-    }
-    else if (type == 'Restaurant') {
-      $('#listing_property_type').html($('#listing_property_type_restaurant').html())
-    }
-    else if (type == 'Cafe') {
-      $('#listing_property_type').html($('#listing_property_type_cafe').html())
-    }
-    else {
-      $('#listing_property_type').html($('#listing_property_type_none').html())
-    }
-  })
-})
+    $('#listing_place_type').change(function(){
+      let val = $(this).val();
+      if (val == 1) {
+        populate_property_type(1);
+      }
+      else if (val == 2) {
+        populate_property_type(2);
+      }
+      else if (val == 3) {
+        populate_property_type(3);
+      }
+      else if (val == 4) {
+        populate_property_type(4);
+      }
+      else if (val == 5) {
+        populate_property_type(5);
+      }
+      else if (val == 6) {
+        populate_property_type(6);
+      }
+      else if (val == 7) {
+        populate_property_type(7);
+      }
+    });
+  });
