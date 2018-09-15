@@ -1,54 +1,73 @@
 <%= form_for @listing do |form| %>
-<div class="text-field form-group">
-  <%= form.label :name %>
-  <%= form.text_field :name, placeholder: 'Your property name...', type: 'name', class: 'form-control' %>
+<div class="text-field form-group col-3 p-0">
+  <%= form.label :name, "Name" %>
+  <%= form.text_field :name, placeholder: "#{@listing.name}", type: 'name', class: 'form-control' %>
 </div>
 
-<div class="field form-group">
-  <%= form.label :place_type %>
-  <select class="form-control" name='listing[place_type]' id='listing_place_type'>
-    <option value="0">Select One</option>
-    <option value="1">Apartment</option>
-    <option value="2">House</option>
-    <option value="3">Secondary Unit</option>
-    <option value="4">Unique Space</option>
-    <option value="5">Boutique Hotel</option>
-    <option value="6">Restaurant</option>
-    <option value="7">Cafe</option>
-  </select>
-</div>
+<ul class="list-inline m-0">
+  <li class="list-inline-item col-2 p-0">
+    <div class="field form-group">
+      <%= form.label :place_type, "Choose One" %>
+      <select class="form-control" name='listing[place_type]' id='listing_place_type'>
+        <option value="<%=@listing.place_type%>"><%=@listing.place_type_string%></option>
+        <option disabled>-----------------------------------------------</option>
+        <option value="1">Apartment</option>
+        <option value="2">House</option>
+        <option value="3">Secondary Unit</option>
+        <option value="4">Unique Space</option>
+        <option value="5">Boutique Hotel</option>
+        <option value="6">Restaurant</option>
+        <option value="7">Cafe</option>
+      </select>
+    </div>
+  </li>
+
+  <li class="list-inline-item col-2 p-0">
+    <div class="field form-group">
+      <%= form.label :property_type %>
+      <%= form.select :property_type, options_for_select(["#{@listing.property_type}"]), { include_blank: false} , {id: 'listing_property_type', class: "form-control" } %>
+    </div>
+  </li>
+</ul>
+
+<ul class="list-inline m-0">
+  <li class="list-inline-item">
+    <div class="field form-group">
+      <%= form.label :room_number, "How many bedrooms are there?" %>
+      <select class="form-control col-6" name='listing[room_number]' id='listing_room_number'>
+        <option value="<%= @listing.room_number %>"><%= @listing.room_number%></option>
+        <option disabled>--------------</option>
+        <option value="Studio">Studio</option>
+        <% i = 0 %>
+        <% while i <= 50 do%>
+        <option value='<%= i %>'><%= i %></option>
+        <% i += 1 %>
+        <% end %>
+      </select>
+    </div>
+  </li>
+
+  <li class="list-inline-item">
+    <div class="field form-group ml-5">
+      <%= form.label :bathroom_number, "How many bathrooms are there?" %>
+      <select class="form-control col-6" name='listing[bathroom_number]' id='listing_bathroom_number'>
+        <option value="<%= @listing.bathroom_number %>"><%= @listing.bathroom_number%></option>
+        <% i = 0 %>
+        <% while i <= 10 do%>
+        <option value='<%= i %>'><%= i %></option>
+        <% i += 1 %>
+        <% end %>
+      </select>
+    </div>
+  </li>
+</ul>
+
+<hr/>
 
 <div class="field form-group">
-  <%= form.label :property_type %>
-  <%= form.select :property_type, options_for_select(['Select']), { include_blank: true} , {id: 'listing_property_type', class: "form-control" } %>
-</div>
-
-<div class="field form-group">
-  <%= form.label :room_number %>
-  <select class="form-control" name='listing[room_number]' id='listing_room_number'>
-    <option value="Studio">Studio</option>
-    <% i = 0 %>
-    <% while i <= 50 do%>
-    <option value='<%= i %>'><%= i %></option>
-    <% i += 1 %>
-    <% end %>
-  </select>
-</div>
-
-<div class="field form-group">
-  <%= form.label :bathroom_number %>
-  <select class="form-control" name='listing[bathroom_number]' id='listing_bathroom_number'>
-    <% i = 0 %>
-    <% while i <= 10 do%>
-    <option value='<%= i %>'><%= i %></option>
-    <% i += 1 %>
-    <% end %>
-  </select>
-</div>
-
-<div class="field form-group">
-  <%= form.label :guest_number %>
-  <select class="form-control" name='listing[guest_number]' id='listing_guest_number'>
+  <%= form.label :guest_number, "How many guests can stay?" %>
+  <select class="form-control col-1 p-0" name='listing[guest_number]' id='listing_guest_number'>
+    <option value="<%= @listing.guest_number %>"><%= @listing.guest_number%></option>
     <% i = 0 %>
     <% while i <= 15 do%>
     <option value='<%= i %>'><%= i %></option>
@@ -58,45 +77,56 @@
   </select>
 </div>
 
-<div class="field form-group">
+<hr/>
+
+<div class="field form-group col-6 p-0">
+  <%= form.label :address %>
+  <%= form.text_field :address, placeholder: "#{@listing.address}", type: 'address', class: 'form-control' %>
+</div>
+
+<ul class="list-inline m-0">
+  <li class="list-inline-item col-2 p-0">
+    <div class="field form-group">
+      <%= form.label :state %>
+      <%= form.text_field :state, placeholder: "#{@listing.state}", type: 'state', class: 'form-control' %>
+    </div>
+  </li>
+
+  <li class="list-inline-item col-2 p-0">
+    <div class="field form-group">
+      <%= form.label :city %>
+      <%= form.text_field :city, placeholder: "#{@listing.city}", type: 'city', class: 'form-control' %>
+    </div>
+  </li>
+
+  <li class="list-inline-item col-2 p-0">
+    <div class="field form-group">
+      <%= form.label :zipcode %>
+      <%= form.text_field :zipcode, placeholder: "#{@listing.zipcode}", type: 'zipcode', class: 'form-control' %>
+    </div>
+  </li>
+</ul>
+<div class="field form-group col-2 p-0">
   <%= form.label :country %>
   <%= form.country_select :country, priority_countries = ["United States"], options = {}, html_options = {:class => "form-control", :id => "listing_country"} %>
 </div>
 
-<div class="field form-group">
-  <%= form.label :state %>
-  <%= form.text_field :state, placeholder: 'State', type: 'state', class: 'form-control' %>
-</div>
-
-<div class="field form-group">
-  <%= form.label :city %>
-  <%= form.text_field :city, placeholder: 'City', type: 'city', class: 'form-control' %>
-</div>
-
-<div class="field form-group">
-  <%= form.label :zipcode %>
-  <%= form.text_field :zipcode, placeholder: 'Zipcode', type: 'zipcode', class: 'form-control' %>
-</div>
-
-<div class="field form-group">
-  <%= form.label :address %>
-  <%= form.text_field :address, placeholder: 'Address', type: 'address', class: 'form-control' %>
-</div>
+<hr/>
 
 <div class="text-field form-group">
-  <%= form.label :price %>
-  <%= form.text_field :price, placeholder: 'How much is rent per month...', type: 'price', class: 'form-control' %>
+  <%= form.label :price, "How much is it per stay?"%>
+  <%= form.text_field :price, placeholder: "#{number_to_currency(@listing.price, unit: 'RM')}", type: 'price', class: 'form-control col-1' %>
 </div>
 
 
 <div class="text-field form-group">
-  <%= form.label :description %>
-  <%= form.text_area :description, placeholder: 'Describe something about your listing...', type: 'description', class: 'form-control' %>
+  <%= form.label :description, 'Tell us more about your place.' %>
+  <%= form.text_area :description, placeholder: "#{@listing.description}", type: 'description', class: 'form-control' %>
 </div>
 
 <div class='text-field form-group'>
-    <%= form.label :tag_list, 'Tags (separated by commas)' %><br/>
-    <%= form.text_field :tag_list, type: 'tag_list', class: 'form-control' %>
+    <%= form.label :tag_list, "Anything else you would like your guests to know?"%><br/>
+    <%= form.text_field :tag_list, placeholder: "#{@listing.tag_list}", type: 'tag_list', class: 'form-control' %>
 </div>
 
 <div class="submit-field form-group">
