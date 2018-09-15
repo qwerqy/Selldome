@@ -40,6 +40,8 @@ class UsersController < Clearance::UsersController
   def user_from_params
     first_name = user_params.delete(:first_name)
     last_name = user_params.delete(:last_name)
+    country = user_params.delete(:country)
+    gender = user_params.delete(:gender)
     birthday = user_params.delete(:birhday)
     email = user_params.delete(:email)
     password = user_params.delete(:password)
@@ -47,6 +49,8 @@ class UsersController < Clearance::UsersController
     Clearance.configuration.user_model.new(user_params).tap do |user|
       user.first_name = first_name
       user.last_name = last_name
+      user.country = country
+      user.gender = country
       user.birthday = birthday
       user.email = email
       user.password = password
@@ -58,6 +62,8 @@ class UsersController < Clearance::UsersController
         .permit(
           :first_name,
           :last_name,
+          :country,
+          :gender,
           :birthday,
           :email,
           :phone,
