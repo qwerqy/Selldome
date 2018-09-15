@@ -13,9 +13,15 @@ class UsersController < Clearance::UsersController
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+    render template: 'users/profile'
+  end
+
   def edit
     if current_user
       @user = User.find(params[:id])
+      render template: 'users/edit'
     else
       redirect_to root_path
     end
@@ -23,8 +29,8 @@ class UsersController < Clearance::UsersController
 
   def update
     @user = User.find(params[:id])
-    if @user.update.attributes(user_params)
-      redirect_to @user
+    if @user.update_attributes(user_params)
+      redirect_to profile_path
     else
       render :edit
     end

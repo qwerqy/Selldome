@@ -1,4 +1,5 @@
 class ListingsController < ApplicationController
+  before_action :require_login
   def index
     render template: 'listings/index'
   end
@@ -26,12 +27,13 @@ class ListingsController < ApplicationController
 
   def edit
     @listing = Listing.find(params[:id])
+    render template: 'listings/edit'
   end
 
   def update
     @listing = Listing.find(params[:id])
-    if @listing.update.attributes(listing_params)
-      redirect_to @listing
+    if @listing.update_attributes(listing_params)
+      redirect_to my_listings_path
     else
       render :edit
     end
