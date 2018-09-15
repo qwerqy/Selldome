@@ -9,12 +9,21 @@
             <%= simple_format truncate(listing.description, length: 300) %>
           </p>
           <p class="card-subtitle text-muted">
-          </p>
-          <p class="card-text">
             <%= listing.property_type%>
           </p>
           <p class="card-text">
-            RM<%= listing.price%>
+            <%= listing.description%>
+          </p>
+          <p class="card-text">
+            <%= listing.address%>
+          </p>
+          <ul class="list-inline">
+            <li class="list-inline-item"><i class="fas fa-user"></i> <%=listing.guest_number%></li>
+            <li class="list-inline-item"><i class="fas fa-bed"></i> <%=listing.room_number%></li>
+            <li class="list-inline-item"><i class="fas fa-bath"></i> <%=listing.bathroom_number%></li>
+          </ul>
+          <p class="card-text">
+            <%= number_to_currency(listing.price, unit: 'RM')%>
           </p>
           <p class="card-text">
           </p>
