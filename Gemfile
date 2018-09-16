@@ -52,6 +52,9 @@ gem "google_custom_search_api"
 # ImageSuckr
 gem 'image_suckr'
 
+# Kaminari (Pagination)
+gem 'kaminari'
+
 # Country-Select
 gem 'country_select', '~> 3.1'
 
