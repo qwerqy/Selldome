@@ -9,11 +9,13 @@
   <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  <% if content_for?(:navbar) %>
+  <% if content_for?(:navbar_landing) %>
+    <%= yield(:navbar_landing) %>
+  <% elsif content_for?(:navbar_special)%>
+    <%= yield(:navbar_special) %>
+  <% elsif content_for?(:navbar) %>
     <%= yield(:navbar) %>
-<% else %>
-  <%= render partial: "shared/navbar" %>
-<% end %>
+  <% end %>
 
   <div id="flash">
     <% flash.each do |key, value| -%>
