@@ -2,7 +2,9 @@
   <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
   <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
-
+<% content_for :navbar do %>
+  <%= render partial: "shared/navbar" %>
+<% end %>
 <div class="background-keep">
   <div class="container-fluid mt-4 p-0 row">
     <div class="card col-3 p-3">
@@ -11,7 +13,7 @@
     </div>
     <div class="card col-9 p-3">
       <h5 class="font-weight-bold">Edit Profile</h5>
-      
+
       <%= render partial: '/users/form-edit'%>
 
     </div>

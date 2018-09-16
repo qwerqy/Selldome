@@ -1,4 +1,7 @@
-<%= form_for @listing do |form| %>
+<% content_for :navbar do %>
+  <%= render partial: "shared/navbar" %>
+<% end %>
+<%= form_for @listing, url: new_listing_path do |form| %>
 <div class="text-field form-group col-3 p-0">
   <%= form.label :name, "Name" %>
   <%= form.text_field :name, placeholder: 'What would you like to call your listing?', type: 'name', class: 'form-control' %>

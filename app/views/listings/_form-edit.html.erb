@@ -1,3 +1,6 @@
+<% content_for :navbar do %>
+  <%= render partial: "shared/navbar" %>
+<% end %>
 <%= form_for @listing do |form| %>
 <div class="text-field form-group col-3 p-0">
   <%= form.label :name, "Name" %>
@@ -9,7 +12,7 @@
     <div class="field form-group">
       <%= form.label :place_type, "Choose One" %>
       <select class="form-control" name='listing[place_type]' id='listing_place_type'>
-        <option value="<%=@listing.place_type%>"><%=@listing.place_type_string%></option>
+        <option value="<%=@listing.place_type%>"><%=Listing.place_type_string(@listing.place_type)%></option>
         <option disabled>-----------------------------------------------</option>
         <option value="1">Apartment</option>
         <option value="2">House</option>
