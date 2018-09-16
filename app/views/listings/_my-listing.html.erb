@@ -34,6 +34,7 @@
           </div>
         </div>
         <script>
+        $(document).on("turbolinks:load", function() {
           $('#delete-listing').click(function(){
             $.ajax({
               type: "POST",
@@ -41,7 +42,7 @@
               data: {"_method":"delete"}
             })
           })
-
+        })
         </script>
 
         <div class="modal fade" id="delete-listing-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
