@@ -1,9 +1,9 @@
 <div class="container-fluid mx-0 my-4 p-0">
   <h5 class="font-weight-bold">Best Reviewed Homes</h5>
   <ul class="list-inline">
-    <% Listing.where(place_type: '6').limit(5).order(created_at: :desc).each do |restaurant|%>
+    <% Listing.where(place_type: '6').limit(5).order(created_at: :desc).each do |home|%>
     <li class="list-inline-item">
-      <div id="restaurant-card-<%=restaurant.id%>" class="card first p-0 m-2 shadow-sm btn" data-toggle='modal' data-target='#restaurant-info-box-<%=restaurant.id%>'>
+      <div id="home-card-<%=home.id%>" class="card first p-0 m-2 shadow-sm btn" data-toggle='modal' data-target='#home-info-box-<%=home.id%>'>
         <!-- Carousel -->
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
@@ -13,13 +13,13 @@
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img class="d-block w-100" src="/assets/restaurant.jpg" style="max-width: 300px; max-height: 200px;" alt="First slide">
+              <img class="d-block w-100" src="/assets/home.jpg" style="max-width: 300px; max-height: 200px;" alt="First slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block w-100" src="/assets/restaurant.jpg" style="max-width: 300px; max-height: 200px;" alt="Second slide">
+              <img class="d-block w-100" src="/assets/home.jpg" style="max-width: 300px; max-height: 200px;" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block w-100" src="/assets/restaurant.jpg" style="max-width: 300px; max-height: 200px;" alt="Third slide">
+              <img class="d-block w-100" src="/assets/home.jpg" style="max-width: 300px; max-height: 200px;" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -33,42 +33,42 @@
         </div>
         <!-- Details -->
         <div class="card-body">
-          <p class="card-subtitle text-muted"><%=restaurant.property_type%></p>
-          <p class="card-title font-weight-bold mb-2"><%=restaurant.name%></p>
+          <p class="card-subtitle text-muted"><%=home.property_type%></p>
+          <p class="card-title font-weight-bold mb-2"><%=home.name%></p>
           <ul class="list-inline">
-            <li class="list-inline-item"><i class="fas fa-user"></i> <%=restaurant.guest_number%></li>
-            <li class="list-inline-item"><i class="fas fa-bed"></i> <%=restaurant.room_number%></li>
-            <li class="list-inline-item"><i class="fas fa-bath"></i> <%=restaurant.bathroom_number%></li>
+            <li class="list-inline-item"><i class="fas fa-user"></i> <%=home.guest_number%></li>
+            <li class="list-inline-item"><i class="fas fa-bed"></i> <%=home.room_number%></li>
+            <li class="list-inline-item"><i class="fas fa-bath"></i> <%=home.bathroom_number%></li>
           </ul>
-          <p class="card-text">From <%=number_to_currency(restaurant.price, unit: "RM")%> a meal</p>
+          <p class="card-text">From <%=number_to_currency(home.price, unit: "RM")%> a meal</p>
           <div class="progress" style="height: 5px;">
             <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
       </div>
     </li>
-    <div class="modal fade" id="restaurant-info-box-<%=restaurant.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="home-info-box-<%=home.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle"><%=restaurant.name%></h5>
+            <h5 class="modal-title" id="exampleModalCenterTitle"><%=home.name%></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <p><%=restaurant.property_type%></p>
-            <p><%=restaurant.description%></p>
-            <p><%=restaurant.address%></p>
-            <p><%=restaurant.state%></p>
-            <p><%=restaurant.city%></p>
-            <p><%=restaurant.zipcode%></p>
-            <p><%=restaurant.country%></p>
-            <p><%=number_to_currency(restaurant.price, unit: '$')%></p>
-            <p><%=restaurant.user.name%></p>
+            <p><%=home.property_type%></p>
+            <p><%=home.description%></p>
+            <p><%=home.address%></p>
+            <p><%=home.state%></p>
+            <p><%=home.city%></p>
+            <p><%=home.zipcode%></p>
+            <p><%=home.country%></p>
+            <p><%=number_to_currency(home.price, unit: '$')%></p>
+            <p><%=home.user.name%></p>
           </div>
           <div class="modal-footer">
-            <a class="">View Details</a>
+            <a href="/listings/<%=home.id%>">View Details</a>
           </div>
         </div>
       </div>
