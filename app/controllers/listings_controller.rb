@@ -57,10 +57,6 @@ class ListingsController < ApplicationController
       @property_type = ["Barn", "Boat", "Bus", "Camper/RV", "Campsite", "Castle", "Cave", "Dome House", "Earth House", "Farmstay", "Hut", "Igloo, Island", "Lighthouse", "Pension (South Korea)", "Plane", "Shepherd's Hut (UK, France)", "Tent", "Tinyhouse", "Tipi", "Train", "Treehouse", "Windmill", "Yurt"]
     elsif place == '5'
       @property_type = ["Boutique Hotel", "Aparthotel", "Heritage Hotel (India)", "Hostel", "Hotel", "Natural Lodge", "Resort", "Serviced Apartment"]
-    elsif place == '6'
-      @property_type = ["Restaurant", "Fast Food", "Foodcourt", "High Dining", "Local Restaurant", "Stall", "Traditional Dining"]
-    elsif place == '7'
-      @property_type = ["Cafe", "Hipster Cafe"]
     end
     render json: {property_type: @property_type}
   end
