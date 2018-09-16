@@ -82,3 +82,75 @@ a {
   outline-color: #eeeeee;
   outline-width: medium;
 }
+
+.cover-photo {
+  width: 100%;
+  height: 900px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.profile-photo {
+  width: 80px;
+  height: 80px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.profile-thumbnail {
+  width: 45px;
+  height: 45px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+#view-more {
+  // text-decoration: none;
+  color: #424242;
+}
+
+// Collapse in Profile
+#description.collapse, #description.collapsing {
+  height: 3rem;  /* [NUM_OF_LINES] x [LINE_HEIGHT] */
+}
+
+#description.collapse {
+  position: relative;  /* For ...'s content absolute positioning */
+  display: block;
+  overflow: hidden;
+}
+
+#description.collapse:before {
+  content: ' ...';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+#description.collapse.show {
+  height: auto;  /* You need to reset the height when not collapsed */
+}
+
+#description.collapse.show:before {
+  display: none;  /* Of course you don't want to display ... */
+}
+
+.tiny-font {
+  font-size: 12px;
+}
+
+.sticky-offset {
+  top: 50px;
+}
+
+#view-photo {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
