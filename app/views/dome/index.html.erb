@@ -1,0 +1,15 @@
+<div id="attrBar" class="container-fluid p-3">
+  <ul class="list-inline m-0">
+    <%Listing.all_attr.each do |t|%>
+    <li class="list-inline-item">
+      <a class="btn btn-outline-secondary"><%=t%></a>
+    </li>
+    <% end %>
+  </ul>
+</div>
+<div class="background-keep">
+  <%= render partial: "listings/all-listing" %>
+  <div class="nav-link mx-auto d-block">
+    <%= paginate @listing %>
+  </div>
+</div>
