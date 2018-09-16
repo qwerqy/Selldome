@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :listings, controller: "listings", only: [:show, :update]
   get '/my-listings' => 'listings#my_index', as: "my_listings"
   get '/my-listings/new' => 'listings#new', as: "new_listing"
-  post '/my-listings(.:format)' => 'listings#create'
+  post '/my-listings/new' => 'listings#create'
   get '/my-listings/:id/edit' => 'listings#edit', as: "edit_listing"
   get '/get_property_from_place_type' => 'listings#property_from_place_type'
   delete '/my-listings/:id' => "listings#destroy", as: "delete_listing"
@@ -42,4 +42,7 @@ Rails.application.routes.draw do
 
   # Google OAuth Route
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
+
+  # Moderator
+  get "/pending-verification" => "moderator#pending_verification"
 end
