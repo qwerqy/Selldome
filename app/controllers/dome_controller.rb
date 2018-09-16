@@ -1,10 +1,6 @@
 class DomeController < ApplicationController
   def index
+    @listing = Listing.order(:created_at).page params[:page]
     render template: 'dome/index'
-  end
-
-  def show
-    @listing = Listing.order(created_at: :asc).page params[:page]
-    render :index
   end
 end
