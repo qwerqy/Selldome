@@ -39,6 +39,7 @@ ActiveRecord::Base.transaction do
 
     listing['price'] = rand(80..500)
     listing['description'] = Faker::Hipster.sentence
+    listing['tag_list'] = Faker::Hipster.words(4, true, true)
 
     listing['user_id'] = uids.sample
 
