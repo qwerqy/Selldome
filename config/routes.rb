@@ -6,11 +6,10 @@ Rails.application.routes.draw do
   get '/home' => 'home#index', as: "home"
 
   # Dome Route
-  resources :dome, controller: "dome", only: [:index, :show]
-
+  resources :dome, controller: "dome", only: [:index]
   # Listings Routes
-  resources :listings, controller: "listings", only: [:create, :update]
-  get '/my-listings' => 'listings#index', as: "my_listings"
+  resources :listings, controller: "listings", only: [:show, :update]
+  get '/my-listings' => 'listings#my_index', as: "my_listings"
   get '/my-listings/new' => 'listings#new', as: "new_listing"
   post '/my-listings(.:format)' => 'listings#create'
   get '/my-listings/:id/edit' => 'listings#edit', as: "edit_listing"
