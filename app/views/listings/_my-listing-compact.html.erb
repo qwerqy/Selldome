@@ -33,10 +33,15 @@
             </div>
             <!-- Details -->
             <div class="card-body">
-              <p class="card-subtitle text-muted"><%=listing.property_type%></p>
-              <p class="card-title font-weight-bold mb-2"><%=listing.name%></p>
-              <p class="card-text">RM<%=listing.price%>0 per month</p>
-              <p class="card-text"><%=listing.size%></p>
+              <p><%=listing.property_type%></p>
+              <p><%=listing.description%></p>
+              <p><%=listing.address%></p>
+              <p><%=listing.state%></p>
+              <p><%=listing.city%></p>
+              <p><%=listing.zipcode%></p>
+              <p><%=listing.country%></p>
+              <p><%=number_to_currency(listing.price, unit: '$')%></p>
+              <p><%=listing.user.name%></p>
               <div class="progress" style="height: 5px;">
                 <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
