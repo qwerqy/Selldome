@@ -19,6 +19,17 @@
 //= require_tree .
 
   $(document).on("turbolinks:load", function() {
+
+    $('#pending-verification').click(function(){
+      event.preventDefault();
+      $.ajax({
+        url: '/pending-verification',
+        success: function(data) {
+          $('#moderator-content').load('/pending-verification');
+        }
+      })
+    });
+
     function populate_property_type(place) {
       $.get('/get_property_from_place_type', {place_type: place}, function(data){
         let $property_type = $('#listing_property_type');
@@ -52,4 +63,6 @@
         populate_property_type(7);
       }
     });
+
+
   });
