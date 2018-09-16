@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   get '/home' => 'home#index', as: "home"
 
+  # Dome Route
+  resources :dome, controller: "dome", only: [:index, :show]
+
   # Listings Routes
   resources :listings, controller: "listings", only: [:create, :update]
   get '/my-listings' => 'listings#index', as: "my_listings"
