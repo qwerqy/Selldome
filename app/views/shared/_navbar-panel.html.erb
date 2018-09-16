@@ -1,0 +1,40 @@
+<nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand font-weight-bold" href="/">Selldome</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <% if current_user.superadmin?%>
+    <a class="nav-link disabled font-weight-bold" href="#">Admin Panel</a>
+  <% else %>
+    <a class="nav-link disabled font-weight-bold" href="#">Moderator Panel</a>
+  <% end %>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <!-- Messages -->
+      <li class="nav-item">
+        <a href="#" class="btn text-light">Messages</a>
+      </li>
+      <!-- Account Dropdown -->
+      <li class="nav-item">
+        <div class="dropdown mx-2">
+          <a class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="rounded-circle" src="/assets/profile-photo.jpg" style="width:35px;height:35px;">
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/dome">Dome</a>
+            <a class="dropdown-item" href="/home">Home</a>
+            <div class="dropdown-divider"></div>
+            <div id="header" class="btn dropdown-item">
+              <% if signed_in? -%>
+                <%= button_to(t(".sign_out"), sign_out_path, method: :delete, class: "btn p-0 bg-transparent") %>
+              <% else -%>
+                <%= link_to t(".sign_in"), sign_in_path, class: "btn p-0" %>
+              <% end -%>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
