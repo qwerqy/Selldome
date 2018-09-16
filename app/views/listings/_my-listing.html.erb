@@ -37,7 +37,7 @@
           $('#delete-listing').click(function(){
             $.ajax({
               type: "POST",
-              url: '/listings/<%=listing.id%>',
+              url: '/my-listings/<%=listing.id%>',
               data: {"_method":"delete"}
             })
           })

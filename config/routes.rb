@@ -6,12 +6,13 @@ Rails.application.routes.draw do
   get '/home' => 'home#index', as: "home"
 
   # Listings Routes
-  resources :listings, controller: "listings", only: [:destroy, :create, :update]
+  resources :listings, controller: "listings", only: [:create, :update]
   get '/my-listings' => 'listings#index', as: "my_listings"
   get '/my-listings/new' => 'listings#new', as: "new_listing"
   post '/my-listings(.:format)' => 'listings#create'
   get '/my-listings/:id/edit' => 'listings#edit', as: "edit_listing"
   get '/get_property_from_place_type' => 'listings#property_from_place_type'
+  delete '/my-listings/:id' => "listings#destroy", as: "delete_listing"
 
   # Password Route
   resources :passwords, controller: "passwords", only: [:create, :new]
