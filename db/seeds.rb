@@ -28,7 +28,7 @@ ActiveRecord::Base.transaction do
     listing['place_type'] = rand(1..7)
     listing['property_type'] = ["House", "Entire Floor", "Condominium", "Villa", "Townhouse", "Castle", "Treehouse", "Igloo", "Yurt", "Cave", "Chalet", "Hut", "Tent", "Other"].sample
 
-    listing['room_number'] = rand(0..5)
+    listing['room_number'] = rand(1..10)
     listing['bathroom_number'] = rand(1..6)
     listing['guest_number'] = rand(1..10)
 
