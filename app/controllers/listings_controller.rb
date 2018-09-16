@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :require_login
-  def index
+  def my_index
     render template: 'listings/index'
   end
 
@@ -11,6 +11,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
+    render template: 'listings/profile'
   end
 
   def create
