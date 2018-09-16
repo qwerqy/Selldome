@@ -26,6 +26,16 @@ ActiveRecord::Base.transaction do
   40.times do
     listing['name'] = Faker::App.name
     listing['place_type'] = rand(1..5)
+    if listing['place_type'] == 1
+      listing['property_type'] = ["Apartment", "Condominium", "Casa particular (Cuba)", "Loft", "Serviced Apartment"].sample
+    elsif listing['place_type'] == 2
+      listing['property_type'] = ["House", "Bungalow", "Cabin", "Cottage", "Cycladic House", "Dammuso (Italy)", "Dome House", "Earth House", "Farmstay", "Houseboat", "Hut", "Lighthouse", "Pension (South Korea)", "Shepherd's Hut (UK, France)", "Tiny House", "Townhouse", "Trullo (Italy)", "Villa"].sample
+    elsif listing['place_type'] == 3
+      listing['property_type'] = ["Guesthouse","Guest Suite","Farmstay"].sample
+    elsif listing['place_type'] == 4
+      listing['property_type'] = ["Barn", "Boat", "Bus", "Camper/RV", "Campsite", "Castle", "Cave", "Dome House", "Earth House", "Farmstay", "Hut", "Igloo, Island", "Lighthouse", "Pension (South Korea)", "Plane", "Shepherd's Hut (UK, France)", "Tent", "Tinyhouse", "Tipi", "Train", "Treehouse", "Windmill", "Yurt"].sample
+    elsif listing['place_type'] == 5
+      listing['property_type'] = ["Boutique Hotel", "Aparthotel", "Heritage Hotel (India)", "Hostel", "Hotel", "Natural Lodge", "Resort", "Serviced Apartment"].sample
 
     listing['room_number'] = rand(1..10)
     listing['bathroom_number'] = rand(1..6)
