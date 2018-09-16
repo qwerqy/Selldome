@@ -13,12 +13,16 @@ class Listing < ApplicationRecord
       "Unique Space"
     elsif self.place_type == 5
       "Boutique Hotel"
-    elsif self.place_type == 6
-      "Restaurant"
-    elsif self.place_type == 7
-      "Cafe"
     else
       "Select One"
     end
+  end
+
+  def self.all_place_type
+    all_place_type = ["Apartment", "House", "Secondary Unit", "Unique Space", "Boutique Hotel"]
+  end
+
+  def self.all_attr
+    all_attr = ["Dates","Guests", "Home Type", "Price", "Instant Book", "More filters"]
   end
 end
