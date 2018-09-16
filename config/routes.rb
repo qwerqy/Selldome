@@ -29,6 +29,12 @@ Rails.application.routes.draw do
   get "/profile/:id" => "users#show", as: "profile"
   get "/profile/:id/edit" => "users#edit", as: "user_edit"
 
+  # Superadmin
+  get "/admin-panel" => "superadmin#index", as: "admin_panel"
+
+  # Moderator
+  get "/moderator-panel" => "moderator#index", as: "moderator_panel"
+
   # Sessions Routes
   resource :session, controller: "sessions", only: [:create]
   get "/sign_in" => "sessions#new", as: "sign_in"

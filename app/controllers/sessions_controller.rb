@@ -29,6 +29,35 @@ class SessionsController < Clearance::SessionsController
    end
   end
 
+  def create
+    @user = authenticate(params)
+
+    sign_in(@user) do |status|
+      if @user.superadmin?
+        if status.success?
+          redirect_back_or admin_panel_path
+        else
+          flash.now.notice = status.failure_message
+          render template: "sessions/new", status: :unauthorized
+        end
+      elsif @user.moderator?
+        if status.success?
+          redirect_back_or moderator_panel_path
+        else
+          flash.now.notice = status.failure_message
+          render template: "sessions/new", status: :unauthorized
+        end
+      elsif @user.customer?
+        if status.success?
+          redirect_back_or url_after_create
+        else
+          flash.now.notice = status.failure_message
+          render template: "sessions/new", status: :unauthorized
+        end
+      end
+    end
+  end
+
   def url_after_destroy
     root_url
   end
