@@ -41,7 +41,7 @@ body {
   outline-width: medium;
 }
 
-#navbar a {
+a {
   text-decoration: none;
   color: #424242;
   // font-weight: bold;
@@ -75,4 +75,10 @@ body {
 
 .listing_property_type {
   display: none;
+}
+
+#attrBar {
+  outline-style: solid;
+  outline-color: #eeeeee;
+  outline-width: medium;
 }
