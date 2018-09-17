@@ -32,12 +32,14 @@ Rails.application.routes.draw do
   # Superadmin
   get "/admin-panel" => "superadmin#index", as: "admin_panel"
   get "/all-users" => "superadmin#all_users"
+  get "/update-users" => "superadmin#update_users"
+  delete "/update-users/:id/delete" => "superadmin#delete_user"
 
   # Moderator
   get "/moderator-panel" => "moderator#index", as: "moderator_panel"
-  get "/pending-verification" => "moderator#pending_verification"
+  get "/pending-verification" => "moderator#pending_verification", as: "pending_verification"
   post "/pending-verification/:id/verify/:verified" => "moderator#verify"
-  get "/verified-listings" => "moderator#verified_listings"
+  get "/verified-listings" => "moderator#verified_listings", as: "verified_listings"
 
   # Sessions Routes
   resource :session, controller: "sessions", only: [:create]
