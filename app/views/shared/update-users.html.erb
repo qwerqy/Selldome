@@ -1,0 +1,41 @@
+<h3 class="font-weight-bold mb-4">All Users</h3>
+<div class="row">
+  <div class="col-1 font-weight-bold">ID</div>
+  <div class="col-2 font-weight-bold">First Name</div>
+  <div class="col-1 font-weight-bold">Last Name</div>
+  <div class="col-2 font-weight-bold">Birthday</div>
+  <div class="col-2 font-weight-bold">Email</div>
+  <div class="col-1 font-weight-bold">Phone</div>
+  <div class="col-2 font-weight-bold">Country</div>
+  <div class="col-1 font-weight-bold">Remove</div>
+</div>
+<hr/>
+<% User.all.each do |user|%>
+<div class="row">
+  <div class="col-1"><a href='/users/<%=user.id%>'><%=user.id%></a></div>
+  <div class="col-2"><%=user.first_name%></div>
+  <div class="col-1"><%=user.last_name%></div>
+  <div class="col-2"><%=user.birthday%></div>
+  <div class="col-2"><%=user.email%></div>
+  <div class="col-1"><%=user.phone%></div>
+  <div class="col-2"><%=user.country%></div>
+  <div class="col-1"><button id="delete-user-<%=user.id%>" class="btn btn-link">Delete</div>
+</div>
+</div>
+<hr/>
+<script>
+$(document).on("turbolinks:load", function() {
+  $('#delete-user-<%=user.id%>').click(function(){
+    $.ajax({
+      type: "POST",
+      url: '/update-users/<%=user.id%>/delete',
+      data: {"_method":"delete"}
+      success: function(){
+        alert('User ID <%=user.id%> has been banished!')
+        $('#panel-box').load('/update-users')
+      }
+    })
+  })
+})
+</script>
+<% end %>
