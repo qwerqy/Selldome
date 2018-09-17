@@ -10,47 +10,17 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require rails-ujs
 //= require jquery3
 //= require popper
-//= require rails-ujs
-//= require activestorage
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require activestorage
 //= require_tree .
 
-  $(document).on("turbolinks:load", function() {
+$(document).on("turbolinks:load", function() {
 
     $(".alert" ).fadeOut(3000);
-
-    $('#pending-verification').click(function(){
-      event.preventDefault();
-      $.ajax({
-        url: '/pending-verification',
-        success: function(data) {
-          $('#panel-box').load('/pending-verification');
-        }
-      })
-    });
-
-    $('#verified-listings').click(function(){
-      event.preventDefault();
-      $.ajax({
-        url: '/verified-listings',
-        success: function(data) {
-          $('#panel-box').load('/verified-listings');
-        }
-      })
-    });
-
-    $('#view-users').click(function(){
-      event.preventDefault();
-      $.ajax({
-        url: 'all-users',
-        success: function(data) {
-          $('#panel-box').load('/all-users');
-        }
-      })
-    });
 
     function populate_property_type(place) {
       $.get('/get_property_from_place_type', {place_type: place}, function(data){
@@ -85,6 +55,4 @@
         populate_property_type(7);
       }
     });
-
-
-  });
+});
