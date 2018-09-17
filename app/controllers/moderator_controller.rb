@@ -23,4 +23,9 @@ class ModeratorController < ApplicationController
 
     @listing.update(verified: params[:verified])
   end
+
+  def verified_listings
+    @listing = Listing.order(:name).page params[:page]
+    render template: 'shared/verified-listings'
+  end
 end

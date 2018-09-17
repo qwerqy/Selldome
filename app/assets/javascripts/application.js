@@ -30,6 +30,16 @@
       })
     });
 
+    $('#verified-listings').click(function(){
+      event.preventDefault();
+      $.ajax({
+        url: '/verified-listings',
+        success: function(data) {
+          $('#moderator-content').load('/verified-listings');
+        }
+      })
+    });
+
     function populate_property_type(place) {
       $.get('/get_property_from_place_type', {place_type: place}, function(data){
         let $property_type = $('#listing_property_type');

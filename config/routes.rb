@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get "/moderator-panel" => "moderator#index", as: "moderator_panel"
   get "/pending-verification" => "moderator#pending_verification"
   post "/pending-verification/:id/verify/:verified" => "moderator#verify"
+  get "/verified-listings" => "moderator#verified_listings"
 
   # Sessions Routes
   resource :session, controller: "sessions", only: [:create]
