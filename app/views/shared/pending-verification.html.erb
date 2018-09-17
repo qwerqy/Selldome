@@ -19,8 +19,23 @@
   <div class="col-2"><%=listing.state%></div>
   <div class="col-1"><%=number_to_currency(listing.price, unit: '$')%></div>
   <div class="col-2"><a href='/profile/<%=listing.user.id%>'><%=listing.user.name%></a></div>
-  <div class="col-1 form-check"><input class="form-check-input mx-auto d-block" type="checkbox" value="" id="defaultCheck1"></div>
+  <div class="col-1 form-check"><input class="form-check-input mx-auto d-block" type="checkbox" value="" id="verify-listing-<%=listing.id%>"></div>
 </div>
 </div>
 <hr/>
+<script>
+$('#verify-listing-<%=listing.id%>').change(function(){
+  if (this.checked){
+    $.ajax({
+      type: 'POST',
+      url: '/pending-verification/<%=listing.id%>/verify/true',
+      data: {verified: this.checked},
+      success: function(){
+        alert('Listing ID <%=listing.id%> has been verified!')
+        $('#moderator-content').load('/pending-verification')
+      }
+    })
+  }
+})
+</script>
 <% end %>

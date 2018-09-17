@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   # Moderator
   get "/moderator-panel" => "moderator#index", as: "moderator_panel"
+  get "/pending-verification" => "moderator#pending_verification"
+  post "/pending-verification/:id/verify/:verified" => "moderator#verify"
 
   # Sessions Routes
   resource :session, controller: "sessions", only: [:create]
@@ -42,7 +44,4 @@ Rails.application.routes.draw do
 
   # Google OAuth Route
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
-
-  # Moderator
-  get "/pending-verification" => "moderator#pending_verification"
 end

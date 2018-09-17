@@ -17,4 +17,10 @@ class ModeratorController < ApplicationController
     @listing = Listing.order(:name).page params[:page]
     render template: 'shared/pending-verification'
   end
+
+  def verify
+    @listing = Listing.find(params[:id])
+
+    @listing.update(verified: params[:verified])
+  end
 end

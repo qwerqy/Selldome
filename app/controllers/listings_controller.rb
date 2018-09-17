@@ -80,7 +80,8 @@ class ListingsController < ApplicationController
       :price,
       :description,
       :user_id,
-      :tag_list
+      :tag_list,
+      :verified
     )
   end
 end
