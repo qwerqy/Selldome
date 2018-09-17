@@ -21,13 +21,13 @@
   $(document).on("turbolinks:load", function() {
 
     $(".alert" ).fadeOut(3000);
-    
+
     $('#pending-verification').click(function(){
       event.preventDefault();
       $.ajax({
         url: '/pending-verification',
         success: function(data) {
-          $('#moderator-content').load('/pending-verification');
+          $('#panel-box').load('/pending-verification');
         }
       })
     });
@@ -37,7 +37,17 @@
       $.ajax({
         url: '/verified-listings',
         success: function(data) {
-          $('#moderator-content').load('/verified-listings');
+          $('#panel-box').load('/verified-listings');
+        }
+      })
+    });
+
+    $('#view-users').click(function(){
+      event.preventDefault();
+      $.ajax({
+        url: 'all-users',
+        success: function(data) {
+          $('#panel-box').load('/all-users');
         }
       })
     });

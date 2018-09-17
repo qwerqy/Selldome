@@ -32,7 +32,7 @@ $('#verify-listing-<%=listing.id%>').change(function(){
       data: {verified: this.checked},
       success: function(){
         alert('Listing ID <%=listing.id%> has been verified!')
-        $('#moderator-content').load('/pending-verification')
+        $('#panel-box').load('/pending-verification')
       }
     })
   }
