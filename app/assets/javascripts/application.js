@@ -20,6 +20,8 @@
 
   $(document).on("turbolinks:load", function() {
 
+    $(".alert" ).fadeOut(3000);
+    
     $('#pending-verification').click(function(){
       event.preventDefault();
       $.ajax({

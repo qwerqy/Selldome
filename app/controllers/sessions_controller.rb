@@ -33,27 +33,18 @@ class SessionsController < Clearance::SessionsController
     @user = authenticate(params)
 
     sign_in(@user) do |status|
-      if @user.superadmin?
-        if status.success?
+      if status.success?
+        flash[:success] = "Welcome Back #{@user.name}!"
+        if @user.superadmin?
           redirect_back_or admin_panel_path
-        else
-          flash.now.notice = status.failure_message
-          render template: "sessions/new", status: :unauthorized
-        end
-      elsif @user.moderator?
-        if status.success?
+        elsif @user.moderator?
           redirect_back_or moderator_panel_path
-        else
-          flash.now.notice = status.failure_message
-          render template: "sessions/new", status: :unauthorized
-        end
-      elsif @user.customer?
-        if status.success?
+        elsif @user.customer?
           redirect_back_or url_after_create
-        else
-          flash.now.notice = status.failure_message
-          render template: "sessions/new", status: :unauthorized
         end
+      else
+        flash[:danger] = "Incorrect Login Details!"
+        redirect_to root_url
       end
     end
   end

@@ -16,12 +16,12 @@
   <% elsif content_for?(:navbar) %>
     <%= yield(:navbar) %>
   <% end %>
-
-  <div id="flash">
+  <div id="flash" class="container mt-4">
     <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
+    <div class="alert alert-<%= key %> text-middle"><%=h value %></div>
     <% end %>
   </div>
+
 
   <%= yield %>
 </body>
