@@ -7,4 +7,8 @@ class SuperadminController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def all_users
+    render template: 'shared/view-users'
+  end
 end
