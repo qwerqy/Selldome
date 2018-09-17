@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   # Superadmin
   get "/admin-panel" => "superadmin#index", as: "admin_panel"
+  get "/all-users" => "superadmin#all_users"
 
   # Moderator
   get "/moderator-panel" => "moderator#index", as: "moderator_panel"
