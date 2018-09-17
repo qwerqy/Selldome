@@ -1,3 +1,5 @@
+
+
 <% content_for :navbar_special do %>
   <%= render partial: "shared/navbar-panel" %>
 <% end %>
@@ -14,10 +16,10 @@
           <p class="text-muted">Listings</p>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <a href="#" class="btn-link" id="pending-verification">Pending Verification</a>
+              <%= link_to 'Pending Verification', pending_verification_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
             </li>
             <li class="list-group-item">
-              <a href="#" class="btn-link" id="verified-listings" id="verified-listings">Verified Listings</a>
+              <%= link_to 'Verified Listing', verified_listings_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
             </li>
             <li class="list-group-item">
               <a id="comments">Comments</a>
@@ -28,7 +30,7 @@
     </div>
     <div class="col-9">
       <div class="card">
-        <div id="moderator-content" class="card-body">
+        <div id="panel-box" class="card-body">
         </div>
       </div>
     </div>
