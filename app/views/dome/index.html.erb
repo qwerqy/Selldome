@@ -1,3 +1,6 @@
+<% content_for :navbar do %>
+  <%= render partial: "shared/navbar" %>
+<% end %>
 <div id="attrBar" class="container-fluid p-3">
   <ul class="list-inline m-0">
     <%Listing.all_attr.each do |t|%>
