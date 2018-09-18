@@ -1,3 +1,9 @@
+# Admin Account
+User.create(first_name: 'SuperAdmin', last_name: 'Amin', email: 'superadmin@selldome.com', gender: 1, country: 'MY', password: '123123', superadmin: true)
+
+# Mod Account
+User.create(first_name: 'Moderator', last_name: 'Amin', email: 'moderator@selldome.com', gender: 1, country: 'MY', password: '123123', moderator: true)
+
 # Seed Users
 user = {}
 user['password'] = 'asdf'
@@ -10,8 +16,9 @@ ActiveRecord::Base.transaction do
     user['email'] = Faker::Internet.email
     user['gender'] = rand(1..2)
     user['phone'] = Faker::PhoneNumber.phone_number
-    user['country'] = Faker::Address.country
+    user['country'] = Faker::Address.country_code
     user['birthday'] = Faker::Date.between(50.years.ago, Date.today)
+    user['about_me'] = Faker::GreekPhilosophers.quote
 
     User.create(user)
   end
@@ -36,12 +43,12 @@ ActiveRecord::Base.transaction do
       listing['property_type'] = ["Barn", "Boat", "Bus", "Camper/RV", "Campsite", "Castle", "Cave", "Dome House", "Earth House", "Farmstay", "Hut", "Igloo, Island", "Lighthouse", "Pension (South Korea)", "Plane", "Shepherd's Hut (UK, France)", "Tent", "Tinyhouse", "Tipi", "Train", "Treehouse", "Windmill", "Yurt"].sample
     elsif listing['place_type'] == 5
       listing['property_type'] = ["Boutique Hotel", "Aparthotel", "Heritage Hotel (India)", "Hostel", "Hotel", "Natural Lodge", "Resort", "Serviced Apartment"].sample
-
+    end
     listing['room_number'] = rand(1..10)
     listing['bathroom_number'] = rand(1..6)
     listing['guest_number'] = rand(1..10)
 
-    listing['country'] = Faker::Address.country
+    listing['country'] = Faker::Address.country_code
     listing['state'] = Faker::Address.state
     listing['city'] = Faker::Address.city
     listing['zipcode'] = Faker::Address.zip_code
