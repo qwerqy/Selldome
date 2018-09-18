@@ -22,7 +22,7 @@
   <div class="col-2">
     <ul class="list-inline">
       <li class="list-inline-item">
-        <button id="update-user-<%=user.id%>" class="btn btn-link">Edit</button>
+        <%= link_to 'Edit', update_user_path(user.id), remote: true, data: { target: "#user-modal", toggle: 'modal' }, class: 'btn-link' %>
       </li>
       <li class="list-inline-item">
         <%= link_to 'Delete', delete_user_path(user.id), remote: true, data: { target: "#user-modal", toggle: 'modal' }, class: 'btn-link' %>
