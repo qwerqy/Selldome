@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get "/pending-verification" => "moderator#pending_verification", as: "pending_verification"
   post "/pending-verification/:id/verify/:verified" => "moderator#verify"
   get "/verified-listings" => "moderator#verified_listings", as: "verified_listings"
+  get "/all-listings" => "moderator#all_listings", as: "all_listings"
 
   # Sessions Routes
   resource :session, controller: "sessions", only: [:create]
