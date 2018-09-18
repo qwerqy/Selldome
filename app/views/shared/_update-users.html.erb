@@ -25,7 +25,7 @@
         <button id="update-user-<%=user.id%>" class="btn btn-link">Edit</button>
       </li>
       <li class="list-inline-item">
-        <%= link_to 'Delete', delete_user_path, remote: true, data: { target: '#user-modal', toggle: 'modal' }, class: 'btn-link' %>
+        <%= link_to 'Delete', delete_user_path(user.id), remote: true, data: { target: "#user-modal", toggle: 'modal' }, class: 'btn-link' %>
       </li>
     </ul>
   </div>

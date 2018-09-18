@@ -35,21 +35,26 @@ class SuperadminController < ApplicationController
 
     def delete_user
       if current_user.superadmin?
+        @user = User.find(params[:id])
+
         render template: 'superadmin/delete-user'
+
         respond_to do |format|
-          format.js
+          format.js # => delete_user.js.erb
         end
+
       else
         flash[:danger] = "You have no access!"
         redirect_to root_path
       end
     end
 
-    def destroy
+    def destroy_user
       if current_user.superadmin?
         @user = User.find(params[:id])
         @user.destroy
         @user.listings.destroy_all
+        redirect_to root_path
       else
         flash[:danger] = "You have no access!"
         redirect_to root_path
