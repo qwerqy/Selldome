@@ -19,7 +19,7 @@ class ModeratorController < ApplicationController
   def pending_verification
     if current_user.moderator? || current_user.superadmin?
       @listing = Listing.order(:name).page params[:page]
-      render template: 'shared/pending-verification'
+      render template: 'moderator/pending-verification'
       respond_to do |format|
         format.js
       end
@@ -34,7 +34,7 @@ class ModeratorController < ApplicationController
       @listing = Listing.find(params[:id])
       @listing.update(verified: params[:verified])
       respond_to do |format|
-        format.js { render 'shared/pending-verification'}
+        format.js { render 'moderator/pending-verification'}
       end
     else
       flash[:danger] = "You have no access!"
@@ -45,7 +45,19 @@ class ModeratorController < ApplicationController
   def verified_listings
     if current_user.moderator? || current_user.superadmin?
       @listing = Listing.order(:name).page params[:page]
-      render template: 'shared/verified-listings'
+      render template: 'moderator/verified-listings'
+      respond_to do |format|
+        format.js
+      end
+    else
+      flash[:danger] = "You have no access!"
+      redirect_to root_path
+    end
+  end
+
+  def all_listings
+    if current_user.moderator? || current_user.superadmin?
+      render template: "moderator/all-listings"
       respond_to do |format|
         format.js
       end
