@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   get "/verified-listings" => "moderator#verified_listings", as: "verified_listings"
   get "/all-listings" => "moderator#all_listings", as: "all_listings"
   get "/view-listing/:id" => "moderator#view_listing", as: "view_listing"
+  get "/moderator-edit-listing/:id" => "moderator#edit_listing", as: "moderator_edit_listing"
+  get "/moderator-delete-listing/:id" => "moderator#delete_listing", as: "moderator_delete_listing"
+  delete "/moderator-delete-listing/:id" => "moderator#destroy_listing", as: "moderator_destroy_listing"
 
   # Sessions Routes
   resource :session, controller: "sessions", only: [:create]
