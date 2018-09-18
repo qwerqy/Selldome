@@ -66,4 +66,17 @@ class ModeratorController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def view_listing
+    if current_user.moderator? || current_user.superadmin?
+      @listing = Listing.find(params[:id])
+      render template: "moderator/view-listing"
+      respond_to do |format|
+        format.js
+      end
+    else
+      flash[:danger] = "You have no access!"
+      redirect_to root_path
+    end
+  end
 end
