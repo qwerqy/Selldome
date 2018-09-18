@@ -23,19 +23,4 @@
 </div>
 </div>
 <hr/>
-<script>
-$('#verify-listing-<%=listing.id%>').change(function(){
-  if (this.checked){
-    $.ajax({
-      type: 'POST',
-      url: '/pending-verification/<%=listing.id%>/verify/true',
-      data: {verified: this.checked},
-      success: function(){
-        alert('Listing ID <%=listing.id%> has been verified!')
-        $('#panel-box').load('/pending-verification')
-      }
-    })
-  }
-})
-</script>
 <% end %>
