@@ -7,8 +7,23 @@
 </div>
 <% if current_user.moderator? || current_user.superadmin? %>
 <div class="d-flex justify-content-center p-3 bg-success">
-  <button class="btn btn-warning p-2 px-5 m-2">Edit</button>
-  <button class="btn btn-danger p-2 px-5 m-2">Delete Listing</button>
+  <!-- <button class="btn btn-warning p-2 px-5 m-2">Edit</button> -->
+  <%=link_to "Edit", moderator_edit_listing_path, remote:true, class: 'btn btn-warning p-2 px-5 m-2'%>
+  <%=link_to "Delete", moderator_delete_listing_path, remote:true, class: 'btn btn-danger p-2 px-5 m-2'%>
+</div>
+<div class="modal fade" id="mod-edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Listing ID <%=@listing.id%></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
 </div>
 <% end %>
 <div class="container mx-auto d-block">
@@ -17,16 +32,13 @@
       <div class="col-8">
         <div class="row">
           <div class="col">
-            <ul class="list-inline">
-
-              <li class="list-inline-item"><h1 class="font-weight-bold mb-0"><%=@listing.name%></h1></li>
+            <div class="d-flex">
+              <h1 class="font-weight-bold mb-0 mr-1"><%=@listing.name%></h1>
               <% if @listing.verified %>
-              <li class="list-inline-item">
-                <i id="verified-badge" class="fas fa-check-circle text-success"></i>
-                <p id="verified-text" class=""> Verified Listing</p>
-              </li>
+                <p id="verified-text" class=""><i id="verified-badge" class="fas fa-check-circle text-success"></i> Verified Listing</p>
               <% end %>
-            </ul>
+            </div>
+            <p class="text-muted p-0"><%=@listing.property_type%></p>
             <p class="text-muted"><%=@listing.state%></p>
             <ul class="inline-item p-0">
               <li class="list-inline-item"><i class="fas fa-user"></i> <%=@listing.guest_number%> guests</li>
