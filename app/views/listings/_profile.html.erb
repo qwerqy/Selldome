@@ -1,0 +1,93 @@
+<div class="cover-photo" style="background-image: url('/assets/profile-cover.jpg');">
+  <button id="view-photo" class="btn btn-outline-light">View Photos</button>
+</div>
+<% if current_user.moderator? || current_user.superadmin? %>
+<div class="d-flex justify-content-center p-3 bg-success">
+  <button class="btn btn-warning p-2 px-5 m-2">Edit</button>
+  <button class="btn btn-danger p-2 px-5 m-2">Delete Listing</button>
+</div>
+<% end %>
+<div class="container mx-auto d-block">
+  <div class="container-fluid p-0 mt-5">
+    <div class="row">
+      <div class="col-8">
+        <div class="row">
+          <div class="col">
+            <ul class="list-inline">
+
+              <li class="list-inline-item"><h1 class="font-weight-bold mb-0"><%=@listing.name%></h1></li>
+              <% if @listing.verified %>
+              <li class="list-inline-item">
+                <i id="verified-badge" class="fas fa-check-circle text-success"></i>
+                <p id="verified-text" class=""> Verified Listing</p>
+              </li>
+              <% end %>
+            </ul>
+            <p class="text-muted"><%=@listing.state%></p>
+            <ul class="inline-item p-0">
+              <li class="list-inline-item"><i class="fas fa-user"></i> <%=@listing.guest_number%> guests</li>
+              <li class="list-inline-item mx-3"><i class="fas fa-bed"></i> <%=@listing.room_number%> Bedrooms</li>
+              <li class="list-inline-item"><i class="fas fa-bath"></i> <%=@listing.bathroom_number%> Bathrooms</li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="profile-photo mx-auto" style= "background-image: url('/assets/profile-photo.jpg');"></div>
+            <p class="text-muted text-center mt-1"><%=@listing.user.name%></p>
+          </div>
+        </div>
+
+        <div class="card my-5">
+          <div class="card-body">
+            <p class="card-title text-muted">Home Hightlights</p>
+            <ul class="list-inline m-0">
+            <%@listing.tag_list.each do |tag|%>
+              <li class="list-inline-item"><p class="card-text btn btn-outline-secondary"><%=tag%></p></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+
+        <div id="description" class="collapse" aria-labelledby="description" data-parent="#description">
+            <p><%=@listing.description%></p><a role="button" class="collapsed" data-toggle="collapse" href="#collapseExample"
+         aria-expanded="false" aria-controls="collapseExample"></a>
+        </div>
+        <button id="view-more" class="btn btn-link p-0 my-2 font-weight-bold" data-toggle='collapse' data-target='#description' aria-expanded='true' aria-controls= 'description'>
+          Read more about this space.
+        </button></br>
+        <a href="" class="btn btn-link p-0 font-weight-bold text-dark my-4">Contact Host</a>
+        <hr/>
+        <p class="font-weight-bold mt-5">Availability</p>
+        <p>RESERVED: CALENDAR FOR RESERVATION</p>
+        <hr/>
+        <h3 class="font-weight-bold">200 Reviews</h3>
+        <hr/>
+
+        <% Listing.all.limit(10).each do |comment| %>
+        <div class="card border-0">
+          <ul class="list-inline">
+            <li class="list-inline-item float-left">
+              <div class="profile-thumbnail m-0 p-0 " style='background-image: url("/assets/profile-photo.jpg")'></div>
+            </li>
+            <li class="list-inline-item float-left">
+              <p class="font-weight-bold m-0 align-top"><%=comment.name%></p>
+              <p class="text-muted m-0 align-top"><%=Time.now.strftime("%B %Y")%></p>
+            </li>
+          </ul>
+          <p class=""><%=comment.description%></p>
+        </div>
+        <hr/>
+      <% end %>
+      </div>
+
+      <div class="col-4">
+        <div class="card sticky-top sticky-offset">
+          <div class="card-body ">
+            <h4 class="card-title font-weight-bold">$<%=@listing.price.to_i%> <span class="tiny-font">per night</span></h4>
+            <hr/>
+            <button class="btn btn-danger px-5 mx-auto d-block">Book</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
