@@ -11,32 +11,32 @@
 </div>
 <hr/>
 <% Listing.where(verified: false).each do |listing|%>
-<div class="row">
-  <div class="col-1"><a href='/listings/<%=listing.id%>'><%=listing.id%></a></div>
-  <div class="col-2"><%=listing.name%></div>
-  <div class="col-1"><%=listing.property_type%></div>
-  <div class="col-2"><%=listing.country%></div>
-  <div class="col-2"><%=listing.state%></div>
-  <div class="col-1"><%=number_to_currency(listing.price, unit: '$')%></div>
-  <div class="col-2"><a href='/profile/<%=listing.user.id%>'><%=listing.user.name%></a></div>
-  <!-- <div class="col-1 form-check"><input class="form-check-input mx-auto d-block" type="checkbox" value="" id="verify-listing-<%=listing.id%>"></div> -->
-  <%=check_box("listings","verified", {id: "verify-listing-#{listing.id}", class: 'col-1 form-check'}, true, false)%>
-</div>
-</div>
-<hr/>
-<script>
-$('#verify-listing-<%=listing.id%>').change(function(){
-  if (this.checked){
-    $.ajax({
-      type: 'POST',
-      url: '/pending-verification/<%=listing.id%>/verify/true',
-      data: {verified: this.checked},
-      success: function(data){
-        alert('Listing ID <%=listing.id%> has been verified!');
-        $(this).submit();
+  <%= link_to view_listing_path(listing.id), remote: true, data: { target: "#listing-modal", toggle: 'modal' } do %>
+    <div class="row">
+      <div class="col-1"><%=listing.id%></div>
+      <div class="col-2"><%=listing.name%></div>
+      <div class="col-1"><%=listing.property_type%></div>
+      <div class="col-2"><%=listing.country%></div>
+      <div class="col-2"><%=listing.state%></div>
+      <div class="col-1"><%=number_to_currency(listing.price, unit: '$')%></div>
+      <div class="col-2"><%=listing.user.name%></div>
+      <%=check_box("listings","verified", {id: "verify-listing-#{listing.id}", class: 'col-1 form-check'}, true, false)%>
+    </div>
+  <%end%>
+    <hr/>
+    <script>
+    $('#verify-listing-<%=listing.id%>').change(function(){
+      if (this.checked){
+        $.ajax({
+          type: 'POST',
+          url: '/pending-verification/<%=listing.id%>/verify/true',
+          data: {verified: this.checked},
+          success: function(data){
+            alert('Listing ID <%=listing.id%> has been verified!');
+            $(this).submit();
+          }
+        })
       }
     })
-  }
-})
-</script>
+    </script>
 <% end %>
