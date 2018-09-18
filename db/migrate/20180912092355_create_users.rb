@@ -10,6 +10,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :phone
       t.string :country
 
+      t.string :about_me
+
       t.boolean :superadmin, default: false
       t.boolean :moderator, default: false
       t.boolean :customer, default: true
