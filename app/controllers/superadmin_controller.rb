@@ -61,10 +61,15 @@ class SuperadminController < ApplicationController
     end
 
     def update_user
-      @user = User.find(params[:id])
-      render template: 'superadmin/edit-user'
-      respond_to do |format|
-        format.js
+      if current_user.superadmin?
+        @user = User.find(params[:id])
+        render template: 'superadmin/edit-user'
+        respond_to do |format|
+          format.js
+        end
+      else
+        flash[:danger] = "You have no access!"
+        redirect_to admin_panel_path
       end
     end
 
