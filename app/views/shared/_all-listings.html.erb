@@ -11,22 +11,23 @@
 </div>
 <hr/>
 <% Listing.order(created_at: :asc).each do |listing|%>
-<div class="row">
-  <div class="col-1"><a href='/listings/<%=listing.id%>'><%=listing.id%></a></div>
-  <div class="col-2"><%=listing.name%></div>
-  <div class="col-1"><%=listing.property_type%></div>
-  <div class="col-2"><%=listing.country%></div>
-  <div class="col-2"><%=listing.state%></div>
-  <div class="col-1"><%=number_to_currency(listing.price, unit: '$')%></div>
-  <div class="col-2"><a href='/profile/<%=listing.user.id%>'><%=listing.user.name%></a></div>
-  <div class="col-1">
-    <% if listing.verified? %>
-      <p class="font-weight-bold text-success">Verified</p>
-    <% else %>
-      <p class="font-weight-bold text-warning">Not Verified</p>
-    <% end %>
-  </div>
-</div>
-</div>
+  <%= link_to view_listing_path(listing.id), remote: true, data: { target: "#listing-modal", toggle: 'modal' } do %>
+    <div class="row">
+      <div class="col-1"><%=listing.id%></div>
+      <div class="col-2"><%=listing.name%></div>
+      <div class="col-1"><%=listing.property_type%></div>
+      <div class="col-2"><%=listing.country%></div>
+      <div class="col-2"><%=listing.state%></div>
+      <div class="col-1"><%=number_to_currency(listing.price, unit: '$')%></div>
+      <div class="col-2"><%=listing.user.name%></div>
+      <div class="col-1">
+        <% if listing.verified? %>
+          <p class="font-weight-bold text-success">Verified</p>
+        <% else %>
+          <p class="font-weight-bold text-warning">Not Verified</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 <hr/>
 <% end %>
