@@ -79,4 +79,41 @@ class ModeratorController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def edit_listing
+    if current_user.moderator? || current_user.superadmin?
+      @listing = Listing.find(params[:id])
+      render template: "moderator/edit-listing"
+      respond_to do |format|
+        format.js
+      end
+    else
+      flash[:danger] = "You have no access!"
+      redirect_to root_path
+    end
+  end
+
+    def delete_listing
+      if current_user.moderator? || current_user.superadmin?
+        @listing = Listing.find(params[:id])
+        render template: "moderator/delete-listing"
+        respond_to do |format|
+          format.js
+        end
+      else
+        flash[:danger] = "You have no access!"
+        redirect_to root_path
+      end
+    end
+
+    def destroy_listing
+      if current_user.moderator? || current_user.superadmin?
+        @listing = Listing.find(params[:id])
+        @listing.destroy
+        redirect_to root_path
+      else
+        flash[:danger] = "You have no access!"
+        redirect_to root_path
+      end
+    end
 end
