@@ -28,7 +28,7 @@ class User < ApplicationRecord
  end
 
  def country_name
-    country = ISO3166::Country[country_code]
-    country.translations[I18n.locale.to_s] || country.name
+    full_country = ISO3166::Country[country]
+    full_country.translations[I18n.locale.to_s] || full_country.name
   end
 end
