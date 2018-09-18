@@ -53,7 +53,6 @@ class SuperadminController < ApplicationController
       if current_user.superadmin?
         @user = User.find(params[:id])
         @user.destroy
-        @user.listings.destroy_all
         redirect_to root_path
       else
         flash[:danger] = "You have no access!"

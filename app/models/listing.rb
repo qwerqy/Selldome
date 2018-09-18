@@ -1,5 +1,5 @@
 class Listing < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
   acts_as_taggable
 
   def self.place_type_string(data)
