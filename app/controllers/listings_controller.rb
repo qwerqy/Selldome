@@ -34,7 +34,7 @@ class ListingsController < ApplicationController
   def update
     @listing = Listing.find(params[:id])
     if @listing.update_attributes(listing_params)
-      redirect_to my_listings_path
+      redirect_back(fallback_location: root_path)
     else
       render :edit
     end
