@@ -101,6 +101,15 @@ a {
   border-radius: 50%;
 }
 
+.profile-photo-large {
+  width: 250px;
+  height: 250px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+}
+
 .profile-thumbnail {
   width: 45px;
   height: 45px;
@@ -180,4 +189,8 @@ a {
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+}
+
+.report-link {
+  font-size: 14px;
 }
