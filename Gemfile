@@ -58,6 +58,18 @@ gem 'kaminari'
 # Country-Select
 gem 'country_select', '~> 3.1'
 
+# CarrierWave
+gem 'carrierwave', '~> 1.0'
+
+# CarrierWave + AWS
+gem 'carrierwave-aws'
+
+# Mini Magick
+gem 'mini_magick'
+
+# AWS SDK Rails
+gem 'aws-sdk-rails'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
