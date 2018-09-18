@@ -5,6 +5,12 @@
 <div class="cover-photo" style="background-image: url('/assets/profile-cover.jpg');">
   <button id="view-photo" class="btn btn-outline-light">View Photos</button>
 </div>
+<% if current_user.moderator? || current_user.superadmin? %>
+<div class="d-flex justify-content-center p-3 bg-success">
+  <button class="btn btn-warning p-2 px-5 m-2">Edit</button>
+  <button class="btn btn-danger p-2 px-5 m-2">Delete Listing</button>
+</div>
+<% end %>
 <div class="container mx-auto d-block">
   <div class="container-fluid p-0 mt-5">
     <div class="row">
