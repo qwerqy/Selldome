@@ -11,7 +11,10 @@ class SuperadminController < ApplicationController
 
     def all_users
       if current_user.superadmin?
-        render template: 'shared/view-users'
+        render template: 'superadmin/view-users'
+        respond_to do |format|
+          format.js
+        end
       else
         flash[:danger] = "You have no access!"
         redirect_to root_path
@@ -20,7 +23,10 @@ class SuperadminController < ApplicationController
 
     def update_users
       if current_user.superadmin?
-        render template: 'shared/update-users'
+        render template: 'superadmin/update-users'
+        respond_to do |format|
+          format.js
+        end
       else
         flash[:danger] = "You have no access!"
         redirect_to root_path
@@ -28,6 +34,18 @@ class SuperadminController < ApplicationController
     end
 
     def delete_user
+      if current_user.superadmin?
+        render template: 'superadmin/delete-user'
+        respond_to do |format|
+          format.js
+        end
+      else
+        flash[:danger] = "You have no access!"
+        redirect_to root_path
+      end
+    end
+
+    def destroy
       if current_user.superadmin?
         @user = User.find(params[:id])
         @user.destroy
