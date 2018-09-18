@@ -158,13 +158,14 @@ a {
 #verified-badge {
   font-size:30px;
   vertical-align: middle;
+  float: left;
 }
 
 #verified-text {
-  display: inline-block;
+  // display: inline-block;
   font-weight: bold;
-  font-size: 13px;
-  vertical-align: middle;
+  // font-size: 13px;
+  // vertical-align: middle
   margin: 0;
 }
 
