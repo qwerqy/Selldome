@@ -4,21 +4,24 @@
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true%>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
   <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  <% if content_for?(:navbar) %>
+  <% if content_for?(:navbar_landing) %>
+    <%= yield(:navbar_landing) %>
+  <% elsif content_for?(:navbar_special)%>
+    <%= yield(:navbar_special) %>
+  <% elsif content_for?(:navbar) %>
     <%= yield(:navbar) %>
-<% else %>
-  <%= render partial: "shared/navbar" %>
-<% end %>
-
+  <% end %>
   <div id="flash">
     <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
+    <div class="alert alert-<%= key %> text-middle"><%=h value %></div>
     <% end %>
   </div>
+
 
   <%= yield %>
 </body>

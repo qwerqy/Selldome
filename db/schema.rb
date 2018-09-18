@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2018_09_14_095506) do
     t.string "address"
     t.decimal "price"
     t.string "description"
+    t.boolean "verified", default: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -80,6 +81,9 @@ ActiveRecord::Schema.define(version: 2018_09_14_095506) do
     t.integer "gender"
     t.string "phone"
     t.string "country"
+    t.boolean "superadmin", default: false
+    t.boolean "moderator", default: false
+    t.boolean "customer", default: true
     t.string "encrypted_password", limit: 128, null: false
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128, null: false

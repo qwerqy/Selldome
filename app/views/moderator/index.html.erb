@@ -1,0 +1,48 @@
+
+
+<% content_for :navbar_special do %>
+  <%= render partial: "shared/navbar-panel" %>
+<% end %>
+
+<div class="background-keep mt-5">
+  <div class="row">
+    <div class="col-3 ">
+      <div class="card sticky-top sticky-offset">
+        <div class="card-body">
+          <h3 class="font-weight-bold">Welcome <%=current_user.name%>!</h3>
+          <hr/>
+          <h5 class="text-muted">Dashboard</h5>
+          <hr/>
+          <p class="text-muted">Listings</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <%= link_to 'All Listings', all_listings_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
+            </li>
+            <li class="list-group-item">
+              <%= link_to 'Pending Verification', pending_verification_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
+            </li>
+            <li class="list-group-item">
+              <%= link_to 'Verified Listings', verified_listings_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
+            </li>
+            <li class="list-group-item">
+              <a id="comments">Comments</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="card">
+        <div id="panel-box" class="card-body">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="listing-modal" tabindex="-1" role="dialog" aria-labelledby="viewListing" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>

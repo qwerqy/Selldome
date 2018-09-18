@@ -17,7 +17,9 @@ class CreateListings < ActiveRecord::Migration[5.2]
 
       t.decimal :price
       t.string :description
-      
+
+      t.boolean :verified, default: false
+
       t.references :user
 
       t.timestamps null: false

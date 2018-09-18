@@ -1,0 +1,47 @@
+<% content_for :navbar_special do %>
+  <%= render partial: "shared/navbar-panel" %>
+<% end %>
+
+<div class="background-keep mt-5">
+  <div class="row">
+    <div class="col-3 ">
+      <div class="card sticky-top sticky-offset">
+        <div class="card-body">
+          <h3 class="font-weight-bold">Welcome <%=current_user.name%>!</h3>
+          <hr/>
+          <h5 class="text-muted">Dashboard</h5>
+          <hr/>
+          <!-- Users -->
+          <p class="text-muted">Users</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <%= link_to 'View Users', view_users_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
+            </li>
+            <li class="list-group-item">
+              <%= link_to 'Update Users', update_users_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
+            </li>
+          </ul>
+          <!-- Listings -->
+          <p class="text-muted mt-3">Listings</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <%= link_to 'Pending Verification', pending_verification_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
+            </li>
+            <li class="list-group-item">
+              <%= link_to 'Verified Listing', verified_listings_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
+            </li>
+            <li class="list-group-item">
+              <a id="comments" class="text-muted">Comments</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="card">
+        <div id="panel-box" class="card-body">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

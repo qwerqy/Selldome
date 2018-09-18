@@ -1,0 +1,26 @@
+<h3 class="font-weight-bold mb-4">All Users</h3>
+<div class="row">
+  <div class="col-1 font-weight-bold">ID</div>
+  <div class="col-2 font-weight-bold">First Name</div>
+  <div class="col-1 font-weight-bold">Last Name</div>
+  <div class="col-2 font-weight-bold">Birthday</div>
+  <div class="col-2 font-weight-bold">Email</div>
+  <div class="col-1 font-weight-bold">Phone</div>
+  <div class="col-2 font-weight-bold">Country</div>
+  <div class="col-1 font-weight-bold">Profile</div>
+</div>
+<hr/>
+<% User.all.each do |user|%>
+<div class="row">
+  <div class="col-1"><a href='/users/<%=user.id%>'><%=user.id%></a></div>
+  <div class="col-2"><%=user.first_name%></div>
+  <div class="col-1"><%=user.last_name%></div>
+  <div class="col-2"><%=user.birthday%></div>
+  <div class="col-2"><%=user.email%></div>
+  <div class="col-1"><%=user.phone%></div>
+  <div class="col-2"><%=user.country%></div>
+  <div class="col-1"><a href='/profile/<%=user.id%>'>Link</a></div>
+</div>
+</div>
+<hr/>
+<% end %>

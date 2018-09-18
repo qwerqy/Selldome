@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :require_login
-  def index
+  def my_index
     render template: 'listings/index'
   end
 
@@ -11,6 +11,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
+    render template: 'listings/profile'
   end
 
   def create
@@ -33,10 +34,16 @@ class ListingsController < ApplicationController
   def update
     @listing = Listing.find(params[:id])
     if @listing.update_attributes(listing_params)
-      redirect_to my_listings_path
+      redirect_back(fallback_location: root_path)
     else
       render :edit
     end
+  end
+
+  def destroy
+    @listing = Listing.find(params[:id])
+    @listing.destroy
+    redirect_to my_listings_path
   end
 
   def property_from_place_type
@@ -51,10 +58,6 @@ class ListingsController < ApplicationController
       @property_type = ["Barn", "Boat", "Bus", "Camper/RV", "Campsite", "Castle", "Cave", "Dome House", "Earth House", "Farmstay", "Hut", "Igloo, Island", "Lighthouse", "Pension (South Korea)", "Plane", "Shepherd's Hut (UK, France)", "Tent", "Tinyhouse", "Tipi", "Train", "Treehouse", "Windmill", "Yurt"]
     elsif place == '5'
       @property_type = ["Boutique Hotel", "Aparthotel", "Heritage Hotel (India)", "Hostel", "Hotel", "Natural Lodge", "Resort", "Serviced Apartment"]
-    elsif place == '6'
-      @property_type = ["Restaurant", "Fast Food", "Foodcourt", "High Dining", "Local Restaurant", "Stall", "Traditional Dining"]
-    elsif place == '7'
-      @property_type = ["Cafe", "Hipster Cafe"]
     end
     render json: {property_type: @property_type}
   end
@@ -77,7 +80,8 @@ class ListingsController < ApplicationController
       :price,
       :description,
       :user_id,
-      :tag_list
+      :tag_list,
+      :verified
     )
   end
 end

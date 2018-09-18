@@ -1,12 +1,12 @@
 <%= form_for @user do |form| %>
 <div class="text-field form-group">
   <%= form.label :first_name %>
-  <%= form.text_field :first_name, type: 'first_name', class: 'form-control' %>
+  <%= form.text_field :first_name, type: 'first_name', placeholder: "#{@user.first_name}", class: 'form-control' %>
 </div>
 
 <div class="text-field form-group">
   <%= form.label :last_name %>
-  <%= form.text_field :last_name, type: 'last_name', class: 'form-control' %>
+  <%= form.text_field :last_name, type: 'last_name', placeholder: "#{@user.last_name}", class: 'form-control' %>
 </div>
 
 <div class="field form-group">
@@ -17,22 +17,22 @@
 
 <div class="text-field form-group">
   <%= form.label :birthday %>
-  <%= form.text_field :birthday, type: 'birthday', class: 'form-control', id: 'datepicker'%>
+  <%= form.text_field :birthday, type: 'birthday', placeholder: "#{@user.birthday}", class: 'form-control', id: 'datepicker'%>
 </div>
 
 <div class="field form-group">
   <%= form.label :country %>
-  <%= form.country_select :country, priority_countries = ["United States"], options = {}, html_options = {:class => "form-control", :id => "user_country"} %>
+  <%= form.country_select :country, priority_countries = ["#{@user.country}"], options = {}, html_options = {:class => "form-control", :id => "user_country"} %>
 </div>
 
 <div class="text-field form-group">
   <%= form.label :email %>
-  <%= form.text_field :email, type: 'email', class: 'form-control' %>
+  <%= form.text_field :email, type: 'email', placeholder: "#{@user.email}", class: 'form-control' %>
 </div>
 
 <div class="text-field form-group">
   <%= form.label :phone %>
-  <%= form.text_field :phone, type: 'phone', class: 'form-control' %>
+  <%= form.text_field :phone, type: 'phone', placeholder: "#{@user.phone}", class: 'form-control' %>
 </div>
 
 <div class="password-field form-group">

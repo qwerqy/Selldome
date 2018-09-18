@@ -1,6 +1,9 @@
 <head>
    <%= stylesheet_link_tag "listings" if controller_name == "listings" %>
 </head>
+<% content_for :navbar do %>
+  <%= render partial: "shared/navbar" %>
+<% end %>
 <div class="background-keep">
   <div class="mt-5 container-fluid p-0">
     <ul class="list-inline">
