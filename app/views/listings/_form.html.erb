@@ -127,6 +127,11 @@
     <%= form.text_field :tag_list, placeholder: 'No Smoking, Pet Owner, Quiet....', type: 'tag_list', class: 'form-control' %>
 </div>
 
+<div class="file-field form-group">
+    <%= form.label "Upload some photos of your home."%>
+    <%= form.file_field :photos, multiple: true, class: 'form-control-file' %>
+</div>
+
 <div class="submit-field form-group">
   <%= form.submit "Create", class: 'btn' %>
 </div>
