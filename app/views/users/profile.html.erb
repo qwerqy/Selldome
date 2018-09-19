@@ -48,6 +48,7 @@
         <h2 class="">Listings <span class="secondary-text text-muted">(<%=@user.listings.count%>)</span></h2>
         <ul class="list-inline">
           <% @user.listings.limit(3).each do |listing| %>
+            <a href="/listings/<%=listing.id%>">
               <li class="list-inline-item">
                 <div id="list-card-<%=listing.id%>" class="card p-0 shadow-sm listing-card" style="background-image: url('https://source.unsplash.com/collection/1198672');">
                 <!-- Details -->
@@ -57,6 +58,7 @@
                   </div>
                 </div>
               </li>
+            </a>
               <script>
               $('#list-text-<%=listing.id%>').hide();
               $('#list-card-<%=listing.id%>').mouseover(function(){
@@ -80,7 +82,7 @@
             <div class="row">
               <div class="col-2">
                 <a href="/profile/<%=comment.user.id%>">
-                  <div class="profile-photo m-0 p-0 mx-auto" style='background-image: url("/assets/profile-photo.jpg")'></div>
+                  <div class="profile-photo m-0 p-0 mx-auto" style='background-image: url("<%=comment.user.avatar.url%>")'></div>
                   <p class="text-center text-muted report-link"><%=comment.user.first_name%></p>
                 </a>
               </div>
