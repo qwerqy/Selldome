@@ -40,6 +40,14 @@ class ListingsController < ApplicationController
     end
   end
 
+  def upload_photos
+    @listing = Listing.find(params[:id])
+    # render template: 'listings/upload-listing-photos'
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def destroy
     @listing = Listing.find(params[:id])
     @listing.destroy
@@ -82,7 +90,7 @@ class ListingsController < ApplicationController
       :user_id,
       :tag_list,
       :verified,
-      {avatars: []})
+      {photos: []}
     )
   end
 end
