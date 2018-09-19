@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :passwords, controller: "passwords", only: [:create, :new]
 
   # Users Routes
-  resources :users, controller: "users", only: [:create, :update] do
+  resources :users, controller: "users", only: [:create] do
     resource :password,
       controller: "passwords",
       only: [:create, :edit, :update]
@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get "/sign_up" => "users#new", as: "sign_up"
   get "/profile/:id" => "users#show", as: "profile"
   get "/profile/:id/edit" => "users#edit", as: "user_edit"
+  patch "/profile/:id/edit" => "users#update", as: "user"
 
   # Superadmin
   get "/admin-panel" => "superadmin#index", as: "admin_panel"
