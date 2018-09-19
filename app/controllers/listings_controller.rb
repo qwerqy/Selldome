@@ -44,9 +44,36 @@ class ListingsController < ApplicationController
   end
 
   def upload_photos
+    new_photos = listing_params[:photos]
+    @listing = Listing.find(params[:id])
+    photos = @listing.photos
+    photos += new_photos
+    @listing.photos = photos
+    if @listing.save
+      flash[:success] = "Photo(s) uploaded!"
+      redirect_back(fallback_location: root_path)
+    else
+      flash[:danger] = "Error Occured"
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def show_upload
     @listing = Listing.find(params[:id])
     respond_to do |format|
       format.js
+    end
+  end
+
+  def remove_photo
+    @listing = Listing.find(params[:id])
+    remove_image_at_index(params[:index].to_i)
+    if @listing.save
+      flash[:success] = "Photo removed"
+      redirect_back(fallback_location: root_path)
+    else
+      flash[:danger] = "Error Occured"
+      redirect_back(fallback_location: root_path)
     end
   end
 
