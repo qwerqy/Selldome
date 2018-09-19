@@ -128,7 +128,7 @@
 </div>
 
 <div class='text-field form-group'>
-    <%= form.label :tag_list, "Anything else you would like your guests to know?"%><br/>
+    <%= form.label :tag_list, "Anything else you would like your guests to know?"%>
     <%= form.text_field :tag_list, placeholder: "#{@listing.tag_list}", type: 'tag_list', class: 'form-control' %>
 </div>
 
@@ -136,6 +136,17 @@
   <%= form.submit "Save Changes", class: 'btn' %>
 </div>
 <% end %>
+
+<hr/>
+
+<%=link_to "Upload Photos", listing_upload_photos_path(@listing.id), remote: true, data: {target: '#listing_upload_box',toggle: 'modal' }, class: 'btn btn-primary'%>
+
+<div id="listing-upload-box" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
 
 <script>
 $(document).ready(function() {
