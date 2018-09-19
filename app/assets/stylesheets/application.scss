@@ -93,8 +93,8 @@ a {
 }
 
 .profile-photo {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -107,7 +107,7 @@ a {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 50%;
+  // border-radius: 50%;
 }
 
 .profile-thumbnail {
@@ -193,4 +193,25 @@ a {
 
 .report-link {
   font-size: 14px;
+}
+
+.secondary-text {
+  font-size: 23px;
+}
+
+.listing-card {
+  height: 250px;
+  width: 250px;
+  background-position: center;
+  background-size: cover;
+}
+
+.listing-card-text {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7));
+
 }
