@@ -1,5 +1,6 @@
 class Listing < ApplicationRecord
   belongs_to :user
+  mount_uploaders :photos, PhotoUploader
   acts_as_taggable
 
   def self.place_type_string(data)
@@ -38,5 +39,5 @@ class Listing < ApplicationRecord
      full_country = ISO3166::Country[country]
      full_country.translations[I18n.locale.to_s] || full_country.name
    end
-   
+
 end
