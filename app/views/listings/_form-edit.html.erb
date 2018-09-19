@@ -132,21 +132,18 @@
     <%= form.text_field :tag_list, placeholder: "#{@listing.tag_list}", type: 'tag_list', class: 'form-control' %>
 </div>
 
+<hr/>
+
+<div class="file-field form-group">
+    <%= form.label "Upload some photos of your home."%>
+    <%= form.file_field :photos, multiple: true, class: 'form-control-file' %>
+</div>
+
+
 <div class="submit-field form-group">
   <%= form.submit "Save Changes", class: 'btn' %>
 </div>
 <% end %>
-
-<hr/>
-
-<%=link_to "Upload Photos", listing_upload_photos_path(@listing.id), remote: true, data: {target: '#listing_upload_box',toggle: 'modal' }, class: 'btn btn-primary'%>
-
-<div id="listing-upload-box" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-    </div>
-  </div>
-</div>
 
 <script>
 $(document).ready(function() {
