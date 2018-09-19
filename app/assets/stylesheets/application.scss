@@ -217,3 +217,20 @@ a {
   background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7));
 
 }
+
+.no-text-decoration {
+  text-decoration: none;
+}
+
+.background-wrap {
+  background-position: center;
+  background-size: cover;
+}
+
+.my-listing-card-text {
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7));
+}
+
+.my-listing-card-text p, i {
+  color: white!important;
+}
