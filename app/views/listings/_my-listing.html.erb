@@ -1,7 +1,6 @@
 <div id="listings">
   <div class="row">
-  <% Listing.all.each do |listing| %>
-    <% if listing.user_id == current_user.id %>
+  <% @user.listings.all.each do |listing| %>
       <div id="card-<%=listing.id%>" class="card col-3 shadow m-3">
         <div class="card-body">
           <button id="close-<%=listing.id%>" class="btn p-0 fas fa-times text-muted d-block float-right bg-transparent" data-toggle='modal' data-target="#delete-listing-modal"></button>
@@ -50,7 +49,6 @@
             </div>
           </div>
         </div>
-    <% end %>
   <% end %>
   </div>
 </div>

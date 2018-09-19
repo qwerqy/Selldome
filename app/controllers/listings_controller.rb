@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
   before_action :require_login
   def my_index
+    @user = current_user
     render template: 'listings/index'
   end
 
@@ -34,7 +35,8 @@ class ListingsController < ApplicationController
   def update
     @listing = Listing.find(params[:id])
     if @listing.update_attributes(listing_params)
-      redirect_back(fallback_location: root_path)
+      flash[:success] = "Listing successfully updated!"
+      redirect_to listing_path(@listing.id)
     else
       flash[:danger] = "Update Failed!"
       render :edit
@@ -43,7 +45,6 @@ class ListingsController < ApplicationController
 
   def upload_photos
     @listing = Listing.find(params[:id])
-    # render template: 'listings/upload-listing-photos'
     respond_to do |format|
       format.js
     end
