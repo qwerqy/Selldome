@@ -5,21 +5,5 @@
   </button>
   </div>
 <div class="modal-body">
-  <%= form_tag '/media_contents', method: :post, class: "dropzone media-dropzone", id: "media-dropzone" do %>
-  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
-  <div class="fallback">
-    <%= file_field_tag "media", multiple: true%>
-  </div>
-  <% end %>
-</div>
 
-<script>
-  $(function() {
-    var mediaDropzone;
-    mediaDropzone = new Dropzone("#media-dropzone");
-    return mediaDropzone.on("success", function(file, responseText) {
-      var imageUrl;
-      imageUrl = responseText.file_name.url;
-    });
-  });
-</script>
+</div>
