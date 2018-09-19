@@ -19,6 +19,7 @@ ActiveRecord::Base.transaction do
     user['country'] = Faker::Address.country_code
     user['birthday'] = Faker::Date.between(50.years.ago, Date.today)
     user['about_me'] = Faker::GreekPhilosophers.quote
+    user['remote_avatar_url'] = Faker::LoremFlickr.image("300x300", ['people'])
 
     User.create(user)
   end
