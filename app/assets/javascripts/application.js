@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require dropzone
 //= require rails-ujs
 //= require jquery3
 //= require popper
@@ -55,4 +56,13 @@ $(document).ready(function() {
         populate_property_type(7);
       }
     });
+
+    // $(function() {
+    //   var mediaDropzone;
+    //   mediaDropzone = new Dropzone("#media-dropzone");
+    //   return mediaDropzone.on("success", function(file, responseText) {
+    //     var imageUrl;
+    //     imageUrl = responseText.file_name.url;
+    //   });
+    // });
 });
