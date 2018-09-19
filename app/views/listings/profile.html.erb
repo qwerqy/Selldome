@@ -47,7 +47,7 @@
             </ul>
           </div>
           <div class="col">
-            <a href="/profile/<%=@listing.user_id%>"><div class="profile-photo mx-auto" style= "background-image: url('/assets/profile-photo.jpg');"></div></a>
+            <a href="/profile/<%=@listing.user_id%>"><div class="profile-photo mx-auto" style= "background-image: url('<%=@listing.user.avatar.url%>');"></div></a>
             <p class="text-muted text-center mt-1"><%=@listing.user.name%></p>
           </div>
         </div>
@@ -82,7 +82,7 @@
         <div class="card border-0">
           <ul class="list-inline">
             <li class="list-inline-item float-left">
-              <a href="/profile/<%=comment.user_id%>"><div class="profile-thumbnail m-0 p-0 " style='background-image: url("/assets/profile-photo.jpg")'></div></a>
+              <a href="/profile/<%=comment.user_id%>"><div class="profile-thumbnail m-0 p-0 " style='background-image: url("<%=comment.user.avatar.url%>")'></div></a>
             </li>
             <li class="list-inline-item float-left">
               <p class="font-weight-bold m-0 align-top"><%=comment.user.name%></p>
