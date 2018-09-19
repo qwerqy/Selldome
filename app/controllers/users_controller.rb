@@ -35,6 +35,15 @@ class UsersController < Clearance::UsersController
       render :edit
     end
   end
+
+  def upload_photo
+    @user = User.find(params[:id])
+    render template: 'users/upload-profile-photo'
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def user_from_params
@@ -45,6 +54,8 @@ class UsersController < Clearance::UsersController
     birthday = user_params.delete(:birhday)
     email = user_params.delete(:email)
     password = user_params.delete(:password)
+    avatar = user_params.delete(:avatar)
+    about_me = user_params.delete(:about_me)
 
     Clearance.configuration.user_model.new(user_params).tap do |user|
       user.first_name = first_name
@@ -54,6 +65,8 @@ class UsersController < Clearance::UsersController
       user.birthday = birthday
       user.email = email
       user.password = password
+      user.avatar = avatar
+      user.about_me = about_me
     end
   end
 
@@ -69,6 +82,7 @@ class UsersController < Clearance::UsersController
           :phone,
           :password,
           :avatar,
+          :about_me,
           :remote_avatar_url
         )
   end
