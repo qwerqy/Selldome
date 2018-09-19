@@ -1,5 +1,9 @@
 <% content_for :navbar do %>
-  <%= render partial: "shared/navbar" %>
+  <% if signed_in? %>
+    <%= render partial: "shared/navbar" %>
+  <% else %>
+    <%= render partial: "shared/navbar-index" %>
+  <% end %>
 <% end %>
 <div class="container mx-auto mt-5">
   <div class="row">
@@ -43,7 +47,7 @@
       <div>
         <h2 class="">Listings <span class="secondary-text text-muted">(<%=@user.listings.count%>)</span></h2>
         <ul class="list-inline">
-          <% @user.listings.each do |listing| %>
+          <% @user.listings.limit(3).each do |listing| %>
               <li class="list-inline-item">
                 <div id="list-card-<%=listing.id%>" class="card p-0 shadow-sm listing-card" style="background-image: url('https://source.unsplash.com/collection/1198672');">
                 <!-- Details -->

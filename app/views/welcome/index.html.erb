@@ -3,7 +3,11 @@
 </head>
 
 <% content_for :navbar_landing do %>
-  <%= render partial: "shared/navbar-index" %>
+  <% if signed_in? %>
+    <%= render partial: "shared/navbar" %>
+  <% else %>
+    <%= render partial: "shared/navbar-index" %>
+  <% end %>
 <% end %>
 
 <div id="landingText" class="container">

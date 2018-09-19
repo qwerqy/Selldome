@@ -1,5 +1,9 @@
 <% content_for :navbar do %>
-  <%= render partial: "shared/navbar" %>
+  <% if signed_in? %>
+    <%= render partial: "shared/navbar" %>
+  <% else %>
+    <%= render partial: "shared/navbar-index" %>
+  <% end %>
 <% end %>
 
 <div class="cover-photo" style="background-image: url('/assets/profile-cover.jpg');">

@@ -2,7 +2,11 @@
    <%= stylesheet_link_tag "listings" if controller_name == "listings" %>
 </head>
 <% content_for :navbar do %>
-  <%= render partial: "shared/navbar" %>
+  <% if signed_in? %>
+    <%= render partial: "shared/navbar" %>
+  <% else %>
+    <%= render partial: "shared/navbar-index" %>
+  <% end %>
 <% end %>
 <div class="background-keep">
   <div class="mt-5 container-fluid p-0">
