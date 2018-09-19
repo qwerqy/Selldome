@@ -68,7 +68,8 @@ class UsersController < Clearance::UsersController
           :email,
           :phone,
           :password,
-          :avatar
+          :avatar,
+          :remote_avatar_url
         )
   end
 end
