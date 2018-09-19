@@ -231,6 +231,6 @@ a {
   background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7));
 }
 
-.my-listing-card-text p, i {
-  color: white!important;
+.my-listing-card-text p, .my-listing-card-text i {
+  color: white;
 }
