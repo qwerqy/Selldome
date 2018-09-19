@@ -81,7 +81,8 @@ class ListingsController < ApplicationController
       :description,
       :user_id,
       :tag_list,
-      :verified
+      :verified,
+      {avatars: []})
     )
   end
 end
