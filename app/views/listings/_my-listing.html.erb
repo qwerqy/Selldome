@@ -1,7 +1,11 @@
 <div id="listings">
   <div class="row">
   <% @user.listings.all.each do |listing| %>
+    <% if listing.photos? == true %>
       <div id="my-listing-card-<%=listing.id%>" class="p-0 background-wrap card col-3 shadow m-3" style='background-image: url("<%=listing.photos[0].url%>");'>
+    <% else %>
+      <div id="my-listing-card-<%=listing.id%>" class="p-0 background-wrap card col-3 shadow m-3" style='background-image: url("assets/default-no-photos.jpg");'>
+    <% end %>
         <div class="d-block">
           <button id="close-<%=listing.id%>" class="btn p-0 fas fa-times text-muted bg-transparent" data-toggle='modal' data-target="#delete-listing-modal"></button>
         </div>
