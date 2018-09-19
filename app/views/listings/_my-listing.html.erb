@@ -1,38 +1,32 @@
 <div id="listings">
   <div class="row">
   <% @user.listings.all.each do |listing| %>
-      <div id="card-<%=listing.id%>" class="card col-3 shadow m-3">
-        <div class="card-body">
-          <button id="close-<%=listing.id%>" class="btn p-0 fas fa-times text-muted d-block float-right bg-transparent" data-toggle='modal' data-target="#delete-listing-modal"></button>
-          <h2 class="card-title"><%= listing.name %></h2>
-          <p class="card-text">
-            <%= simple_format truncate(listing.description, length: 300) %>
-          </p>
-          <p class="card-subtitle text-muted">
-            <%= listing.property_type%>
-          </p>
-          <p class="card-text">
-            <%= listing.description%>
-          </p>
-          <p class="card-text">
-            <%= listing.address%>
-          </p>
-          <ul class="list-inline">
-            <li class="list-inline-item"><i class="fas fa-user"></i> <%=listing.guest_number%></li>
-            <li class="list-inline-item"><i class="fas fa-bed"></i> <%=listing.room_number%></li>
-            <li class="list-inline-item"><i class="fas fa-bath"></i> <%=listing.bathroom_number%></li>
-          </ul>
-          <p class="card-text">
-            <%= number_to_currency(listing.price, unit: 'RM')%>
-          </p>
-          <p class="card-text">
-          </p>
-          <hr>
-            <a class="" href="/my-listings/<%=listing.id%>/edit">Edit</a>
-            <p class="mt-2 text-muted">Tags: <%= listing.tag_list %></p>
-          </div>
+      <div id="my-listing-card-<%=listing.id%>" class="p-0 background-wrap card col-3 shadow m-3" style='background-image: url("<%=listing.photos[0].url%>");'>
+        <div class="d-block">
+          <button id="close-<%=listing.id%>" class="btn p-0 fas fa-times text-muted bg-transparent" data-toggle='modal' data-target="#delete-listing-modal"></button>
         </div>
-
+        <div id="my-listing-card-text-<%=listing.id%>" class="card-body my-listing-card-text">
+          <a class="text-dark" href="/listings/<%=listing.id%>">
+            <div>
+              <h2 class="card-title text-center"><%= listing.name %></h2>
+              <p class="card-subtitle text-muted text-center"><%= listing.property_type%></p>
+              <p class="card-text text-center"><%= listing.address%></p>
+              <ul class="list-inline text-center">
+                <li class="list-inline-item"><i class="fas fa-user"></i> <p class="m-0"><%=listing.guest_number%></p></li>
+                <li class="list-inline-item"><i class="fas fa-bed"></i> <p class="m-0"><%=listing.room_number%></p></li>
+                <li class="list-inline-item"><i class="fas fa-bath"></i> <p class="m-0"><%=listing.bathroom_number%></p></li>
+              </ul>
+              <p class="card-text text-center">
+                <%= number_to_currency(listing.price, unit: '$')%>
+              </p>
+              <hr>
+                <a class="" href="/my-listings/<%=listing.id%>/edit">Edit</a>
+                <p class="mt-2 text-muted">Tags: <%= listing.tag_list %></p>
+            </div>
+          </a>
+        </div>
+      </div>
+        <!-- Delete Listing Modal -->
         <div class="modal fade" id="delete-listing-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
