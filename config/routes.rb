@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get "/profile/:id" => "users#show", as: "profile"
   get "/profile/:id/edit" => "users#edit", as: "user_edit"
   patch "/profile/:id/edit" => "users#update", as: "user"
+  get "/:id/upload-photo" => "users#upload_photo", as: "user_upload_photo"
 
   # Superadmin
   get "/admin-panel" => "superadmin#index", as: "admin_panel"
