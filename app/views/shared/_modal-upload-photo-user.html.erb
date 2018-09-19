@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Upload Profile Photo</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+<div class="modal-body">
+  <%= form_for @user , url: user_path do |f|%>
+  <div class="form-group">
+    <%=f.label :avatar, "Upload via Computer:"%>
+    <%=f.file_field :avatar, class: 'form-control-file'%>
+  </div>
+  <div class="form-group">
+    <%=f.label "Upload via URL:"%>
+    <%= f.text_field :remote_avatar_url , placeholder: "www.example.com/example.jpg",class: "form-control"%>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Upload Photo", class: 'btn' %>
+  </div>
+  <%end%>
+</div>

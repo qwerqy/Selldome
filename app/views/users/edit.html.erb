@@ -12,20 +12,10 @@
 <div class="background-keep">
   <div class="container-fluid mt-4 p-0 row">
     <div class="card col-3 p-3">
-      <img src="<%=@user.avatar.url%>" class="rounded-circle mx-auto d-block"style="height:250px;width:250px"/>
-      <%= form_for @user , url: user_path do |f|%>
-      <div class="form-group">
-        <%=f.label :avatar%>
-        <%=f.file_field :avatar, class: 'form-control-file'%>
+      <img src="<%=@user.avatar.url%>" class=" shadow rounded-circle mx-auto d-block"style="height:250px;width:250px"/>
+      <div class="mx-auto d-block mt-3">
+        <%=link_to "Update Profile Photo", user_upload_photo_path(@user.id), remote: true, data: { target: '#modal-upload-photo', toggle: 'modal' },class: "btn btn-primary"%>
       </div>
-      <div class="form-group">
-        <%= image_tag(@user.avatar_url) if @user.avatar? %>
-        <%= f.text_field :remote_avatar_url %>
-      </div>
-      <div class="form-group">
-        <%= f.submit "Upload Photo", class: 'btn' %>
-      </div>
-      <% end %>
     </div>
     <div class="card col-9 p-3">
       <h5 class="font-weight-bold">Edit Profile</h5>
@@ -34,5 +24,12 @@
 
     </div>
 
+  </div>
+</div>
+
+<div id="modal-upload-photo" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    </div>
   </div>
 </div>
