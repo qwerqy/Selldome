@@ -44,6 +44,18 @@ class UsersController < Clearance::UsersController
     end
   end
 
+  def remove_photo
+    @user = User.find(params[:id])
+    @user.remove_avatar!
+    if @user.save
+      flash[:warning] = "Profile Photo has been removed."
+      redirect_back(fallback_location: root_path)
+    else
+      flash[:danger] = "Error Occured, please try again later."
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   private
 
   def user_from_params
