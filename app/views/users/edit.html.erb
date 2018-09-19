@@ -12,9 +12,13 @@
 <div class="background-keep">
   <div class="container-fluid mt-4 p-0 row">
     <div class="card col-3 p-3">
-      <img src="<%=@user.avatar.url%>" class=" shadow rounded-circle mx-auto d-block"style="height:250px;width:250px"/>
+      <%= image_tag(@user.avatar.thumb_large.url, class: "shadow profile-photo-large-rounded mx-auto d-block") if @user.avatar? %>
       <div class="mx-auto d-block mt-3">
+        <% if @user.avatar? %>
+        <%=link_to "Remove Profile Photo", user_remove_photo_path(@user.id), class: "btn btn-secondary"%>
+        <% else %>
         <%=link_to "Update Profile Photo", user_upload_photo_path(@user.id), remote: true, data: { target: '#modal-upload-photo', toggle: 'modal' },class: "btn btn-primary"%>
+        <% end %>
       </div>
     </div>
     <div class="card col-9 p-3">
