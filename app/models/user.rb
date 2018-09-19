@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include Clearance::User
+  require 'carrierwave/orm/activerecord'
   mount_uploader :avatar, AvatarUploader
 
   has_many :authentications, dependent: :destroy
