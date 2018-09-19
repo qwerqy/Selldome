@@ -67,6 +67,9 @@ gem 'carrierwave-aws'
 # Mini Magick
 gem 'mini_magick'
 
+# Dropzone JS
+gem 'dropzonejs-rails'
+
 # AWS SDK Rails
 gem 'aws-sdk-rails'
 
