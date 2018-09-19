@@ -15,8 +15,10 @@ Rails.application.routes.draw do
   get '/my-listings/:id/edit' => 'listings#edit', as: "edit_listing"
   get '/get_property_from_place_type' => 'listings#property_from_place_type'
   delete '/my-listings/:id' => "listings#destroy", as: "delete_listing"
-  get '/listings/:id/upload-photos' => "listings#upload_photos", as: "listing_upload_photos"
+  get "/listing/:id/upload-photos" => 'listings#show_upload', as: "show_upload"
+  post '/listings/:id/upload-photos' => "listings#upload_photos", as: "listing_upload_photos"
   patch '/listings/:id/upload-photos' => "listing#update", as: "listings"
+  delete '/listings/:id/remove-photo/:index' => "listings#remove_photo", as: "listing_remove_photo"
 
   # Password Route
   resources :passwords, controller: "passwords", only: [:create, :new]
