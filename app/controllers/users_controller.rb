@@ -67,7 +67,8 @@ class UsersController < Clearance::UsersController
           :birthday,
           :email,
           :phone,
-          :password
+          :password,
+          :avatar
         )
   end
 end
