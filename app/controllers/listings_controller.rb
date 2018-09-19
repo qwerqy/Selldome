@@ -36,6 +36,7 @@ class ListingsController < ApplicationController
     if @listing.update_attributes(listing_params)
       redirect_back(fallback_location: root_path)
     else
+      flash[:danger] = "Update Failed!"
       render :edit
     end
   end
