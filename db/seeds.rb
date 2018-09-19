@@ -58,6 +58,11 @@ ActiveRecord::Base.transaction do
     listing['price'] = rand(80..500)
     listing['description'] = Faker::Hipster.sentence
     listing['tag_list'] = Faker::Hipster.words(4, true, true)
+    listing['photos'] = [
+                          Rails.root.join("app/assets/images/stock/#{rand(1..15)}.jpg").open,
+                          Rails.root.join("app/assets/images/stock/#{rand(1..15)}.jpg").open,
+                          Rails.root.join("app/assets/images/stock/#{rand(1..15)}.jpg").open
+                        ]
 
     listing['user_id'] = uids.sample
 
