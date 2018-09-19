@@ -11,7 +11,6 @@
 </div>
 <hr/>
 <% Listing.where(verified: false).each do |listing|%>
-  <%= link_to view_listing_path(listing.id), remote: true, data: { target: "#listing-modal", toggle: 'modal' } do %>
     <div class="row">
       <div class="col-1"><%=listing.id%></div>
       <div class="col-2"><%=listing.name%></div>
@@ -22,7 +21,6 @@
       <div class="col-2"><%=listing.user.name%></div>
       <%=check_box("listings","verified", {id: "verify-listing-#{listing.id}", class: 'col-1 form-check'}, true, false)%>
     </div>
-  <%end%>
     <hr/>
     <script>
     $('#verify-listing-<%=listing.id%>').change(function(){

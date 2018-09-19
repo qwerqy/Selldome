@@ -20,6 +20,11 @@
   <%= form.text_field :birthday, type: 'birthday', class: 'form-control', id: 'datepicker'%>
 </div>
 
+<div class="text-field form-group">
+  <%= form.label :about_me %>
+  <%= form.text_area :about_me, type: 'about_me', class: 'form-control'%>
+</div>
+
 <div class="field form-group">
   <%= form.label :country %>
   <%= form.country_select :country, priority_countries = ["United States"], options = {}, html_options = {:class => "form-control", :id => "user_country"} %>

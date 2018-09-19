@@ -1,31 +1,101 @@
 <% content_for :navbar do %>
   <%= render partial: "shared/navbar" %>
 <% end %>
-<div class="background-keep">
-  <div class="container-fluid p-0 mt-5">
-    <img src="/assets/profile-photo.jpg" class="rounded-circle mx-auto d-block" style="height:300px;width:300px;"/>
-  </div>
-  <div class="container-fluid p-0">
-    <h1 class="text-center mt-4"><%= @user.name %></h1>
-  </div>
-  <div class="col-3 mx-auto d-block p-0">
-    <ul class="list-inline">
-    <li class="list-inline-item"><p class="m-0 card-title text-center"><%= @user.country %></p></li>
-    <li class="list-inline-item"><p class="m-0 card-title text-center"><%= @user.email %></p></li>
-    <li class="list-inline-item"><p class="m-0 card-title text-center">0<%= @user.phone %></p></li>
-    <li class="list-inline-item">
-      <p class="m-0 card-title text-center">
-        <% if @user.gender == 1 %>
-          Male
-        <% else %>
-          Female
-        <% end %>
-      </p>
-    </li>
-    </ul>
-  </div>
-  <div class="container-fluid p-0 mt-5">
-    <h5 class="font-weight-bold"><%=@user.name%>'s Listings</h5>
-    <%= render partial: 'listings/my-listing'%>
+<div class="container mx-auto mt-5">
+  <div class="row">
+    <div class="col-3 ">
+        <div class="profile-photo-large mx-auto d-block" style="background-image: url('/assets/profile-photo.jpg');"></div>
+          <div class="card mt-3">
+            <div class="card-header">
+              More Info
+            </div>
+              <ul class="list-group list-group-flush">
+                <% if @user.email? %>
+                <li class="list-group-item"><p class="m-0"><%= @user.email %></p></li>
+                <%end%>
+                <% if @user.phone? %>
+                <li class="list-group-item"><p class="m-0"><%= @user.phone %></p></li>
+                <% end %>
+                <li class="list-group-item">
+                  <p class="m-0">
+                    <% if @user.gender == 1 %>
+                      Male
+                    <% else %>
+                      Female
+                    <% end %>
+                  </p>
+                </li>
+              </ul>
+          </div>
+    </div>
+    <div class="col-9">
+
+      <div class="mb-5">
+        <h1 class="m-0">Hello! I'm <%= @user.first_name %>!</h1>
+        <p class="font-weight-bold m-0"><%= @user.country_name %></p>
+        <a href="#" class="report-link text-muted"><i class="far fa-flag"></i> Report this user</a>
+      </div>
+
+      <div>
+        <p class=""><%= @user.about_me%></p>
+      </div>
+
+      <div>
+        <h2 class="">Listings <span class="secondary-text text-muted">(<%=@user.listings.count%>)</span></h2>
+        <ul class="list-inline">
+          <% @user.listings.each do |listing| %>
+              <li class="list-inline-item">
+                <div id="list-card-<%=listing.id%>" class="card p-0 shadow-sm listing-card" style="background-image: url('https://source.unsplash.com/collection/1198672');">
+                <!-- Details -->
+                  <div id="list-text-<%=listing.id%>" class="py-3 listing-card-text" >
+                    <p class="m-0 text-center text-light"><%=listing.property_type%></p>
+                    <p class="m-0 text-center text-light"><%=listing.country_name%></p>
+                  </div>
+                </div>
+              </li>
+              <script>
+              $('#list-text-<%=listing.id%>').hide();
+              $('#list-card-<%=listing.id%>').mouseover(function(){
+                $('#list-text-<%=listing.id%>').show();
+              })
+              $('#list-card-<%=listing.id%>').mouseleave(function(){
+                $('#list-text-<%=listing.id%>').hide();
+              })
+              </script>
+          <%end%>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="">Reviews <span class="secondary-text text-muted">(200)</span></h2>
+        <h5 class="font-weight-bold">Reviews from Guests</h5>
+
+        <ul class="list-group list-group-flush">
+          <% Listing.all.limit(10).each do |comment| %>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-2">
+                <a href="/profile/<%=comment.user.id%>">
+                  <div class="profile-photo m-0 p-0 mx-auto" style='background-image: url("/assets/profile-photo.jpg")'></div>
+                  <p class="text-center text-muted report-link"><%=comment.user.first_name%></p>
+                </a>
+              </div>
+              <div class="col-10 p-0">
+                <p class="mb-5"><%=comment.user.about_me%></p>
+                <ul class="list-inline">
+                  <li class="list-inline-item float-left">
+                    <p class="text-muted report-link">From <%=comment.user.country_name%> <i class="far fa-flag"></i></p>
+                  </li>
+                  <li class="list-inline-item float-right">
+                    <p class="text-muted report-link"><i class="fas fa-home"></i> <%=comment.name%>, <%=comment.property_type%></p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

@@ -33,4 +33,10 @@ class Listing < ApplicationRecord
       "No"
     end
   end
+
+  def country_name
+     full_country = ISO3166::Country[country]
+     full_country.translations[I18n.locale.to_s] || full_country.name
+   end
+   
 end
