@@ -16,10 +16,8 @@ class ModeratorController < ApplicationController
     end
   end
 
-  def pending_verification
+  def unverified_listings
     if current_user.moderator? || current_user.superadmin?
-      @listing = Listing.order(:name).page params[:page]
-      render template: 'moderator/pending-verification'
       respond_to do |format|
         format.js
       end
@@ -34,7 +32,7 @@ class ModeratorController < ApplicationController
       @listing = Listing.find(params[:id])
       @listing.update(verified: params[:verified])
       respond_to do |format|
-        format.js { render 'moderator/pending-verification'}
+        format.js { render 'moderator/unverified_listings'}
       end
     else
       flash[:danger] = "You have no access!"
@@ -45,7 +43,6 @@ class ModeratorController < ApplicationController
   def verified_listings
     if current_user.moderator? || current_user.superadmin?
       @listing = Listing.order(:name).page params[:page]
-      render template: 'moderator/verified-listings'
       respond_to do |format|
         format.js
       end
@@ -57,7 +54,6 @@ class ModeratorController < ApplicationController
 
   def all_listings
     if current_user.moderator? || current_user.superadmin?
-      render template: "moderator/all-listings"
       respond_to do |format|
         format.js
       end
@@ -70,7 +66,6 @@ class ModeratorController < ApplicationController
   def view_listing
     if current_user.moderator? || current_user.superadmin?
       @listing = Listing.find(params[:id])
-      render template: "moderator/view-listing"
       respond_to do |format|
         format.js
       end
@@ -83,7 +78,6 @@ class ModeratorController < ApplicationController
   def edit_listing
     if current_user.moderator? || current_user.superadmin?
       @listing = Listing.find(params[:id])
-      render template: "moderator/edit-listing"
       respond_to do |format|
         format.js
       end
@@ -93,27 +87,14 @@ class ModeratorController < ApplicationController
     end
   end
 
-    def delete_listing
-      if current_user.moderator? || current_user.superadmin?
-        @listing = Listing.find(params[:id])
-        render template: "moderator/delete-listing"
-        respond_to do |format|
-          format.js
-        end
-      else
-        flash[:danger] = "You have no access!"
-        redirect_to root_path
-      end
+  def destroy_listing
+    if current_user.moderator? || current_user.superadmin?
+      @listing = Listing.find(params[:id])
+      @listing.destroy
+      redirect_to root_path
+    else
+      flash[:danger] = "You have no access!"
+      redirect_to root_path
     end
-
-    def destroy_listing
-      if current_user.moderator? || current_user.superadmin?
-        @listing = Listing.find(params[:id])
-        @listing.destroy
-        redirect_to root_path
-      else
-        flash[:danger] = "You have no access!"
-        redirect_to root_path
-      end
-    end
+  end
 end

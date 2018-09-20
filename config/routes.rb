@@ -40,15 +40,14 @@ Rails.application.routes.draw do
   get "/admin-panel" => "superadmin#index", as: "admin_panel"
   get "/all-users" => "superadmin#all_users", as: "view_users"
   get "/update-users" => "superadmin#update_users", as: "update_users"
-  get "/delete/:id" => "superadmin#delete_user", as: "delete_user"
   delete "/delete/:id" => "superadmin#destroy_user", as: "destroy_user"
   get "/update/:id" => "superadmin#edit_user", as: "edit_user"
   patch "/update/:id" => "superadmin#confirm_edit", as: "superadmin_edit_user"
 
   # Moderator
   get "/moderator-panel" => "moderator#index", as: "moderator_panel"
-  get "/pending-verification" => "moderator#pending_verification", as: "pending_verification"
-  post "/pending-verification/:id/verify/:verified" => "moderator#verify"
+  get "/unverified_listings" => "moderator#unverified_listings", as: "unverified_listings"
+  post "/unverified_listings/:id/verify/:verified" => "moderator#verify"
   get "/verified-listings" => "moderator#verified_listings", as: "verified_listings"
   get "/all-listings" => "moderator#all_listings", as: "all_listings"
   get "/view-listing/:id" => "moderator#view_listing", as: "view_listing"

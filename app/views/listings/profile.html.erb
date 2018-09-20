@@ -17,7 +17,7 @@
 <div class="d-flex justify-content-center p-3 bg-success">
   <!-- <button class="btn btn-warning p-2 px-5 m-2">Edit</button> -->
   <%=link_to "Edit", moderator_edit_listing_path, remote:true, class: 'btn btn-warning p-2 px-5 m-2'%>
-  <%=link_to "Delete", moderator_delete_listing_path, remote:true, class: 'btn btn-danger p-2 px-5 m-2'%>
+  <%= button_to 'Delete', moderator_destroy_listing_path(@listing.id),  method: "delete", remote: true , data: {confirm: "Are you sure you want to delete this?"}, class: 'btn btn-danger' %>
 </div>
 <div class="modal fade" id="mod-edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
