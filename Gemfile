@@ -40,6 +40,39 @@ gem 'autoprefixer-rails'
 
 gem 'jquery-rails'
 
+# Act As Taggable
+gem 'acts-as-taggable-on'
+
+# Faker
+gem 'faker'
+
+# Google Custom Search API
+gem "google_custom_search_api"
+
+# ImageSuckr
+gem 'image_suckr'
+
+# Kaminari (Pagination)
+gem 'kaminari'
+
+# Country-Select
+gem 'country_select', '~> 3.1'
+
+# CarrierWave
+gem 'carrierwave', '~> 1.0'
+
+# CarrierWave + AWS
+gem 'carrierwave-aws'
+
+# Mini Magick
+gem 'mini_magick'
+
+# Dropzone JS
+gem 'dropzonejs-rails'
+
+# AWS SDK Rails
+gem 'aws-sdk-rails'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

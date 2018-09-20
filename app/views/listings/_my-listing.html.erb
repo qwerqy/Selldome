@@ -1,0 +1,52 @@
+<div id="listings">
+  <div class="row">
+  <% @user.listings.all.each do |listing| %>
+    <% if listing.photos? == true %>
+      <div id="my-listing-card-<%=listing.id%>" class="p-0 background-wrap card col-3 shadow m-3" style='background-image: url("<%=listing.photos[0].url%>");'>
+    <% else %>
+      <div id="my-listing-card-<%=listing.id%>" class="p-0 background-wrap card col-3 shadow m-3" style='background-image: url("assets/default-no-photos.jpg");'>
+    <% end %>
+        <div class="d-block">
+          <button id="close-<%=listing.id%>" class="btn p-0 fas fa-times text-muted bg-transparent" data-toggle='modal' data-target="#delete-listing-modal"></button>
+        </div>
+        <div id="my-listing-card-text-<%=listing.id%>" class="card-body my-listing-card-text">
+          <a class="text-dark" href="/listings/<%=listing.id%>">
+            <div>
+              <h2 class="card-title text-center"><%= listing.name %></h2>
+              <p class="card-subtitle text-muted text-center"><%= listing.property_type%></p>
+              <p class="card-text text-center"><%= listing.address%></p>
+              <ul class="list-inline text-center">
+                <li class="list-inline-item"><i class="fas fa-user"></i> <p class="m-0"><%=listing.guest_number%></p></li>
+                <li class="list-inline-item"><i class="fas fa-bed"></i> <p class="m-0"><%=listing.room_number%></p></li>
+                <li class="list-inline-item"><i class="fas fa-bath"></i> <p class="m-0"><%=listing.bathroom_number%></p></li>
+              </ul>
+              <p class="card-text text-center">
+                <%= number_to_currency(listing.price, unit: '$')%>
+              </p>
+              <hr>
+                <a class="" href="/my-listings/<%=listing.id%>/edit">Edit</a>
+                <p class="mt-2 text-muted">Tags: <%= listing.tag_list %></p>
+            </div>
+          </a>
+        </div>
+      </div>
+        <!-- Delete Listing Modal -->
+        <div class="modal fade" id="delete-listing-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this listing?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <%=button_to "Delete", delete_listing_path(listing.id),  method: "delete", class: 'btn btn-danger' %>
+              </div>
+            </div>
+          </div>
+        </div>
+  <% end %>
+  </div>
+</div>

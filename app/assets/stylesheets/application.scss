@@ -1,5 +1,6 @@
 @import "bootstrap";
 
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -14,6 +15,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require dropzone/dropzone
  */
 body {
   color: #424242;
@@ -41,7 +43,7 @@ body {
   outline-width: medium;
 }
 
-#navbar a {
+a {
   text-decoration: none;
   color: #424242;
   // font-weight: bold;
@@ -71,4 +73,182 @@ body {
 
 .last {
   margin-right: 0!important;
+}
+
+.listing_property_type {
+  display: none;
+}
+
+#attrBar {
+  outline-style: solid;
+  outline-color: #eeeeee;
+  outline-width: medium;
+}
+
+.cover-photo {
+  width: 100%;
+  height: 900px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.profile-photo {
+  width: 70px;
+  height: 70px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.profile-photo-large {
+  width: 250px;
+  height: 250px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  // border-radius: 50%;
+}
+
+.profile-photo-large-rounded {
+  width: 250px;
+  height: 250px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.profile-thumbnail {
+  width: 45px;
+  height: 45px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+#view-more {
+  // text-decoration: none;
+  color: #424242;
+}
+
+// Collapse in Profile
+#description.collapse, #description.collapsing {
+  height: 3rem;  /* [NUM_OF_LINES] x [LINE_HEIGHT] */
+}
+
+#description.collapse {
+  position: relative;  /* For ...'s content absolute positioning */
+  display: block;
+  overflow: hidden;
+}
+
+#description.collapse:before {
+  content: ' ...';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+#description.collapse.show {
+  height: auto;  /* You need to reset the height when not collapsed */
+}
+
+#description.collapse.show:before {
+  display: none;  /* Of course you don't want to display ... */
+}
+
+.tiny-font {
+  font-size: 12px;
+}
+
+.sticky-offset {
+  top: 50px;
+}
+
+#view-photo {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+#verified-badge {
+  font-size:30px;
+  vertical-align: middle;
+  float: left;
+}
+
+#verified-text {
+  // display: inline-block;
+  font-weight: bold;
+  // font-size: 13px;
+  // vertical-align: middle
+  margin: 0;
+}
+
+#verified-badge-thumbnail {
+  font-size:15px;
+  vertical-align: middle;
+}
+
+#flash {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.report-link {
+  font-size: 14px;
+}
+
+.secondary-text {
+  font-size: 23px;
+}
+
+.listing-card {
+  height: 250px;
+  width: 250px;
+  background-position: center;
+  background-size: cover;
+}
+
+.listing-card-text {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7));
+
+}
+
+.no-text-decoration {
+  text-decoration: none;
+}
+
+.background-wrap {
+  background-position: center;
+  background-size: cover;
+}
+
+.my-listing-card-text {
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7));
+}
+
+.my-listing-card-text p, .my-listing-card-text i {
+  color: white;
+}
+
+.modal-lg {
+    max-width: 80%;
+}
+
+.photo-500 {
+  height: 500px;
+  width: 500px;
 }

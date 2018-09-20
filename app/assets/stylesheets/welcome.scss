@@ -3,10 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 body {
   background: {
-    image: asset-url("santorini-architecture.jpg")
+    image: url("https://source.unsplash.com/collection/1198672/2000x2000")
   }
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: cover;
 }
 
 #landingText {
@@ -20,3 +21,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+// @keyframes animatedBackground {
+// 	from { background-position: 0 0; }
+// 	to { background-position: -100px 0; }

@@ -37,3 +37,6 @@ en:
     navbar-index:
       sign_out: "Sign Out"
       sign_in: "Sign In"
+    navbar-panel:
+      sign_out: "Sign Out"
+      sign_in: "Sign In"

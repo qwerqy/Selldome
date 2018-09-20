@@ -1,27 +1,65 @@
 Rails.application.routes.draw do
 
   get 'welcome/index'
-  get 'home/index'
-
   root 'welcome#index'
 
+  get '/home' => 'home#index', as: "home"
 
+  # Dome Route
+  resources :dome, controller: "dome", only: [:index]
+  # Listings Routes
+  resources :listings, controller: "listings", only: [:show, :update]
+  get '/my-listings' => 'listings#my_index', as: "my_listings"
+  get '/my-listings/new' => 'listings#new', as: "new_listing"
+  post '/my-listings/new' => 'listings#create'
+  get '/my-listings/:id/edit' => 'listings#edit', as: "edit_listing"
+  get '/get_property_from_place_type' => 'listings#property_from_place_type'
+  delete '/my-listings/:id' => "listings#destroy", as: "delete_listing"
+  get "/listing/:id/upload-photos" => 'listings#show_upload', as: "show_upload"
+  post '/listings/:id/upload-photos' => "listings#upload_photos", as: "listing_upload_photos"
+  patch '/listings/:id/upload-photos' => "listing#update", as: "listings"
+  delete '/listings/:id/remove-photo/:index' => "listings#remove_photo", as: "listing_remove_photo"
+
+  # Password Route
   resources :passwords, controller: "passwords", only: [:create, :new]
-  resource :session, controller: "sessions", only: [:create]
 
-  resources :users, controller: "users", only: [:create, :update] do
+  # Users Routes
+  resources :users, controller: "users", only: [:create] do
     resource :password,
       controller: "passwords",
       only: [:create, :edit, :update]
   end
+  get "/sign_up" => "users#new", as: "sign_up"
+  get "/profile/:id" => "users#show", as: "profile"
+  get "/profile/:id/edit" => "users#edit", as: "user_edit"
+  patch "/profile/:id/edit" => "users#update", as: "user"
+  get "/:id/upload-photo" => "users#upload_photo", as: "user_upload_photo"
+  get "/:id/remove-photo" => "users#remove_photo", as: "user_remove_photo"
 
+  # Superadmin
+  get "/admin-panel" => "superadmin#index", as: "admin_panel"
+  get "/all-users" => "superadmin#all_users", as: "view_users"
+  get "/update-users" => "superadmin#update_users", as: "update_users"
+  get "/delete/:id" => "superadmin#delete_user", as: "delete_user"
+  delete "/delete/:id" => "superadmin#destroy_user", as: "destroy_user"
+  get "/update/:id" => "superadmin#update_user", as: "update_user"
+  patch "/update/:id" => "superadmin#confirm_update", as: "superadmin_user_edit"
 
+  # Moderator
+  get "/moderator-panel" => "moderator#index", as: "moderator_panel"
+  get "/pending-verification" => "moderator#pending_verification", as: "pending_verification"
+  post "/pending-verification/:id/verify/:verified" => "moderator#verify"
+  get "/verified-listings" => "moderator#verified_listings", as: "verified_listings"
+  get "/all-listings" => "moderator#all_listings", as: "all_listings"
+  get "/view-listing/:id" => "moderator#view_listing", as: "view_listing"
+  get "/moderator-edit-listing/:id" => "moderator#edit_listing", as: "moderator_edit_listing"
+  get "/moderator-delete-listing/:id" => "moderator#delete_listing", as: "moderator_delete_listing"
+  delete "/moderator-delete-listing/:id" => "moderator#destroy_listing", as: "moderator_destroy_listing"
 
+  # Sessions Routes
+  resource :session, controller: "sessions", only: [:create]
   get "/sign_in" => "sessions#new", as: "sign_in"
   delete "/sign_out" => "sessions#destroy", as: "sign_out"
-  get "/sign_up" => "users#new", as: "sign_up"
-  get "/edit_user" => "users#edit", as: "edit_user"
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Google OAuth Route
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"

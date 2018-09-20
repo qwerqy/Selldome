@@ -1,11 +1,39 @@
-<div id="clearance" class="edit-profile">
-  <h2><%= t(".title") %></h2>
-
-  <%= form_for @user do |form| %>
-    <%= render partial: '/users/form', object: form %>
-
-    <div class="submit-field">
-      <%= form.submit %>
-    </div>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+</head>
+<% content_for :navbar do %>
+  <% if signed_in? %>
+    <%= render partial: "shared/navbar" %>
+  <% else %>
+    <%= render partial: "shared/navbar-index" %>
   <% end %>
+<% end %>
+<div class="background-keep">
+  <div class="container-fluid mt-4 p-0 row">
+    <div class="card col-3 p-3">
+      <%= image_tag(@user.avatar.thumb_large.url, class: "shadow profile-photo-large-rounded mx-auto d-block") if @user.avatar? %>
+      <div class="mx-auto d-block mt-3">
+        <% if @user.avatar? %>
+        <%=link_to "Remove Profile Photo", user_remove_photo_path(@user.id), class: "btn btn-secondary"%>
+        <% else %>
+        <%=link_to "Update Profile Photo", user_upload_photo_path(@user.id), remote: true, data: { target: '#modal-upload-photo', toggle: 'modal' },class: "btn btn-primary"%>
+        <% end %>
+      </div>
+    </div>
+    <div class="card col-9 p-3">
+      <h5 class="font-weight-bold">Edit Profile</h5>
+
+      <%= render partial: '/users/form-edit'%>
+
+    </div>
+
+  </div>
+</div>
+
+<div id="modal-upload-photo" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
 </div>

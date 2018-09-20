@@ -13,7 +13,7 @@ class SessionsController < Clearance::SessionsController
     else
       user = User.create_with_auth_and_hash(authentication, auth_hash)
       # you are expected to have a path that leads to a page for editing user details
-      @next = edit_user_path(user)
+      @next = user_edit_path(user)
       @notice = "User created. Please confirm or edit details"
     end
 
@@ -27,6 +27,26 @@ class SessionsController < Clearance::SessionsController
      format.html
      format.js
    end
+  end
+
+  def create
+    @user = authenticate(params)
+
+    sign_in(@user) do |status|
+      if status.success?
+        flash[:success] = "Welcome Back #{@user.name}!"
+        if @user.superadmin?
+          redirect_back_or admin_panel_path
+        elsif @user.moderator?
+          redirect_back_or moderator_panel_path
+        elsif @user.customer?
+          redirect_back_or url_after_create
+        end
+      else
+        flash[:danger] = "Incorrect Login Details!"
+        redirect_to root_url
+      end
+    end
   end
 
   def url_after_destroy

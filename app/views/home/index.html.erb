@@ -1,6 +1,15 @@
 <head>
    <%= stylesheet_link_tag "home" if controller_name == "home" %>
 </head>
+
+<% content_for :navbar do %>
+  <% if signed_in? %>
+    <%= render partial: "shared/navbar" %>
+  <% else %>
+    <%= render partial: "shared/navbar-index" %>
+  <% end %>
+<% end %>
+
 <div class="container-fluid background-keep my-5 p-0">
   <!-- Explore Selldome -->
   <%= render partial: '/home/explore'%>
@@ -8,9 +17,6 @@
   <!-- Home -->
   <%= render partial: '/home/homes'%>
 
-  <!-- Restaurant -->
-  <%= render partial: '/home/restaurants'%>
-
-  <!-- Cafes -->
-  <%= render partial: '/home/cafes'%>
+  <!-- Verified -->
+  <%= render partial: '/home/top-rated-homes'%>
 </div>

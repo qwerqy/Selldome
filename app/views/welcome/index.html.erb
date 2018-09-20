@@ -2,8 +2,12 @@
    <%= stylesheet_link_tag "welcome" if controller_name == "welcome" %>
 </head>
 
-<% content_for :navbar do %>
-  <%= render partial: "shared/navbar-index" %>
+<% content_for :navbar_landing do %>
+  <% if signed_in? %>
+    <%= render partial: "shared/navbar" %>
+  <% else %>
+    <%= render partial: "shared/navbar-index" %>
+  <% end %>
 <% end %>
 
 <div id="landingText" class="container">

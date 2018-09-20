@@ -1,0 +1,196 @@
+<% content_for :navbar do %>
+  <%= render partial: "shared/navbar" %>
+<% end %>
+<div class="card p-5 mt-5 mb-2">
+  <h1 class="text-center">Listing Photos</h1>
+  <div class="d-flex flex-row justify-content-center">
+    <% @listing.photos.each_with_index do |photo, index| %>
+    <div class="d-flex flex-column">
+      <div class="background-wrap photo-500 mb-2" style="background-image: url('<%=photo.url%> ');"></div>
+      <%=link_to "Remove Photo", listing_remove_photo_path(@listing.id, index), method: 'delete', data: { confirm: "Are you sure you want to delete this image?" }, class: "mx-auto btn btn-outline-secondary"%>
+    </div>
+    <% end %>
+  </div>
+</div>
+<div class="d-flex justify-content-center">
+  <%=link_to 'Add More Photos', show_upload_path(@listing.id), remote: true, data: {target: '#modal-upload-photo-listing', toggle: 'modal'}, class: 'btn btn-secondary'%>
+</div>
+<hr/>
+<%= form_for @listing do |form| %>
+<div class="text-field form-group col-3 p-0">
+  <%= form.label :name, "Name" %>
+  <%= form.text_field :name, placeholder: "#{@listing.name}", type: 'name', class: 'form-control' %>
+</div>
+
+<ul class="list-inline m-0">
+  <li class="list-inline-item col-2 p-0">
+    <div class="field form-group">
+      <%= form.label :place_type, "Choose One" %>
+      <select class="form-control" name='listing[place_type]' id='listing_place_type'>
+        <option value="<%=@listing.place_type%>"><%=Listing.place_type_string(@listing.place_type)%></option>
+        <option disabled>-----------------------------------------------</option>
+        <option value="1">Apartment</option>
+        <option value="2">House</option>
+        <option value="3">Secondary Unit</option>
+        <option value="4">Unique Space</option>
+        <option value="5">Boutique Hotel</option>
+        <option value="6">Restaurant</option>
+        <option value="7">Cafe</option>
+      </select>
+    </div>
+  </li>
+
+  <li class="list-inline-item col-2 p-0">
+    <div class="field form-group">
+      <%= form.label :property_type %>
+      <%= form.select :property_type, options_for_select(["#{@listing.property_type}"]), { include_blank: false} , {id: 'listing_property_type', class: "form-control" } %>
+    </div>
+  </li>
+</ul>
+
+<ul class="list-inline m-0">
+  <li class="list-inline-item">
+    <div class="field form-group">
+      <%= form.label :room_number, "How many bedrooms are there?" %>
+      <select class="form-control col-6" name='listing[room_number]' id='listing_room_number'>
+        <option value="<%= @listing.room_number %>"><%= @listing.room_number%></option>
+        <option disabled>--------------</option>
+        <option value="Studio">Studio</option>
+        <% i = 0 %>
+        <% while i <= 50 do%>
+        <option value='<%= i %>'><%= i %></option>
+        <% i += 1 %>
+        <% end %>
+      </select>
+    </div>
+  </li>
+
+  <li class="list-inline-item">
+    <div class="field form-group ml-5">
+      <%= form.label :bathroom_number, "How many bathrooms are there?" %>
+      <select class="form-control col-6" name='listing[bathroom_number]' id='listing_bathroom_number'>
+        <option value="<%= @listing.bathroom_number %>"><%= @listing.bathroom_number%></option>
+        <% i = 0 %>
+        <% while i <= 10 do%>
+        <option value='<%= i %>'><%= i %></option>
+        <% i += 1 %>
+        <% end %>
+      </select>
+    </div>
+  </li>
+</ul>
+
+<hr/>
+
+<div class="field form-group">
+  <%= form.label :guest_number, "How many guests can stay?" %>
+  <select class="form-control col-1 p-0" name='listing[guest_number]' id='listing_guest_number'>
+    <option value="<%= @listing.guest_number %>"><%= @listing.guest_number%></option>
+    <% i = 0 %>
+    <% while i <= 15 do%>
+    <option value='<%= i %>'><%= i %></option>
+    <% i += 1 %>
+    <% end %>
+    <option value="16+">16+</option>
+  </select>
+</div>
+
+<hr/>
+
+<div class="field form-group col-6 p-0">
+  <%= form.label :address %>
+  <%= form.text_field :address, placeholder: "#{@listing.address}", type: 'address', class: 'form-control' %>
+</div>
+
+<ul class="list-inline m-0">
+  <li class="list-inline-item col-2 p-0">
+    <div class="field form-group">
+      <%= form.label :state %>
+      <%= form.text_field :state, placeholder: "#{@listing.state}", type: 'state', class: 'form-control' %>
+    </div>
+  </li>
+
+  <li class="list-inline-item col-2 p-0">
+    <div class="field form-group">
+      <%= form.label :city %>
+      <%= form.text_field :city, placeholder: "#{@listing.city}", type: 'city', class: 'form-control' %>
+    </div>
+  </li>
+
+  <li class="list-inline-item col-2 p-0">
+    <div class="field form-group">
+      <%= form.label :zipcode %>
+      <%= form.text_field :zipcode, placeholder: "#{@listing.zipcode}", type: 'zipcode', class: 'form-control' %>
+    </div>
+  </li>
+</ul>
+<div class="field form-group col-2 p-0">
+  <%= form.label :country %>
+  <%= form.country_select :country, priority_countries = ["United States"], options = {}, html_options = {:class => "form-control", :id => "listing_country"} %>
+</div>
+
+<hr/>
+
+<div class="text-field form-group">
+  <%= form.label :price, "How much is it per stay?"%>
+  <%= form.text_field :price, placeholder: "#{number_to_currency(@listing.price, unit: 'RM')}", type: 'price', class: 'form-control col-1' %>
+</div>
+
+
+<div class="text-field form-group">
+  <%= form.label :description, 'Tell us more about your place.' %>
+  <%= form.text_area :description, placeholder: "#{@listing.description}", type: 'description', class: 'form-control' %>
+</div>
+
+<div class='text-field form-group'>
+    <%= form.label :tag_list, "Anything else you would like your guests to know?"%>
+    <%= form.text_field :tag_list, placeholder: "#{@listing.tag_list}", type: 'tag_list', class: 'form-control' %>
+</div>
+
+<hr/>
+
+<div class="submit-field form-group">
+  <%= form.submit "Save Changes", class: 'btn' %>
+</div>
+<% end %>
+
+<script>
+$(document).ready(function() {
+
+    $(".alert" ).fadeOut(3000);
+
+    function populate_property_type(place) {
+      $.get('/get_property_from_place_type', {place_type: place}, function(data){
+        let $property_type = $('#listing_property_type');
+        $property_type.empty();
+        for (i = 0; i < data.property_type.length; i++) {
+          $property_type.append("<option value='" + data.property_type[i] + "'>" + data.property_type[i] + '</option>');
+        }
+      }, "json");
+    }
+    $('#listing_place_type').change(function(){
+      let val = $(this).val();
+      if (val == 1) {
+        populate_property_type(1);
+      }
+      else if (val == 2) {
+        populate_property_type(2);
+      }
+      else if (val == 3) {
+        populate_property_type(3);
+      }
+      else if (val == 4) {
+        populate_property_type(4);
+      }
+      else if (val == 5) {
+        populate_property_type(5);
+      }
+      else if (val == 6) {
+        populate_property_type(6);
+      }
+      else if (val == 7) {
+        populate_property_type(7);
+      }
+    });
+});
+</script>

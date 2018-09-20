@@ -1,0 +1,27 @@
+<head>
+   <%= stylesheet_link_tag "listings" if controller_name == "listings" %>
+</head>
+<% content_for :navbar do %>
+  <% if signed_in? %>
+    <%= render partial: "shared/navbar" %>
+  <% else %>
+    <%= render partial: "shared/navbar-index" %>
+  <% end %>
+<% end %>
+<div class="background-keep">
+  <div class="mt-5 container-fluid p-0">
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <h5 class="font-weight-bold">My Listings</h5>
+      </li>
+
+      <li class="list-inline-item float-right">
+        <a href="my-listings/new"class="btn btn-outline-dark">Create a listing</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container-fluid p-0">
+      <%= render partial: 'listings/my-listing.html.erb'%>
+  </div>
+</div>
