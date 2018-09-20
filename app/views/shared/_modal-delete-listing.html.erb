@@ -1,9 +1,0 @@
-<div class="modal-body">
-  <h5>Are you sure you want to delete this Listing?</h5>
-  <p>Listing ID: <%= @listing.id %></p>
-  <p>Listing Host: <%= @listing.user.name %></p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-  <%= button_to 'Yes', moderator_destroy_listing_path(@listing.id),  method: "delete", remote: true , class: 'btn btn-danger' %>
-</div>

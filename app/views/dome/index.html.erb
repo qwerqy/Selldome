@@ -7,16 +7,41 @@
 <% end %>
 <div id="attrBar" class="container-fluid p-3">
   <ul class="list-inline m-0">
-    <%Listing.all_attr.each do |t|%>
     <li class="list-inline-item">
-      <a class="btn btn-outline-secondary"><%=t%></a>
+      <%=link_to "Show All", dome_index_path, class: 'btn btn-outline-secondary'%>
     </li>
-    <% end %>
+    <li class="list-inline-item">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Place
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <%=link_to "Apartment", show_place_type_path(1), remote:true, class: 'dropdown-item'%>
+          <%=link_to "House", show_place_type_path(2), remote:true, class: 'dropdown-item'%>
+          <%=link_to "Secondary Unit", show_place_type_path(3), remote:true, class: 'dropdown-item'%>
+          <%=link_to "Unique Space", show_place_type_path(4), remote:true, class: 'dropdown-item'%>
+          <%=link_to "Boutique Hotel", show_place_type_path(5), remote:true, class: 'dropdown-item'%>
+        </div>
+      </div>
+    </li>
+    <li class="list-inline-item">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Guests
+        </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%=link_to "1-5", show_by_guests_path(no1:1,no2:5), remote:true, class: 'dropdown-item'%>
+            <%=link_to "6-10", show_by_guests_path(no1:6,no2:10), remote:true, class: 'dropdown-item'%>
+            <%=link_to "11-15", show_by_guests_path(no1:11,no2:15), remote:true, class: 'dropdown-item'%>
+            <%=link_to "16-20", show_by_guests_path(no1:16,no2:20), remote:true, class: 'dropdown-item'%>
+          </div>
+      </div>
+    </li>
   </ul>
 </div>
 <div class="background-keep">
-  <%= render partial: "listings/all-listing" %>
-  <div class="nav-link mx-auto d-block">
-    <%= paginate @listing %>
+  <div id="dome-content">
+    <%= render partial: 'dome/all_listings' %>
   </div>
+
 </div>

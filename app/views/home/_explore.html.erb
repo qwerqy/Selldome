@@ -3,7 +3,7 @@
   <ul class="list-inline">
     <% Listing.all_place_type.each do |type| %>
     <li class="list-inline-item">
-      <a href="/dome">
+      <%=link_to dome_index_path do %>
         <div class="card container shadow-sm my-2">
           <div class="row">
             <img class="col-4 p-0" src="/assets/home.jpg" style="width:100px;height:100px;">
@@ -12,7 +12,7 @@
             </div>
           </div>
         </div>
-      </a>
+      <%end%>
     </li>
     <% end %>
   </ul>

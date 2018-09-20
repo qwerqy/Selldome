@@ -1,0 +1,40 @@
+<h3 class="font-weight-bold mb-4">Unverified Listings</h3>
+<div class="row">
+  <div class="col-1 font-weight-bold">ID</div>
+  <div class="col-2 font-weight-bold">Name</div>
+  <div class="col-1 font-weight-bold">Property Type</div>
+  <div class="col-2 font-weight-bold">Country</div>
+  <div class="col-2 font-weight-bold">State</div>
+  <div class="col-1 font-weight-bold">Price</div>
+  <div class="col-2 font-weight-bold">Host</div>
+  <div class="col-1 font-weight-bold"><p class="m-0 text-left">Verify</p></div>
+</div>
+<hr/>
+<% Listing.where(verified: false).each do |listing|%>
+    <div class="row">
+      <div class="col-1"><%=listing.id%></div>
+      <div class="col-2"><%=listing.name%></div>
+      <div class="col-1"><%=listing.property_type%></div>
+      <div class="col-2"><%=listing.country%></div>
+      <div class="col-2"><%=listing.state%></div>
+      <div class="col-1"><%=number_to_currency(listing.price, unit: '$')%></div>
+      <div class="col-2"><%=listing.user.name%></div>
+      <%=check_box("listings","verified", {id: "verify-listing-#{listing.id}", class: 'col-1 form-check'}, true, false)%>
+    </div>
+    <hr/>
+    <script>
+    $('#verify-listing-<%=listing.id%>').change(function(){
+      if (this.checked){
+        $.ajax({
+          type: 'POST',
+          url: '/pending-verification/<%=listing.id%>/verify/true',
+          data: {verified: this.checked},
+          success: function(data){
+            alert('Listing ID <%=listing.id%> has been verified!');
+            $(this).submit();
+          }
+        })
+      }
+    })
+    </script>
+<% end %>

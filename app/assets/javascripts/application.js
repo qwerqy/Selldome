@@ -21,6 +21,10 @@
 
 $(document).ready(function() {
 
+    $('.carousel').carousel({
+      interval: false
+    });
+
     $(".alert" ).fadeOut(3000);
 
     function populate_property_type(place) {

@@ -10,7 +10,7 @@
   <div class="col-2 font-weight-bold">Remove</div>
 </div>
 <hr/>
-<% User.all.each do |user|%>
+<% User.order(:updated_at).each do |user|%>
 <div class="row">
   <div class="col-1"><a href='/users/<%=user.id%>'><%=user.id%></a></div>
   <div class="col-1"><%=user.first_name%></div>
@@ -22,10 +22,10 @@
   <div class="col-2">
     <ul class="list-inline">
       <li class="list-inline-item">
-        <%= link_to 'Edit', update_user_path(user.id), remote: true, data: { target: "#user-modal", toggle: 'modal' }, class: 'btn-link' %>
+        <%= link_to 'Edit', edit_user_path(user.id), remote: true, data: { target: "#user-modal", toggle: 'modal' }, class: 'btn-link' %>
       </li>
       <li class="list-inline-item">
-        <%= link_to 'Delete', delete_user_path(user.id), remote: true, data: { target: "#user-modal", toggle: 'modal' }, class: 'btn-link' %>
+        <%= button_to 'Delete', destroy_user_path(user.id),  method: "delete", remote: true , data: {confirm: "Are you sure about deleting #{user.name}?"}, class: 'btn btn-link' %>
       </li>
     </ul>
   </div>
