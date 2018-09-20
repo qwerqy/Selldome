@@ -5,9 +5,9 @@ class CreateListings < ActiveRecord::Migration[5.2]
       t.integer :place_type
       t.string :property_type
 
-      t.string :room_number
-      t.string :bathroom_number
-      t.string :guest_number
+      t.integer :room_number
+      t.integer :bathroom_number
+      t.integer :guest_number
 
       t.string :country
       t.string :state
