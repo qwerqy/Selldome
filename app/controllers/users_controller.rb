@@ -1,12 +1,7 @@
 class UsersController < Clearance::UsersController
 
-  # def user_from_params
-  #   user_params = params[:user] || Hash.new
-  # end
-
   def new
     @user = User.new
-    # render template: "users/new"
     respond_to do |format|
       format.html
       format.js
