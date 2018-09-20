@@ -42,8 +42,8 @@ Rails.application.routes.draw do
   get "/update-users" => "superadmin#update_users", as: "update_users"
   get "/delete/:id" => "superadmin#delete_user", as: "delete_user"
   delete "/delete/:id" => "superadmin#destroy_user", as: "destroy_user"
-  get "/update/:id" => "superadmin#update_user", as: "update_user"
-  patch "/update/:id" => "superadmin#confirm_update", as: "superadmin_user_edit"
+  get "/update/:id" => "superadmin#edit_user", as: "edit_user"
+  patch "/update/:id" => "superadmin#confirm_edit", as: "superadmin_edit_user"
 
   # Moderator
   get "/moderator-panel" => "moderator#index", as: "moderator_panel"

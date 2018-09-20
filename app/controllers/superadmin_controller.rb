@@ -1,5 +1,6 @@
 class SuperadminController < ApplicationController
   before_action :require_login
+
     def index
       if current_user.superadmin?
         render template: 'superadmin/index'
@@ -11,7 +12,6 @@ class SuperadminController < ApplicationController
 
     def all_users
       if current_user.superadmin?
-        render template: 'superadmin/view-users'
         respond_to do |format|
           format.js
         end
@@ -23,26 +23,9 @@ class SuperadminController < ApplicationController
 
     def update_users
       if current_user.superadmin?
-        render template: 'superadmin/update-users'
         respond_to do |format|
           format.js
         end
-      else
-        flash[:danger] = "You have no access!"
-        redirect_to root_path
-      end
-    end
-
-    def delete_user
-      if current_user.superadmin?
-        @user = User.find(params[:id])
-
-        render template: 'superadmin/delete-user'
-
-        respond_to do |format|
-          format.js # => delete_user.js.erb
-        end
-
       else
         flash[:danger] = "You have no access!"
         redirect_to root_path
@@ -60,10 +43,9 @@ class SuperadminController < ApplicationController
       end
     end
 
-    def update_user
+    def edit_user
       if current_user.superadmin?
         @user = User.find(params[:id])
-        render template: 'superadmin/edit-user'
         respond_to do |format|
           format.js
         end
@@ -73,7 +55,7 @@ class SuperadminController < ApplicationController
       end
     end
 
-    def confirm_update
+    def confirm_edit
       if current_user.superadmin?
         @user = User.find(params[:id])
         @user.update_attributes(user_params)
