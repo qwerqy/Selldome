@@ -1,7 +1,7 @@
 <div class="container-fluid mx-0 my-4 p-0">
   <h5 class="font-weight-bold">Homes</h5>
   <ul class="list-inline">
-    <% Listing.limit(5).order(created_at: :desc).each do |home|%>
+    <% Listing.all.sample(5).each do |home|%>
     <li class="list-inline-item">
       <div id="home-card-<%=home.id%>" class="card first p-0 m-2 shadow-sm btn">
         <!-- Carousel -->
