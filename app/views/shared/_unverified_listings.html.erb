@@ -27,7 +27,7 @@
       if (this.checked){
         $.ajax({
           type: 'POST',
-          url: '/pending-verification/<%=listing.id%>/verify/true',
+          url: '/unverified_listings/<%=listing.id%>/verify/true',
           data: {verified: this.checked},
           success: function(data){
             alert('Listing ID <%=listing.id%> has been verified!');

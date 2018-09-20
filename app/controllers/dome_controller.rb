@@ -18,6 +18,7 @@ class DomeController < ApplicationController
     @place_type = Listing.where("place_type = ?", params[:place_type])
     @pagination = Listing.where(place_type: params[:place_type]).page params[:page]
     respond_to do |format|
+      format.html { render 'dome/index' }
       format.js
     end
   end
