@@ -38,19 +38,18 @@ class Listing < ApplicationRecord
   def country_name
      full_country = ISO3166::Country[country]
      full_country.translations[I18n.locale.to_s] || full_country.name
-   end
-
-end
+  end
 
 private
 
-def remove_image_at_index(index)
-remain_photos = @listing.photos
-    if index == 0 && @listing.photos.size == 1
-        @listing.remove_photos!
-    else
-        deleted_photo = remain_photos.delete_at(index)
-        deleted_photo.try(:remove!)
-        @listing.photos = remain_photos
-    end
- end
+  def remove_image_at_index(index)
+  remain_photos = @listing.photos
+      if index == 0 && @listing.photos.size == 1
+          @listing.remove_photos!
+      else
+          deleted_photo = remain_photos.delete_at(index)
+          deleted_photo.try(:remove!)
+          @listing.photos = remain_photos
+      end
+  end
+end
