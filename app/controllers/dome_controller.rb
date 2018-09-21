@@ -35,6 +35,7 @@ class DomeController < ApplicationController
     @price = Listing.where("price >= :start AND price <= :end", {start: params[:no1], end: params[:no2]})
     @pagination = Listing.where(price: params[:no1]..params[:no2]).page params[:page]
     respond_to do |format|
+      format.html { render 'dome/index'}
       format.js
     end
   end
