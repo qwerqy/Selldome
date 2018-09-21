@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "/dome/:place_type" => 'dome#show_place_type', as: "show_place_type"
   get "/dome" => 'dome#show_all', as: "show_all"
   get "/dome/guests/:no1-:no2" => 'dome#show_by_guests', as: "show_by_guests"
+  get "/dome/price/:no1-:no2" => 'dome#show_by_price', as: "show_by_price"
   # Listings Routes
   resources :listings, controller: "listings", only: [:show, :update]
   get '/my-listings' => 'listings#my_index', as: "my_listings"
