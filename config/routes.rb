@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   get '/home' => 'home#index', as: "home"
 
+  # Home Route
+  get "/home/load" => "home#load_content", as: "load_content"
+
   # Dome Route
   resources :dome, controller: "dome", only: [:index]
   get "/dome/:place_type" => 'dome#show_place_type', as: "show_place_type"

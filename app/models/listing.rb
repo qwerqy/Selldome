@@ -23,6 +23,10 @@ class Listing < ApplicationRecord
     all_place_type = ["Apartment", "House", "Secondary Unit", "Unique Space", "Boutique Hotel"]
   end
 
+  def self.all_title
+    all_title = ["Look for more Homes","One does not stay for one night!","Who needs a house, when you selldome live in one!","Browse for More!"]
+  end
+
   def self.all_attr
     all_attr = ["Dates","Guests", "Home Type", "Price", "Instant Book", "More filters"]
   end
