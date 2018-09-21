@@ -24,6 +24,7 @@
         </div>
       </div>
     </li>
+
     <li class="list-inline-item">
       <div class="dropdown">
         <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,10 +38,57 @@
           </div>
       </div>
     </li>
+
+    <li class="list-inline-item">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Price
+        </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%=link_to "< $100", show_by_price_path(no1:1,no2:100), remote:true, class: 'dropdown-item'%>
+            <%=link_to "$101 - $500", show_by_price_path(no1:101,no2:500), remote:true, class: 'dropdown-item'%>
+            <%=link_to "$501 - $1000", show_by_price_path(no1:501,no2:1000), remote:true, class: 'dropdown-item'%>
+            <%=link_to "> $1000", show_by_price_path(no1:1000,no2:2000), remote:true, class: 'dropdown-item'%>
+          </div>
+      </div>
+    </li>
+
+    <li class="list-inline-item">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dates
+        </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            Hi
+          </div>
+      </div>
+    </li>
+
+    <li class="list-inline-item">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Instant Book
+        </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            Hello
+          </div>
+      </div>
+    </li>
+
+    <li class="list-inline-item">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          More Filters
+        </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            Wat
+          </div>
+      </div>
+    </li>
   </ul>
 </div>
 <div class="background-keep">
-  <div id="dome-content">
+  <div id="dome-content" class="mt-4">
     <%= render partial: 'dome/all_listings' %>
   </div>
 
