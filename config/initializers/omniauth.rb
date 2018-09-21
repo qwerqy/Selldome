@@ -4,6 +4,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       scope: 'userinfo.email, userinfo.profile, plus.me, http://gdata.youtube.com',
       prompt: 'select_account',
       image_aspect_ratio: 'square',
-      image_size: 50
+      image_size: 300
     }
 end

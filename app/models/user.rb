@@ -13,6 +13,7 @@ class User < ApplicationRecord
      birthday: auth_hash["info"]["birthday"],
      email: auth_hash["info"]["email"],
      phone: auth_hash["info"]["phone"],
+     remote_avatar_url: auth_hash["info"]["image"],
      password: SecureRandom.hex(10)
    )
    user.authentications << authentication
