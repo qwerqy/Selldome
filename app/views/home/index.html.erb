@@ -10,7 +10,7 @@
   <% end %>
 <% end %>
 
-<div class="container-fluid background-keep my-5 p-0">
+<div id="home-box" class="container-fluid background-keep my-5 p-0">
   <!-- Explore Selldome -->
   <%= render partial: '/home/explore'%>
 
@@ -20,3 +20,15 @@
   <!-- Verified -->
   <%= render partial: '/home/top-rated-homes'%>
 </div>
+<script>
+$(window).scroll(function() {
+  if($(window).scrollTop() + $(window).height() == $(document).height()) {
+    $.ajax({
+      url: "/home/load"
+    })
+    .done(function(data){
+      $('#home-box').append(data);
+    })
+  }
+});
+</script>

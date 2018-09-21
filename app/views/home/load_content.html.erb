@@ -1,7 +1,11 @@
+<div id="scroll-box">
+<hr/>
+<% Listing.all_title.sample(1).each do |title|%>
+<h1 class="text-center"><%=title%></h1>
+<% end %>
 <div class="container-fluid mx-0 my-4 p-0">
-  <h5 class="font-weight-bold">Homes</h5>
   <ul class="list-inline">
-    <% Listing.all.sample(5).each do |home|%>
+    <% Listing.all.sample(10).each do |home|%>
     <li class="list-inline-item">
       <div id="home-card-<%=home.id%>" class="card first p-0 m-2 shadow-sm btn">
         <% if home.photos? == true %>
@@ -93,4 +97,6 @@
     <% end %>
   </ul>
   <a class="" href="/dome">See All ></a>
+</div>
+
 </div>
