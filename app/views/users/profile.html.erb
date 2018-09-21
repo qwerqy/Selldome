@@ -36,7 +36,9 @@
 
       <div class="mb-5">
         <h1 class="m-0">Hello! I'm <%= @user.first_name %>!</h1>
+        <% if @user.country? %>
         <p class="font-weight-bold m-0"><%= @user.country_name %></p>
+        <% end %> 
         <a href="#" class="report-link text-muted"><i class="far fa-flag"></i> Report this user</a>
       </div>
 
