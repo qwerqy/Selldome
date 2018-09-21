@@ -83,6 +83,13 @@ class ListingsController < ApplicationController
     redirect_to my_listings_path
   end
 
+  def view_photos
+    @listing = Listing.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def property_from_place_type
     place = params[:place_type]
     if place == '1'
