@@ -40,11 +40,6 @@
   <%= form.text_field :phone, type: 'phone', placeholder: "#{@user.phone}", class: 'form-control' %>
 </div>
 
-<div class="password-field form-group">
-  <%= form.label :password %>
-  <%= form.password_field :password, class: 'form-control' %>
-</div>
-
 <div class="submit-field form-group">
   <%= form.submit "Save Changes", class: 'btn' %>
 </div>
