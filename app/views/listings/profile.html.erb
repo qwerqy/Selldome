@@ -95,7 +95,11 @@
         <p>RESERVED: CALENDAR FOR RESERVATION</p>
         <hr/>
         <div id="review-box">
-          <h3 class="font-weight-bold">200 Reviews</h3>
+          <% if @listing.reviews.any? %>
+          <h3 class="font-weight-bold"><%=@listing.reviews.count%> Reviews</h3>
+          <% else %>
+          <h3 class="font-weight-bold">No Reviews yet.</h3>
+          <% end %>
           <div class="rating-box my-4">
             <ul id="star-rating" class="list-inline">
               <li class="list-inline-item star"><i data-value='1' id="star-<%=@listing.id%>" class="rate-star far fa-star"></i></li>
@@ -103,18 +107,25 @@
               <li class="list-inline-item star"><i data-value='3' id="star-<%=@listing.id%>" class="rate-star far fa-star"></i></li>
               <li class="list-inline-item star"><i data-value='4' id="star-<%=@listing.id%>" class="rate-star far fa-star"></i></li>
               <li class="list-inline-item star"><i data-value='5' id="star-<%=@listing.id%>" class="rate-star far fa-star"></i></li>
+              <li class="list-inline-item">
+                <p id="rate-text" class="text-muted m-0"><%=@listing.reviews.count%> people has left a review.</p>
+              </li>
             </ul>
           </div>
-          <form>
+          <%= form_for [@listing, Review.new] do |f|%>
+            <%= f.hidden_field :rating%>
             <div class="form-group">
-              <label class="font-weight-bold" for="exampleFormControlTextarea1">Leave A Review</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <%= f.label "Comment", class: 'text-weight-bold'%>
+              <%= f.text_area :comment, class: 'form-control'%>
             </div>
-          </form>
+            <div class="form-group">
+              <%= f.submit "Leave A Review", class: 'btn btn-secondary'%>
+            </div>
+          <% end %>
         </div>
         <hr/>
 
-        <% Listing.all.limit(10).each do |comment| %>
+        <% @listing.reviews.all.limit(10).each do |comment| %>
         <div class="card border-0">
           <ul class="list-inline">
             <li class="list-inline-item float-left">
@@ -123,9 +134,75 @@
             <li class="list-inline-item float-left">
               <p class="font-weight-bold m-0 align-top"><%=comment.user.name%></p>
               <p class="text-muted m-0 align-top"><%=Time.now.strftime("%B %Y")%></p>
+              <% if comment.rating == 0 %>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                </ul>
+              </div>
+
+              <% elsif comment.rating == 1 %>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                </ul>
+              </div>
+
+              <% elsif comment.rating == 2 %>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                </ul>
+              </div>
+
+              <% elsif comment.rating == 3 %>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                </ul>
+              </div>
+
+              <% elsif comment.rating == 4 %>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                </ul>
+              </div>
+
+              <% elsif comment.rating == 5 %>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font rate-star fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font rate-star fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font rate-star fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font rate-star fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font rate-star fas fa-star"></i></li>
+                </ul>
+              </div>
+              <% end %>
             </li>
           </ul>
-          <p class=""><%=comment.description%></p>
+          <p class=""><%=comment.comment%></p>
         </div>
         <hr/>
       <% end %>
@@ -163,16 +240,17 @@
     });
   });
 
-  $('#stars-rating li').on('click', function(){
-    let onStar = parseInt($(this).children('i.rate-star').data('value'), 10); // The star currently selected
+
+  $('.rate-star').on('click', function(){
+    let onStar = $(this).data('value');
     let stars = $(this).parent().children('li.star');
 
-    for (i = 0; i < stars.length; i++) {
-      $(stars[i]).children('i.rate-star').removeClass('fas').addClass('far');
-    }
-
-    for (i = 0; i < onStar; i++) {
+    for (i=0; i < onStar.length; i++) {
       $(stars[i]).children('i.rate-star').removeClass('far').addClass('fas');
     }
+    $('#rate-text').html('You rated ' + onStar + ' stars');
+
+    $('input[name="review[rating]"]').val(onStar)
   });
+  $('#rate-text').fadeOut(10000)
 </script>
