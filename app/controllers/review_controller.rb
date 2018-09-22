@@ -1,5 +1,6 @@
 class ReviewController < ApplicationController
   def new
+<<<<<<< HEAD
     @listing = Listing.find(params[:listing_id])
     @review = Review.new
   end
@@ -30,4 +31,12 @@ private
       :user_id
     )
   end
+=======
+  end
+
+  def create
+  end
+
+
+>>>>>>> 517ca7c4cc17b57676ff43b7b773860a32330bce
 end

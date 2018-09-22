@@ -101,6 +101,21 @@
           <h3 class="font-weight-bold">No Reviews yet.</h3>
           <% end %>
           <div class="rating-box my-4">
+            <%= form_for @review, url: review_path do |f|%>
+            <div class="form-group">
+              <%=f.label :rating%>
+              <%=f.number_field :rating%>
+            </div>
+
+            <div class="form-group">
+              <%=f.label :comment%>
+              <%=f.text_area :comment%>
+            </div>
+
+            <div class="form-group">
+              <%=f.submit 'Submit'%>
+            </div>
+            <%end%>
             <ul id="star-rating" class="list-inline">
               <li class="list-inline-item star"><i data-value='1' id="star-<%=@listing.id%>" class="rate-star far fa-star"></i></li>
               <li class="list-inline-item star"><i data-value='2' id="star-<%=@listing.id%>" class="rate-star far fa-star"></i></li>
@@ -123,6 +138,10 @@
             </div>
           <% end %>
         </div>
+
+
+
+
         <hr/>
 
         <% @listing.reviews.all.limit(10).each do |comment| %>
@@ -234,12 +253,18 @@
       }
     })
 
-  }).on('mouseout', function(){
+  }).on('mouseleave', function(){
     $(this).each(function(e){
-      $(this).removeClass('hover');
+      $(this).children('i.rate-star').removeClass('fas');
     });
   });
 
+<<<<<<< HEAD
+=======
+  $('#stars-rating li').children('i.rate-star').on('click', function(){
+    let onStar = parseInt($(this).data('value'), 10); // The star currently selected
+    let stars = $(this).parent().children('li.star');
+>>>>>>> 517ca7c4cc17b57676ff43b7b773860a32330bce
 
   $('.rate-star').on('click', function(){
     let onStar = $(this).data('value');
@@ -248,9 +273,22 @@
     for (i=0; i < onStar.length; i++) {
       $(stars[i]).children('i.rate-star').removeClass('far').addClass('fas');
     }
+<<<<<<< HEAD
     $('#rate-text').html('You rated ' + onStar + ' stars');
 
     $('input[name="review[rating]"]').val(onStar)
   });
   $('#rate-text').fadeOut(10000)
+=======
+
+    let ratingValue = parseInt($('#stars-rating li').children('i.rate-star').data('value'), 10);
+    if (ratingValue > 1) {
+        alert("Thanks! You rated this " + ratingValue + " stars.");
+    }
+    else {
+        msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
+    }
+  });
+
+>>>>>>> 517ca7c4cc17b57676ff43b7b773860a32330bce
 </script>
