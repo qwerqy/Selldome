@@ -9,7 +9,6 @@ class ReviewController < ApplicationController
     @review = Review.new(review_params)
     @review.user_id = current_user.id
     @review.listing_id = @listing.id
-    byebug
     if @review.save
       flash[:success] = "Thank you for the review!"
       redirect_back(fallback_location: root_path)
