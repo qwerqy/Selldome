@@ -1,6 +1,5 @@
 class ReviewController < ApplicationController
   def new
-<<<<<<< HEAD
     @listing = Listing.find(params[:listing_id])
     @review = Review.new
   end
@@ -14,7 +13,7 @@ class ReviewController < ApplicationController
       flash[:success] = "Thank you for the review!"
       redirect_back(fallback_location: root_path)
     else
-      flash[:danger] = "Uh Oh! Something's wrong!"
+      flash[:danger] = @review.errors.full_messages.to_sentence
       redirect_back(fallback_location: root_path)
     end
 
@@ -30,12 +29,4 @@ private
       :user_id
     )
   end
-=======
-  end
-
-  def create
-  end
-
-
->>>>>>> 517ca7c4cc17b57676ff43b7b773860a32330bce
 end
