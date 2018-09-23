@@ -18,8 +18,6 @@ class ListingsController < ApplicationController
   def create
     @listing = Listing.new(listing_params)
     @listing.user_id = current_user.id
-    # @listing.tag_list.add(listing_params[:location])
-    # @listing.tag_list.add(listing_params[:property_type])
     if @listing.save
       redirect_to my_listings_path
     else

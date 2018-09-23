@@ -15,8 +15,14 @@ Rails.application.routes.draw do
   get "/dome/guests/:no1-:no2" => 'dome#show_by_guests', as: "show_by_guests"
   get "/dome/price/:no1-:no2" => 'dome#show_by_price', as: "show_by_price"
 
+
+
+
   # Listings Routes
-  resources :listings, controller: "listings", only: [:show, :update]
+  resources :listings, controller: "listings", only: [:create, :show, :update] do
+    # Review Route
+    resources :reviews, controller: "review"
+  end
   get '/my-listings' => 'listings#my_index', as: "my_listings"
   get '/my-listings/new' => 'listings#new', as: "new_listing"
   post '/my-listings/new' => 'listings#create'
@@ -25,9 +31,9 @@ Rails.application.routes.draw do
   delete '/my-listings/:id' => "listings#destroy", as: "delete_listing"
   get "/listing/:id/upload-photos" => 'listings#show_upload', as: "show_upload"
   post '/listings/:id/upload-photos' => "listings#upload_photos", as: "listing_upload_photos"
-  patch '/listings/:id/upload-photos' => "listing#update", as: "listings"
   delete '/listings/:id/remove-photo/:index' => "listings#remove_photo", as: "listing_remove_photo"
   get '/listings/:id/view-photos' => "listings#view_photos", as: "view_photos"
+
 
   # Password Route
   resources :passwords, controller: "passwords", only: [:create, :new]

@@ -36,7 +36,9 @@
 
       <div class="mb-5">
         <h1 class="m-0">Hello! I'm <%= @user.first_name %>!</h1>
+        <% if @user.country? %>
         <p class="font-weight-bold m-0"><%= @user.country_name %></p>
+        <% end %>
         <a href="#" class="report-link text-muted"><i class="far fa-flag"></i> Report this user</a>
       </div>
 
@@ -45,6 +47,7 @@
       </div>
 
       <div>
+        <% if @user.listings.any? %>
         <h2 class="">Listings <span class="secondary-text text-muted">(<%=@user.listings.count%>)</span></h2>
         <ul class="list-inline">
           <% @user.listings.limit(3).each do |listing| %>
@@ -70,14 +73,15 @@
               </script>
           <%end%>
         </ul>
+        <%end%>
       </div>
 
       <div>
-        <h2 class="">Reviews <span class="secondary-text text-muted">(200)</span></h2>
+        <h2 class="">Reviews <span class="secondary-text text-muted">(<%=Review.where(listing_id: @user.listings.ids).count%>)</span></h2>
         <h5 class="font-weight-bold">Reviews from Guests</h5>
 
         <ul class="list-group list-group-flush">
-          <% Listing.all.limit(10).each do |comment| %>
+          <% Review.where(listing_id: @user.listings.ids).limit(10).each do |comment| %>
           <li class="list-group-item">
             <div class="row">
               <div class="col-2">
@@ -87,13 +91,13 @@
                 </a>
               </div>
               <div class="col-10 p-0">
-                <p class="mb-5"><%=comment.user.about_me%></p>
+                <p class="mb-5"><%=comment.comment%></p>
                 <ul class="list-inline">
                   <li class="list-inline-item float-left">
                     <p class="text-muted report-link">From <%=comment.user.country_name%> <i class="far fa-flag"></i></p>
                   </li>
                   <li class="list-inline-item float-right">
-                    <p class="text-muted report-link"><i class="fas fa-home"></i> <%=comment.name%>, <%=comment.property_type%></p>
+                    <a href="/listings/<%=comment.listing_id%>" class="text-muted report-link"><i class="fas fa-home"></i> <%=comment.listing.name%>, <%=comment.listing.property_type%></p>
                   </li>
                 </ul>
               </div>
