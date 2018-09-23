@@ -1,4 +1,4 @@
-<input name="dates" class="form-control" value=''>
+<input name="dates" class="form-control my-5" value='' placeholder="Pick a Date">
 <%= form_for [@listing, Reservation.new] do |form| %>
 
   <div class="form-group">
@@ -10,11 +10,11 @@
 
   </div>
 
+  <hr/>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Book", class: "btn btn-danger px-5 mx-auto d-block"%>
   </div>
 <% end %>
-
 <script>
 var startDate;
 var endDate;
