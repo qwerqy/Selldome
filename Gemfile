@@ -73,6 +73,9 @@ gem 'dropzonejs-rails'
 # AWS SDK Rails
 gem 'aws-sdk-rails'
 
+# Simple Calendar
+gem 'simple_calendar', '~> 2.0'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
