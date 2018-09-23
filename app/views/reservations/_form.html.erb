@@ -1,0 +1,17 @@
+<%= form_for [@listing, Reservation.new] do |form| %>
+
+
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.datetime_select :start_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.datetime_select :end_time %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
