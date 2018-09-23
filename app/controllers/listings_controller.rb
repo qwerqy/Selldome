@@ -12,7 +12,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
-    @reservations = Reservation.all
+    @reservations = Reservation.where(listing_id: params[:id])
     respond_to do |format|
       format.html
       format.js
