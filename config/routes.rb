@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   get 'welcome/index'
   root 'welcome#index'
 
@@ -22,6 +23,8 @@ Rails.application.routes.draw do
   resources :listings, controller: "listings", only: [:create, :show, :update] do
     # Review Route
     resources :reviews, controller: "review"
+    # Reservations Route
+    resources :reservations
   end
   get '/my-listings' => 'listings#my_index', as: "my_listings"
   get '/my-listings/new' => 'listings#new', as: "new_listing"
