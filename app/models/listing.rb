@@ -1,7 +1,8 @@
 class Listing < ApplicationRecord
   belongs_to :user
   has_many :reviews
-  
+  has_many :reservations
+
   mount_uploaders :photos, PhotoUploader
   acts_as_taggable
 
