@@ -19,12 +19,20 @@
         <% date_range.each_slice(7) do |week| %>
           <tr>
             <% week.each do |day| %>
-              <%= content_tag :td, class: calendar.td_classes_for(day) do %>
+              <%= content_tag :td,data: {value:"#{day}"}, id: "day-#{day.day}",class: calendar.td_classes_for(day) do %>
                 <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(block) %>
                   <% capture_haml(day, sorted_events.fetch(day, []), &block) %>
                 <% else %>
                   <% block.call day, sorted_events.fetch(day, []) %>
                 <% end %>
+                <script>
+                  $("#day-<%=day.day%>").one('click', function(){
+                    let day = $(this).data('value')
+                      $(this).toggleClass('start-date bg-danger text-white');
+                      $('input[name="reservation[start_time]"]').val(day);
+                  })
+                </script>
+
               <% end %>
             <% end %>
           </tr>

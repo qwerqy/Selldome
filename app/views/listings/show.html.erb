@@ -220,7 +220,7 @@
           <div class="card-body ">
             <h4 class="card-title font-weight-bold">$<%=@listing.price.to_i%> <span class="tiny-font">per night</span></h4>
             <hr/>
-            <%= render partial: 'reservations/form' %>
+            <%= render partial: 'reservations/form', locals: {events: @reservations} %>
             <hr/>
             <button class="btn btn-danger px-5 mx-auto d-block">Book</button>
           </div>
@@ -258,4 +258,5 @@
 
     $('input[name="review[rating]"]').val(onStar)
   });
+
 </script>
