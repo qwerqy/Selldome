@@ -25,14 +25,6 @@
                 <% else %>
                   <% block.call day, sorted_events.fetch(day, []) %>
                 <% end %>
-                <script>
-                  $("#day-<%=day.day%>").one('click', function(){
-                    let day = $(this).data('value')
-                      $(this).toggleClass('start-date bg-danger text-white');
-                      $('input[name="reservation[start_time]"]').val(day);
-                  })
-                </script>
-
               <% end %>
             <% end %>
           </tr>

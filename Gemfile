@@ -76,6 +76,9 @@ gem 'aws-sdk-rails'
 # Simple Calendar
 gem 'simple_calendar', '~> 2.0'
 
+gem 'momentjs-rails'
+gem 'bootstrap-daterangepicker-rails'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
