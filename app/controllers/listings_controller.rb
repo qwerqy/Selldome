@@ -12,7 +12,11 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
-    render template: 'listings/profile'
+    @reservations = Reservation.all
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
