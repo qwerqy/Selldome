@@ -5,12 +5,17 @@
     <%= render partial: "shared/navbar-index" %>
   <% end %>
 <% end %>
+
+
+<!-- Filter Bar -->
 <div id="attrBar" class="container-fluid p-3">
   <ul class="list-inline m-0">
     <li class="list-inline-item">
+      <!-- Show All -->
       <%=link_to "Show All", show_all_path, remote:true, class: 'btn btn-outline-secondary'%>
     </li>
     <li class="list-inline-item">
+      <!-- Place -->
       <div class="dropdown">
         <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Place
@@ -27,6 +32,7 @@
 
     <li class="list-inline-item">
       <div class="dropdown">
+        <!-- Guests -->
         <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Guests
         </button>
@@ -41,6 +47,7 @@
 
     <li class="list-inline-item">
       <div class="dropdown">
+        <!-- Price -->
         <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Price
         </button>

@@ -3,7 +3,11 @@
     <% @price.page(params[:page]).each do |home|%>
     <li class="list-inline-item">
       <div id="home-card-<%=home.id%>" class="card first p-0 m-2 shadow-sm btn">
+
+
         <!-- Carousel -->
+
+        <!-- If listing has photos -->
         <% if home.photos? == true %>
             <div id="carousel-<%=home.id%>" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators">
@@ -37,14 +41,20 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
+
+        <!-- If listing has no photos -->
         <% else %>
         <%=image_tag('default2.jpg', class: 'd-block w-100', style: 'max-width: 300px; max-height: 200px;')%>
         <% end %>
-        <!-- Details -->
+
+
+        <!-- Details card about listing -->
         <div class="card-body pb-1" data-toggle='modal' data-target='#home-info-box-<%=home.id%>'>
           <p class="card-subtitle text-muted"><%=home.property_type%></p>
           <ul class="list-inline">
             <li class="list-inline-item"><p class="card-title font-weight-bold mb-2"><%=home.name%></p></li>
+
+            <!-- If home is verified, this will show -->
             <% if home.verified %>
             <li class="list-inline-item">
               <i id="verified-badge-thumbnail" class="fas fa-check-circle text-success"></i>
@@ -58,6 +68,8 @@
           </ul>
           <p class="card-text">From <%=number_to_currency(home.price, unit: "$")%> a night</p>
         </div>
+
+          <!-- Rating -->
           <div class="rating-box mb-3">
             <ul id="star-rating" class="list-inline">
               <li class="list-inline-item star"><i data-value='1' id="star-<%=home.id%>" class="tiny-font rate-star fas fa-star"></i></li>
@@ -69,7 +81,9 @@
           </div>
       </div>
     </li>
-    <!-- Modal -->
+
+
+    <!-- Modal to access more info and link to profile-->
     <div class="modal fade" id="home-info-box-<%=home.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
