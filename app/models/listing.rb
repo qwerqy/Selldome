@@ -6,6 +6,14 @@ class Listing < ApplicationRecord
   mount_uploaders :photos, PhotoUploader
   acts_as_taggable
 
+  validates :name, presence: true
+  validates :country, presence: true
+  validates :state, presence: true
+  validates :address, presence: true
+  validates :city, presence: true
+  validates :place_type, presence: true
+  validates :property_type, presence: true
+
   def self.search(search)
     if search
       name = Listing.where(name: search.titleize)
@@ -14,9 +22,11 @@ class Listing < ApplicationRecord
       city = Listing.where(city: search.titleize)
       address = Listing.where(address: search.titleize)
       property_type = Listing.where(property_type: search.titleize)
+      place_type = Listing.where(place_type: Listing.string_to_place_type(search.titleize))
       {
         Names: name,
         Home: property_type,
+        Place: place_type,
         Countries: country,
         States: state,
         Cities: city,
@@ -41,6 +51,20 @@ class Listing < ApplicationRecord
       "Boutique Hotel"
     else
       "Select One"
+    end
+  end
+
+  def self.string_to_place_type(data)
+    if  data == "Apartment"
+      return 1
+    elsif  data == "House"
+      return 2
+    elsif  data == "Secondary Unit"
+      return 3
+    elsif  data == "Unique Space"
+      return 4
+    elsif data == "Boutique Hotel"
+      return 5
     end
   end
 

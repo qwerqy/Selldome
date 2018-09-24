@@ -8,9 +8,22 @@ class Reservation < ApplicationRecord
     message: "Date is taken" }
   validates :listing_id , uniqueness: { scope: :user,
     message: "You can't reserve a Home twice!" }
+  validate :no_reservation_overlap
 
-
-    def days
-      "#{self.end_time.day - self.start_time.day} days"
+    scope :overlapping, ->(period_start, period_end) do
+      where "((start_time <= ?) and (end_time >= ?))", period_end, period_start
     end
+
+  def days
+    "#{self.end_time.day - self.start_time.day} days"
+  end
+
+
+  private
+
+  def no_reservation_overlap
+    if (Reservation.overlapping(start_time, end_time).any?)
+       errors.add(:end_time, 'it overlaps another reservation')
+    end
+  end
 end

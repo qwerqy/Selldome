@@ -2,10 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-  background: {
-    image: asset-url("santorini-architecture.jpg")
-  }
-  background-repeat: no-repeat;
-  background-size:auto;
+#signInBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)!important;
+  width: 30%!important;
+  background: rgba(255,255,255,0.6);
 }

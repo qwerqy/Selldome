@@ -4,7 +4,7 @@
     <% if listing.photos? == true %>
       <div id="my-listing-card-<%=listing.id%>" class="p-0 background-wrap card col-3 shadow m-3" style='background-image: url("<%=listing.photos[0].url%>");'>
     <% else %>
-      <div id="my-listing-card-<%=listing.id%>" class="p-0 background-wrap card col-3 shadow m-3" style='background-image: url("assets/default-no-photos.jpg");'>
+      <div id="my-listing-card-<%=listing.id%>" class="p-0 background-wrap card col-3 shadow m-3" style='background-image: url("assets/default2.jpg");'>
     <% end %>
         <div class="d-block">
           <%=button_to "x", delete_listing_path(listing.id),  method: "delete", data: {confirm: "Are you sure you want to delete this listing?"}, class: 'btn bg-transparent font-weight-bold' %>
