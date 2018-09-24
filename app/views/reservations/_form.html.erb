@@ -1,5 +1,20 @@
-<input name="dates" class="form-control my-5" value='' placeholder="Pick a Date">
+<div class="form-group">
+  <label for='dates' class="tiny-font text-muted">Dates</label>
+  <input id="dates" name="dates" class="form-control" value='' placeholder="Pick a Date">
+</div>
+
 <%= form_for [@listing, Reservation.new] do |form| %>
+
+  <div class="form-group">
+    <%=form.label "Guest", class: 'tiny-font text-muted'%>
+    <select class="form-control col-6" name='reservation[guest_number]' id='reservation_guest_number'>
+      <% i = 1 %>
+      <% while i <= @listing.guest_number.to_i do%>
+      <option value='<%= i %>'><%= i %></option>
+      <% i += 1 %>
+      <% end %>
+    </select>
+  </div>
 
   <div class="form-group">
     <%= form.hidden_field :start_time, class: 'form-control', placeholder: 'Start' %>
@@ -7,19 +22,82 @@
 
   <div class="form-group">
     <%= form.hidden_field :end_time, class: 'form-control', placeholder: 'End' %>
-
   </div>
 
-  <hr/>
-  <div class="actions">
-    <%= form.submit "Book", class: "btn btn-danger px-5 mx-auto d-block"%>
-  </div>
+  <ul id="bookingCalculator" class="list-group list-group-flush mb-4">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-6">
+          <div class="">
+            <p class="m-0"><span id="valuePerNight"><%=number_to_currency(@listing.price, unit: '$', precision: 0)%></span> x <span id="nights"></span> nights</p>
+          </div>
+        </div>
+        <div class="col-6 ">
+          <div class="d-flex justify-content-end">
+            <span id="totalSale"></span>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-6">
+          <div class="">
+            <p class="m-0 text-muted">Service fee</p>
+          </div>
+        </div>
+        <div class="col-6 ">
+          <div class="d-flex justify-content-end">
+            <span id="totalFee" class="text-muted"></span>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-6">
+          <div class="">
+            <h5 class="m-0">Total</h5>
+          </div>
+        </div>
+        <div class="col-6 ">
+          <div class="d-flex justify-content-end">
+            <span id="totalBook"></span>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+
+  <% if @listing.instant_booking?%>
+    <div class="actions">
+      <%= form.submit "Instant Book", class: "btn btn-danger px-5 mx-auto d-block"%>
+    </div>
+  <% else %>
+    <div class="actions">
+      <%= form.submit "No Instant Book", class: "btn btn-secondary px-5 mx-auto d-block", disabled: true%>
+    </div>
+  <%end%>
 <% end %>
+
 <script>
 var startDate;
 var endDate;
 
 $(function() {
+
+  $('#bookingCalculator').hide();
+
+  function calculator(num){
+    $('#totalSale').html('$' + $('#nights').html()*num);
+    var b = $('#totalSale').html().split('').splice(1);
+    $('#totalFee').html('$' + Math.round(b.join('')*0.1));
+    var c = $('#totalFee').html().split('').splice(1);
+    $('#totalBook').html('$' + (parseInt(b.join('')) + parseInt(c.join(''))));
+  }
 
   $('input[name="dates"]').daterangepicker({
     autoUpdateInput: false,
@@ -33,9 +111,22 @@ $(function() {
     console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
     startDate = start.format('YYYY-MM-DD');
     endDate = end.format('YYYY-MM-DD');
+    nights = (end - start)/ 1000 / 60 / 60 / 24;
     $('input[name="reservation[start_time]"]').val(startDate);
     $('input[name="reservation[end_time]"]').val(endDate);
+    $('#nights').html(Math.round(nights));
+
+    $('#bookingCalculator').show();
+
+    calculator($('#valuePerNight').html().split('').splice(1).join(''));
   });
+
+  $('#reservation_guest_number').change(function(){
+    var x = $('#valuePerNight').html().split('').splice(1);
+    var y = $(this).val()*x.join('');
+    calculator(y);
+  })
+
   $('input[name="dates"]').on('apply.daterangepicker', function(ev, picker) {
       $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
   });
