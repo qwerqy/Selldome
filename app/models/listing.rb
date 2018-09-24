@@ -6,6 +6,14 @@ class Listing < ApplicationRecord
   mount_uploaders :photos, PhotoUploader
   acts_as_taggable
 
+  validates :name, presence: true
+  validates :country, presence: true
+  validates :state, presence: true
+  validates :address, presence: true
+  validates :city, presence: true
+  validates :place_type, presence: true
+  validates :property_type, presence: true
+
   def self.search(search)
     if search
       name = Listing.where(name: search.titleize)

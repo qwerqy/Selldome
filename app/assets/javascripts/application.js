@@ -27,7 +27,7 @@ $(document).on('turbolinks:load',function() {
       interval: false
     });
 
-    $(".alert" ).fadeOut(3000);
+    $(".alert" ).fadeOut(5000);
 
     function populate_property_type(place) {
       $.get('/get_property_from_place_type', {place_type: place}, function(data){
