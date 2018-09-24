@@ -25,6 +25,7 @@ class ListingsController < ApplicationController
     if @listing.save
       redirect_to my_listings_path
     else
+      flash[:danger] = @listing.errors.full_messages.to_sentence
       render template: "listings/new"
     end
   end
