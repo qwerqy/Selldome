@@ -126,8 +126,22 @@
 <!-- Price -->
 <div class="text-field form-group">
   <%= form.label :price, "How much is it per stay?"%>
-  <%= form.text_field :price, placeholder: 'Price', type: 'price', class: 'form-control col-1' %>
+  <%= form.text_field :price, placeholder: 'Price', type: 'price', class: 'form-control' %>
 </div>
+
+<!-- Instant Booking -->
+<%= form.label :instant_booking, "Enable Instant Booking?"%><br/>
+<div class="form-check">
+  <%= form.radio_button :instant_booking, true %>
+  <span class="option p-3">Yes<span>
+</div>
+<div class="form-check">
+  <%= form.radio_button :instant_booking, false %>
+  <span class="option p-3">No<span>
+</div>
+
+<hr/>
+
 
 <!-- Description -->
 <div class="text-field form-group">
