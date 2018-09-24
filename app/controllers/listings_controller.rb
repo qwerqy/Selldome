@@ -129,7 +129,8 @@ class ListingsController < ApplicationController
       :user_id,
       :tag_list,
       :verified,
-      {photos: []}
+      {photos: []},
+      :instant_booking
     )
   end
 end
