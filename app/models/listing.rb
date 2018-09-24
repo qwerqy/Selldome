@@ -14,9 +14,11 @@ class Listing < ApplicationRecord
       city = Listing.where(city: search.titleize)
       address = Listing.where(address: search.titleize)
       property_type = Listing.where(property_type: search.titleize)
+      place_type = Listing.where(place_type: Listing.string_to_place_type(search.titleize))
       {
         Names: name,
         Home: property_type,
+        Place: place_type,
         Countries: country,
         States: state,
         Cities: city,
@@ -41,6 +43,20 @@ class Listing < ApplicationRecord
       "Boutique Hotel"
     else
       "Select One"
+    end
+  end
+
+  def self.string_to_place_type(data)
+    if  data == "Apartment"
+      return 1
+    elsif  data == "House"
+      return 2
+    elsif  data == "Secondary Unit"
+      return 3
+    elsif  data == "Unique Space"
+      return 4
+    elsif data == "Boutique Hotel"
+      return 5
     end
   end
 

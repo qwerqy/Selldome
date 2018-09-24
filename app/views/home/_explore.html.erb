@@ -1,12 +1,12 @@
 <div class="container-fluid p-0 mx-0 my-3">
   <h5 class="font-weight-bold">Explore Selldome</h5>
   <ul class="list-inline">
-    <% Listing.all_place_type.each do |type| %>
+    <% Listing.all_place_type.each_with_index do |type, index| %>
     <li class="list-inline-item">
-      <%=link_to dome_index_path do %>
+      <%=link_to "/dome?utf8=✓&search=#{Listing.place_type_string(index+1)}" do %>
         <div class="card container shadow-sm my-2">
           <div class="row">
-            <img class="col-4 p-0" src="/assets/home.jpg" style="width:100px;height:100px;">
+            <img class="col-4 p-0" src="<%=Listing.where(place_type: index+1).first.photos[0].url%>" style="width:100px;height:100px;">
             <div id="tagContainer" class="col-8 p-0 tag-container">
               <p class="m-0"><%=type%></p>
             </div>
