@@ -62,6 +62,8 @@
 
     <li class="list-inline-item">
       <div class="dropdown">
+        <!-- Dates -->
+        <!-- WORK IN PROGRESS -->
         <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dates
         </button>
@@ -73,6 +75,8 @@
 
     <li class="list-inline-item">
       <div class="dropdown">
+        <!-- Instant Book -->
+        <!-- Optional, not finalize -->
         <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Instant Book
         </button>
@@ -84,6 +88,7 @@
 
     <li class="list-inline-item">
       <div class="dropdown">
+        <!-- More to be added soon here -->
         <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           More Filters
         </button>
@@ -95,7 +100,7 @@
   </ul>
 </div>
 <div class="background-keep">
-
+  <!-- If search is not used, this will be populated by all -->
   <div id="dome-content" class="mt-4">
       <% if params[:search] %>
         <%=render partial: 'dome/search', locale: @listings %>
