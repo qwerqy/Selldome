@@ -6,7 +6,7 @@
       <%=link_to "/dome?utf8=✓&search=#{Listing.place_type_string(index+1)}" do %>
         <div class="card container shadow-sm my-2">
           <div class="row">
-            <img class="col-4 p-0" src="/assets/home.jpg" style="width:100px;height:100px;">
+            <img class="col-4 p-0" src="<%=Listing.where(place_type: index+1).first.photos[0].url%>" style="width:100px;height:100px;">
             <div id="tagContainer" class="col-8 p-0 tag-container">
               <p class="m-0"><%=type%></p>
             </div>
