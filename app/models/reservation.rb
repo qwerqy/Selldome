@@ -9,4 +9,8 @@ class Reservation < ApplicationRecord
   validates :listing_id , uniqueness: { scope: :user,
     message: "You can't reserve a Home twice!" }
 
+
+    def days
+      "#{self.end_time.day - self.start_time.day} days"
+    end
 end
