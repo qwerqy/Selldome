@@ -92,7 +92,10 @@
         <a href="" class="btn btn-link p-0 font-weight-bold text-dark my-4">Contact Host</a>
         <hr/>
         <p class="font-weight-bold mt-5">Availability</p>
-        <p>RESERVED: CALENDAR FOR RESERVATION</p>
+
+        <div id="events_calendar">
+          <%= render partial: "reservations/calendar", locals: {events: @reservations} %>
+        </div>
         <hr/>
         <div id="review-box">
           <% if @listing.reviews.any? %>
@@ -217,7 +220,8 @@
           <div class="card-body ">
             <h4 class="card-title font-weight-bold">$<%=@listing.price.to_i%> <span class="tiny-font">per night</span></h4>
             <hr/>
-            <button class="btn btn-danger px-5 mx-auto d-block">Book</button>
+            <%= render partial: 'reservations/form', locals: {events: @reservations} %>
+            
           </div>
         </div>
       </div>
@@ -226,6 +230,7 @@
 </div>
 
 <script>
+
   $('#star-rating li').on('mouseover',function(){
     let onStar = parseInt($(this).children('i.rate-star').data('value'),10);
 
@@ -253,4 +258,5 @@
 
     $('input[name="review[rating]"]').val(onStar)
   });
+
 </script>

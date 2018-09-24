@@ -16,6 +16,8 @@
 //= require popper
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require moment
+//= require daterangepicker
 //= require activestorage
 //= require_tree .
 

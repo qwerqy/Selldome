@@ -2,14 +2,17 @@ class DomeController < ApplicationController
   before_action :require_login
   def index
     @pagination = Listing.order(:created_at).page params[:page]
+    @listings = Listing.search(params[:search])
     respond_to do |format|
       format.html
     end
   end
 
   def show_all
+    @all_listings = Listing.all
     @pagination = Listing.order(:created_at).page params[:page]
     respond_to do |format|
+      format.html { render 'dome/index' }
       format.js
     end
   end

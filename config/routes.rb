@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   get 'welcome/index'
   root 'welcome#index'
 
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
   # Dome Route
   resources :dome, controller: "dome", only: [:index]
   get "/dome/:place_type" => 'dome#show_place_type', as: "show_place_type"
-  get "/dome" => 'dome#show_all', as: "show_all"
+  get "/dome/show/all" => 'dome#show_all', as: "show_all"
   get "/dome/guests/:no1-:no2" => 'dome#show_by_guests', as: "show_by_guests"
   get "/dome/price/:no1-:no2" => 'dome#show_by_price', as: "show_by_price"
 
@@ -22,6 +23,8 @@ Rails.application.routes.draw do
   resources :listings, controller: "listings", only: [:create, :show, :update] do
     # Review Route
     resources :reviews, controller: "review"
+    # Reservations Route
+    resources :reservations
   end
   get '/my-listings' => 'listings#my_index', as: "my_listings"
   get '/my-listings/new' => 'listings#new', as: "new_listing"

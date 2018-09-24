@@ -1,6 +1,6 @@
 <div id="listings">
   <ul class="list-inline">
-    <% Listing.page(params[:page]).each do |home|%>
+    <% Listing.all.page(params[:page]).each do |home|%>
     <li class="list-inline-item">
       <div id="home-card-<%=home.id%>" class="card first p-0 m-2 shadow-sm btn">
         <!-- Carousel -->

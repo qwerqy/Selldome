@@ -1,9 +1,32 @@
 class Listing < ApplicationRecord
   belongs_to :user
   has_many :reviews
-  
+  has_many :reservations
+
   mount_uploaders :photos, PhotoUploader
   acts_as_taggable
+
+  def self.search(search)
+    if search
+      name = Listing.where(name: search.titleize)
+      country = Listing.where(country: search.upcase)
+      state = Listing.where(state: search.titleize)
+      city = Listing.where(city: search.titleize)
+      address = Listing.where(address: search.titleize)
+      property_type = Listing.where(property_type: search.titleize)
+      {
+        Names: name,
+        Home: property_type,
+        Countries: country,
+        States: state,
+        Cities: city,
+        Addresses: address
+      }
+
+    else
+      Listing.all
+    end
+  end
 
   def self.place_type_string(data)
     if  data == 1

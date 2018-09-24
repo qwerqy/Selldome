@@ -8,7 +8,7 @@
 <div id="attrBar" class="container-fluid p-3">
   <ul class="list-inline m-0">
     <li class="list-inline-item">
-      <%=link_to "Show All", dome_index_path, class: 'btn btn-outline-secondary'%>
+      <%=link_to "Show All", show_all_path, remote:true, class: 'btn btn-outline-secondary'%>
     </li>
     <li class="list-inline-item">
       <div class="dropdown">
@@ -88,8 +88,12 @@
   </ul>
 </div>
 <div class="background-keep">
-  <div id="dome-content" class="mt-4">
-    <%= render partial: 'dome/all_listings' %>
-  </div>
 
+  <div id="dome-content" class="mt-4">
+      <% if params[:search] %>
+        <%=render partial: 'dome/search', locale: @listings %>
+      <% else %>
+        <%=render partial: 'dome/show_all'%>
+      <% end %>
+  </div>
 </div>
