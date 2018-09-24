@@ -3,6 +3,8 @@
 <head>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true%>
+  <%= stylesheet_link_tag "sessions", media: 'all', 'data-turbolinks-track' => true if controller_name == "sessions" %>
+  <%= stylesheet_link_tag "users", media: 'all', 'data-turbolinks-track' => true if controller_name == "users" %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>

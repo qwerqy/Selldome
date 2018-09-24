@@ -1,8 +1,6 @@
-<head>
-   <%= stylesheet_link_tag "sessions" if controller_name == "sessions" %>
-</head>
+<%= render partial: "shared/navbar-index" %>
 
-<div class="container" id="signInBox">
+<div class="container p-5" id="signInBox">
   <div id="clearance" class="sign-in">
     <h2><%= t(".title") %></h2>
 
