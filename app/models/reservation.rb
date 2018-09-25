@@ -1,14 +1,13 @@
 class Reservation < ApplicationRecord
+  attr_accessor :skip_validations
   belongs_to :listing
   belongs_to :user
 
-  validates :start_time , uniqueness: { scope: :user,
-    message: "Date is taken" }
-  validates :end_time , uniqueness: { scope: :user,
-    message: "Date is taken" }
+  validates :start_time , presence: true
+  validates :end_time , presence: true
   validates :listing_id , uniqueness: { scope: :user,
     message: "You can't reserve a Home twice!" }
-  validate :no_reservation_overlap
+  validate :no_reservation_overlap, unless: :skip_validations
 
     scope :overlapping, ->(period_start, period_end) do
       where "((start_time <= ?) and (end_time >= ?))", period_end, period_start
