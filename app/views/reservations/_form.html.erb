@@ -1,10 +1,9 @@
-<div class="form-group">
-  <label for='dates' class="tiny-font text-muted">Dates</label>
-  <input id="dates" name="dates" class="form-control" value='' placeholder="Pick a Date">
+<div class="input-group mb-4">
+  <input id="date1" name="dates" class="form-control" value='' placeholder="Choose your dates">
 </div>
 
 <%= form_with scope: :reservation, url: listing_review_booking_path(listing_id: @listing.id), method: :post, local: true do |form| %>
-  <div class="form-group">
+  <div id="guestNumberBox" class="form-group">
     <%=form.label "Guest", class: 'tiny-font text-muted'%>
     <select class="form-control col-6" name='reservation[guest_number]' id='reservation_guest_number'>
       <% i = 1 %>
@@ -70,73 +69,82 @@
   </ul>
 
 
-  <% if @listing.instant_booking%>
-    <div class="actions">
-      <%= form.submit "Instant Book", class: "btn btn-danger px-5 mx-auto d-block"%>
-    </div>
-  <% else %>
-    <div class="actions">
-      <%= form.submit "No Instant Book", class: "btn btn-secondary px-5 mx-auto d-block", disabled: true%>
-    </div>
-  <%end%>
+  <div class="actions">
+    <%= form.submit "Request a Book", class: "btn btn-danger px-5 mx-auto d-block"%>
+  </div>
+
 
 <% end %>
 
 <script>
-var startDate;
-var endDate;
-
-$(function() {
+$(document).ready(function(){
 
   $('#bookingCalculator').hide();
+  $('#guestNumberBox').hide();
 
+  // Ajax call to get JSON of occupied dates from the back-end. Through Reservations Controller.
+  $.ajax({
+    url: '/listings/<%=@listing.id%>/booked_dates',
+    method: 'GET',
+    dataType: 'JSON',
+    data: { listing_id: <%=@listing.id%> },
+    success: function(result){
+      var occupied_array = [];
+
+      for(i=0;i < result.start_time.length; i++){
+        occupied_array.push({ from: result.start_time[i], to: result.end_time[i] })
+      }
+      $("#date1").flatpickr({
+          mode: "range",
+          minDate: "today",
+          dateFormat: "Y-m-d",
+          disable: occupied_array
+      });
+
+      $('#events_calendar').flatpickr({
+        inline: true,
+        minDate: "today",
+        disable: occupied_array
+      })
+    }
+  })
+  // Calculator Logic. Num takes in variable number based on the price, since our price mutiplies by the number of guests.
   function calculator(num){
-    $('#totalSale').html('$' + $('#nights').html()*num);
-    var b = $('#totalSale').html().split('').splice(1);
-    $('#totalFee').html('$' + Math.round(b.join('')*0.1));
-    var c = $('#totalFee').html().split('').splice(1);
-    $('#totalBook').html('$' + (parseInt(b.join('')) + parseInt(c.join(''))));
-    $('#reservation_total_bill').val($('#totalBook').html().split('').splice(1).join(''))
-  }
+      $('#totalSale').html('$' + $('#nights').html()*num);
+      var b = $('#totalSale').html().split('').splice(1);
+      $('#totalFee').html('$' + Math.round(b.join('')*0.1));
+      var c = $('#totalFee').html().split('').splice(1);
+      $('#totalBook').html('$' + (parseInt(b.join('')) + parseInt(c.join(''))));
+      // Total bill
+      $('#reservation_total_bill').val($('#totalBook').html().split('').splice(1).join(''))
+    }
 
-  $('input[name="dates"]').daterangepicker({
-    autoUpdateInput: false,
-    opens: 'left',
-    minDate: moment(),
-    locale: {
-          cancelLabel: 'Clear'
-      },
-    "applyButtonClasses": "btn-danger"
-  }, function(start, end, label) {
-    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-    startDate = start.format('YYYY-MM-DD');
-    endDate = end.format('YYYY-MM-DD');
-    nights = (endDate.split('-').splice(2) - startDate.split('-').splice(2));
+  // Everytime a user inputs a new range.
+  // Dates are processed from a string into an actual readable date using momentJS.
+  // They are then being put in as values within hidden fields for submission.
+  $('#date1').change(function(){
+    var startDate = $('#date1').val().split('').splice(0, 10).join('');
+    var endDate = $('#date1').val().split('').splice(14).join('');
+    var price = $('#valuePerNight').html().split('').splice(1).join('')
+    var nights = (moment(endDate) - moment(startDate)) / (1000 * 3600 * 24)
+
     $('input[name="reservation[start_time]"]').val(startDate);
     $('input[name="reservation[end_time]"]').val(endDate);
-    $('#nights').html(Math.round(nights));
+    $('#nights').html(nights)
 
+    calculator(price);
+
+    $('#guestNumberBox').show();
     $('#bookingCalculator').show();
-
-    calculator($('#valuePerNight').html().split('').splice(1).join(''));
-  });
-
-  $('#reservation_guest_number').change(function(){
-    var x = $('#valuePerNight').html().split('').splice(1);
-    var y = $(this).val()*x.join('');
-    calculator(y);
   })
 
-  $('input[name="dates"]').on('apply.daterangepicker', function(ev, picker) {
-      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-  });
+  // When the amount of guests changes.
+  $('#reservation_guest_number').change(function(){
+      var x = $('#valuePerNight').html().split('').splice(1);
+      var y = $(this).val()*x.join('');
 
-  $('input[name="dates"]').on('cancel.daterangepicker', function(ev, picker) {
-      $(this).val('');
-      $('input[name="reservation[start_time]"]').val('');
-      $('input[name="reservation[end_time]"]').val('');
-  });
-});
-
+      calculator(y);
+    })
+})
 
 </script>
