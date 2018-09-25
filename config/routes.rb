@@ -16,15 +16,16 @@ Rails.application.routes.draw do
   get "/dome/guests/:no1-:no2" => 'dome#show_by_guests', as: "show_by_guests"
   get "/dome/price/:no1-:no2" => 'dome#show_by_price', as: "show_by_price"
 
-  # Payment
 
   # Listings Routes
   resources :listings, controller: "listings", only: [:create, :show, :update] do
     # Review Route
     resources :reviews, controller: "review"
+    get 'booked_dates' => 'reservations#booked_dates'
     # Reservations Route
     post 'reservations/review_booking', as: 'review_booking'
     resources :reservations do
+      # Payment
       get 'payment/new'
       post 'payment/checkout'
     end
