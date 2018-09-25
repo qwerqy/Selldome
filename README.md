@@ -1,25 +1,26 @@
-# README
+# Seldome
+A personal project and an assignment from my bootcamp on building an AirBnB Clone. Do expect alot of changes as it is also a learning process for me.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Framework
+Ruby on Rails 5.2.1
 
-Things you may want to cover:
+## Languages
+- HTML
+- CSS
+- Ruby
+- Javascript
+- jQuery
 
-* Ruby version
+## Others
+- AJAX
+- Bootstrap
+- Flatpickr
+- Sass Integrated
+- AWS
+- Braintree
 
-* System dependencies
+## Gems used
+Please check in my gemfile for the gems I am using. May change on updates.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# selldome
+Any questions you want to ask directly please email me at amnrsln@gmail.com
+ps: Looking for a job.
