@@ -71,6 +71,7 @@ class ReservationsController < ApplicationController
     @listing = Listing.find(params[:listing_id])
     @reservation.user_id = current_user.id
     @reservation.listing_id = @listing.id
+    @reservation.paid = false
     if @reservation.save
       respond_to do |format|
         format.html
@@ -81,6 +82,20 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def booked_dates
+    @listing = Listing.find(params[:listing_id])
+
+    start_time = @listing.reservations.each_with_object([]) do |object, array|
+      array << object.start_time
+    end
+
+    end_time = @listing.reservations.each_with_object([]) do |object, array|
+      array << object.end_time
+    end
+
+    render :json => {start_time: start_time, end_time: end_time}
+
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
 
