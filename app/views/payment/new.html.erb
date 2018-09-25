@@ -1,0 +1,100 @@
+<h5 class="font-weight-bold">Payment Details</h5>
+<div class="">
+
+  <%= form_for :checkout_form, url: payment_checkout_path, html: { id: "cardForm", class: 'p-0'} do |form| %>
+
+    <%= form.label :card_number, "Credit Card Number", html: {class: "hosted-fields--label"} %>
+    <div id="card-number" class="hosted-field"></div>
+
+    <%= form.label :expiration_date, "Expiration Date", html: {class: "hosted-fields--label"} %>
+    <div id="expiration-date" class="hosted-field"></div>
+
+    <%= form.label :cvv, "CVV", html: {class: "hosted-fields--label"} %>
+    <div id="cvv" class="hosted-field"></div>
+
+    <%= form.hidden_field "payment_method_nonce" %>
+
+    <h5 class="font-weight-bold">Cancellation Policy</h5>
+    <p>Cancel within 48 hours of booking and 14 days before check-in to get a full refund. Cancel up to 7 days before check in and get a 50% refund (minus service fees). Cancel within 7 days of your trip and the reservation is non-refundable.</p>
+
+    <p class="tiny-font">I agree to the House Rules, Cancellation Policy, and the Guest Refund Policy. I also agree to pay the total amount shown, which includes Service Fees.</p>
+    <div class="button-container">
+      <%= form.submit "Book", disabled: true, class: "btn btn-danger", id: "submit-payment-btn" %>
+    </div>
+  <% end %>
+</div>
+
+<!-- Load the Client component. -->
+<script src="https://js.braintreegateway.com/web/3.6.3/js/client.min.js"></script>
+
+<!-- Load the Hosted Fields component. -->
+<script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.min.js"></script>
+
+<script>
+  var form = document.querySelector('#cardForm');
+  var submit = document.querySelector("#submit-payment-btn");
+  var authorization = '<%= @client_token %>';
+
+  braintree.client.create({
+    // Replace this with your own authorization.
+    authorization: authorization
+  }, function (clientErr, clientInstance) {
+    if (clientErr) {
+      // Handle error in client creation
+      return;
+    }
+
+    braintree.hostedFields.create({
+      client: clientInstance,
+      styles: {
+        'input': {
+          'font-size': '14pt'
+        },
+        'input.invalid': {
+          'color': 'red'
+        },
+        'input.valid': {
+          'color': 'green'
+        }
+      },
+      fields: {
+        number: {
+          selector: '#card-number',
+          placeholder: '4111 1111 1111 1111'
+        },
+        cvv: {
+          selector: '#cvv',
+          placeholder: '123'
+        },
+        expirationDate: {
+          selector: '#expiration-date',
+          placeholder: '10/2019'
+        }
+      }
+    }, function (hostedFieldsErr, hostedFieldsInstance) {
+      if (hostedFieldsErr) {
+        // Handle error in Hosted Fields creation
+        return;
+      }
+
+      submit.removeAttribute('disabled');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+          if (tokenizeErr) {
+            // Handle error in Hosted Fields tokenization
+            return;
+          }
+
+          // Put `payload.nonce` into the `payment_method_nonce` input, and then
+          // submit the form. Alternatively, you could send the nonce to your server
+          // with AJAX.
+          document.querySelector('input[name="checkout_form[payment_method_nonce]"]').value = payload.nonce;
+          form.submit();
+        });
+      }, false);
+    });
+  });
+</script>

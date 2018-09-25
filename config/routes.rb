@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  get '/construction' => "reservations#test"
   get 'welcome/index'
   root 'welcome#index'
 
@@ -16,16 +16,21 @@ Rails.application.routes.draw do
   get "/dome/guests/:no1-:no2" => 'dome#show_by_guests', as: "show_by_guests"
   get "/dome/price/:no1-:no2" => 'dome#show_by_price', as: "show_by_price"
 
-
-
+  # Payment
 
   # Listings Routes
   resources :listings, controller: "listings", only: [:create, :show, :update] do
     # Review Route
     resources :reviews, controller: "review"
     # Reservations Route
-    resources :reservations
+    post 'reservations/review_booking', as: 'review_booking'
+    resources :reservations do
+      get 'payment/new'
+      post 'payment/checkout'
+    end
   end
+
+
   get '/my-listings' => 'listings#my_index', as: "my_listings"
   get '/my-listings/new' => 'listings#new', as: "new_listing"
   post '/my-listings/new' => 'listings#create'
