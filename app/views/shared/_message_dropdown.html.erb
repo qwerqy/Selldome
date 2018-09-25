@@ -4,10 +4,22 @@
   <% listing.reservations.order(created_at: :desc).each do |reservation| %>
     <a class="font-weight-bold" href="/profile/<%=reservation.user_id%>"><%=User.find(reservation.user_id).name%></a> booked <a class="font-weight-bold" href="/listings/<%=reservation.listing_id%>"><%=Listing.find(reservation.listing_id).name%></a> for <%=reservation.days%>!
     <p class="tiny-font text-muted"><%=reservation.created_at%></p>
+    <% if reservation.paid == true%>
+    <p class="tiny-font text-muted">Paid </p>
+    <% else %>
+    <p class="tiny-font text-muted">Unpaid</p>
+    <% end %>
     <div class="dropdown-divider"></div>
   <% end %>
 <% end %>
 <% current_user.reservations.order(created_at: :desc).each do |reservation|%>
   You have booked <a class="font-weight-bold" href="/listings/<%=reservation.listing_id%>"><%=Listing.find(reservation.listing_id).name%></a> for <%=reservation.days%>!
-  <p class="tiny-font text-muted"><%=reservation.created_at%></p>
+  <p class="m-0 tiny-font text-muted"><%=reservation.created_at%></p>
+  <% if reservation.paid == true%>
+  <p class="tiny-font text-muted">Paid </p>
+  <% else %>
+    <%=link_to listing_reservation_payment_new_path(reservation_id: reservation.id, listing_id: reservation.listing_id) do %>
+    <p class="tiny-font text-muted">Unpaid</p>
+    <% end %>
+  <% end %>
 <% end %>
