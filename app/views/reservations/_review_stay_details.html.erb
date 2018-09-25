@@ -1,0 +1,43 @@
+<h3 class="font-weight-bold">Review stay details.</h3>
+<div class="card my-4">
+  <div class="card-body">
+    <p class="card-text">This is a card to highlight the best deals going on about this place</p>
+  </div>
+</div>
+
+<hr/>
+
+<h4 class="font-weight-bold"><%=@reservation.days%> in <%=@listing.name%></h4>
+
+<div class="row mt-2 mb-5">
+  <div class="col-6">
+    <div class="container">
+      <div class="row">
+        <div class="col-2 bg-secondary text-light text-center p-2">
+          <p class="m-0 tiny-font"><%=I18n.t("date.abbr_month_names")[@reservation.start_time.month].upcase%></p>
+          <p class="m-0"><%=@reservation.start_time.day%></p>
+        </div>
+        <div class="col-8 bg-light p-2">
+          <p class="m-0">Check In</p>
+          <p class="m-0">Before 12pm</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="container">
+      <div class="row">
+        <div class="col-2 bg-secondary text-light text-center p-2">
+          <p class="m-0 tiny-font"><%=I18n.t("date.abbr_month_names")[@reservation.end_time.month].upcase%></p>
+          <p class="m-0"><%=@reservation.end_time.day%></p>
+        </div>
+        <div class="col-8 bg-light p-2">
+          <p class="m-0">Check In</p>
+          <p class="m-0">Before 12pm</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%=link_to "Agree & Proceed to payment", listing_reservation_payment_new_path(reservation_id: @reservation.id, listing_id: @listing.id), remote:true, class: 'btn btn-danger'%>
