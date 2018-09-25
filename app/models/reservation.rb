@@ -15,7 +15,7 @@ class Reservation < ApplicationRecord
     end
 
   def days
-    "#{self.end_time.day - self.start_time.day} days"
+    "#{self.end_time.day - self.start_time.day} nights"
   end
 
 

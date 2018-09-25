@@ -1,5 +1,4 @@
 class ReservationsController < ApplicationController
-  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   # GET /reservations
   # GET /reservations.json
@@ -15,7 +14,7 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   def new
     @listing = Listing.find(params[:listing_id])
-    @reservation = Reservation.new
+    session[:reservation]
   end
 
   # GET /reservations/1/edit
@@ -63,14 +62,31 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def test
+    render template: 'reservations/review_booking'
+  end
+
+  def review_booking
+    @reservation = Reservation.new(reservation_params)
+    @listing = Listing.find(params[:listing_id])
+    @reservation.user_id = current_user.id
+    @reservation.listing_id = @listing.id
+    if @reservation.save
+      respond_to do |format|
+        format.html
+      end
+    else
+      flash[:danger] = @reservation.errors.full_messages.to_sentence
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_reservation
-      @reservation = Reservation.find(params[:id])
-    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:listing_id, :user_id, :start_time, :end_time)
+      params.require(:reservation).permit(:listing_id, :user_id, :start_time, :end_time, :guest_number, :total_bill, :paid)
     end
 end
