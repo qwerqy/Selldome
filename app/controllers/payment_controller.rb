@@ -10,6 +10,7 @@ class PaymentController < ApplicationController
   end
 
   def checkout
+    @listing = Listing.find(params[:listing_id])
     @reservation = Reservation.find(params[:reservation_id])
     nonce_from_the_client = params[:checkout_form][:payment_method_nonce]
 
@@ -24,6 +25,8 @@ class PaymentController < ApplicationController
     if result.success?
       @reservation.skip_validations = true
       @reservation.update(paid: true)
+      ReservationMailer.booking_email(@reservation.user, @listing.user, @listing.id).deliver!
+
       redirect_to :root, :flash => { :success => "Transaction successful!" }
     else
       redirect_to :root, :flash => { :error => "Transaction failed. Please try again." }
