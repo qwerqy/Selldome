@@ -46,7 +46,7 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/profile/<%=current_user.id%>/edit">Edit Profile</a>
             <a class="dropdown-item" href="#">Invite Friends</a>
-            <a class="dropdown-item" href="#">Account Settings</a>
+            <a class="dropdown-item" href="/users/<%=current_user.id%>/account">Account Settings</a>
             <div class="dropdown-divider"></div>
             <div id="header" class="btn dropdown-item">
               <% if signed_in? -%>
