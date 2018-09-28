@@ -7,7 +7,7 @@
         <div class="card container shadow-sm my-2">
           <div class="row">
             <!-- Image looks distorted due to stretch. -->
-            <%=image_tag(Listing.where(place_type:index+1).first.photos[0].thumb_medium.url, class: 'col-4 p-0', style: 'width:100px;height:100px;')%>
+            <div style="width:100px;height:100px;"></div>
             <div id="tagContainer" class="col-8 p-0 tag-container">
               <p class="m-0"><%=type%></p>
             </div>
