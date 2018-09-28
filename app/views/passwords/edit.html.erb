@@ -1,18 +1,32 @@
-<div id="clearance" class="password-reset">
-  <h2><%= t(".title") %></h2>
+<% content_for :navbar do %>
+  <% if signed_in? %>
+    <%= render partial: "shared/navbar" %>
+  <% else %>
+    <%= render partial: "shared/navbar-index" %>
+  <% end %>
+<% end %>
+<div class="container d-flex flex-wrap justify-content-center mt-5">
+  <div class="card w-50">
+    <div class="card-body">
+      <div id="clearance" class="password-reset">
+        <h2 class="card-title"><%= t(".title") %></h2>
 
-  <p><%= t(".description") %></p>
+        <p class="card-text"><%= t(".description") %></p>
 
-  <%= form_for :password_reset,
+        <%= form_for :password_reset,
         url: user_password_path(@user, token: @user.confirmation_token),
         html: { method: :put } do |form| %>
-    <div class="password-field">
-      <%= form.label :password %>
-      <%= form.password_field :password %>
+        <div class="form-group row">
+          <%= form.label 'New Password', class:'col-4 col-form-label text-center m-0' %>
+          <%= form.password_field :password, class:'col-6 col-form-control' %>
+        </div>
+      </div>
     </div>
-
-    <div class="submit-field">
-      <%= form.submit %>
+    <div class="card-footer">
+      <div class="submit-field">
+        <%= form.submit class: 'btn btn-danger'%>
+      </div>
     </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>

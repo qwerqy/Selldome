@@ -1,3 +1,16 @@
-<div id="clearance" class="password-reset">
-  <p><%= t(".description") %></p>
+<% content_for :navbar do %>
+  <% if signed_in? %>
+    <%= render partial: "shared/navbar" %>
+  <% else %>
+    <%= render partial: "shared/navbar-index" %>
+  <% end %>
+<% end %>
+<div class="container d-flex flex-wrap justify-content-center mt-5">
+  <div class="card w-50">
+    <div class="card-body">
+      <div id="clearance" class="password-reset">
+        <p class="card-text"><%= t(".description") %></p>
+      </div>
+    </div>
+  </div>
 </div>
