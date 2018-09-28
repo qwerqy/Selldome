@@ -1,48 +1,52 @@
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-white">
   <!-- PROFILE BOX SM -->
+  <div class="profile-box-sm">
     <a class="" id="dropdownMenuButton" data-toggle="collapse" data-target= "#account-collapse" aria-controls="account-collapse" aria-expanded="false" aria-label="Toggle navigation">
       <img class="rounded-circle" src="<%=current_user.avatar.url%>" style="width:35px;height:35px;">
     </a>
+  </div>
 
   <a class="navbar-brand font-weight-bold" href="/">Selldome</a>
 
   <%=form_tag(dome_index_path, method: :get) do %>
     <%= text_field_tag(:search, params[:search], class: "searchbox shadow-sm form-control mr-sm-2", placeholder: "Search anything...") %>
   <% end %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div id="account-collapse" class="collapse navbar-collapse">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a href="/profile/<%=current_user.id%>">Your Profile</a>
-      </li>
-      <li class="nav-item">
-        <hr/>
-      </li>
-      <li class="nav-item">
-        <a href="/profile/<%=current_user.id%>/edit">Edit Profile</a>
-      </li>
-      <li class="nav-item">
-        <a href="#">Invite Friends</a>
-      </li>
-      <li class="nav-item">
-        <a href="/users/<%=current_user.id%>/account">Account Settings</a>
-      </li>
-      <li class="nav-item">
-        <hr/>
-      </li>
-      <li class="nav-item">
-        <div id="header" class="btn ">
-          <% if signed_in? -%>
-            <%= button_to(t(".sign_out"), sign_out_path, method: :delete, class: "btn p-0 bg-transparent") %>
-          <% else -%>
-            <%= link_to t(".sign_in"), sign_in_path, class: "btn p-0" %>
-          <% end -%>
-        </div>
-      </li>
-    </ul>
+  <div class="profile-box-sm">
+    <div id="account-collapse" class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="/profile/<%=current_user.id%>">Your Profile</a>
+        </li>
+        <li class="nav-item">
+          <hr/>
+        </li>
+        <li class="nav-item">
+          <a href="/profile/<%=current_user.id%>/edit">Edit Profile</a>
+        </li>
+        <li class="nav-item">
+          <a href="#">Invite Friends</a>
+        </li>
+        <li class="nav-item">
+          <a href="/users/<%=current_user.id%>/account">Account Settings</a>
+        </li>
+        <li class="nav-item">
+          <hr/>
+        </li>
+        <li class="nav-item">
+          <div id="header" class="btn ">
+            <% if signed_in? -%>
+              <%= button_to(t(".sign_out"), sign_out_path, method: :delete, class: "btn p-0 bg-transparent") %>
+            <% else -%>
+              <%= link_to t(".sign_in"), sign_in_path, class: "btn p-0" %>
+            <% end -%>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">

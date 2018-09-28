@@ -268,11 +268,18 @@ a:hover {
   display: none;
 }
 
+.line-sm {
+  display: none;
+}
+
 // RESPONSIVENESS
 @media (max-width: 576px) {
+  // WELCOME INDEX
   #landingText h1 {
     font-size: 2.3rem!important;
   }
+
+  // SEARCHBOX
   .searchbox {
     display: none;
   }
@@ -284,6 +291,7 @@ a:hover {
     margin-right: auto;
   }
 
+  // HOME CARDS
   .flexbox-card {
     justify-content: center;
   }
@@ -319,6 +327,7 @@ a:hover {
     padding-bottom: 0.8rem;
   }
 
+  // NAVBAR
   .profile-box {
     display: none;
   }
@@ -332,5 +341,36 @@ a:hover {
     margin-right: auto;
     margin-left: auto;
 
+  }
+
+  .line-sm {
+    display: block;
+  }
+
+  .reviews-sm .col-sm-1 {
+    width: auto;
+  }
+  .reviews-sm .col-sm {
+    width: auto;
+  }
+
+  .profile-grid .col-sm-3 {
+    margin-bottom: 2rem;
+  }
+
+  .profile-grid .col-sm-3 .card {
+    margin-top: 3rem!important;
+  }
+
+  .listings-profile-box {
+    margin-bottom: 2rem;
+  }
+
+  .mb-5 h1 {
+    font-size: 30px;
+  }
+
+  .country, .country i {
+    display: none;
   }
 }
