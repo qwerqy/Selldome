@@ -52,6 +52,10 @@ Rails.application.routes.draw do
     resource :password,
       controller: "passwords",
       only: [:create, :edit, :update]
+
+    get 'account' => 'account#index', as: 'account_settings'
+    get 'account/security' => 'account#security', as: 'account_settings_security'
+    patch 'account/security/password-update' => 'account#update_password', as: 'account_settings_password_update'
   end
   get "/sign_up" => "users#new", as: "sign_up"
   get "/profile/:id" => "users#show", as: "profile"
