@@ -1,9 +1,8 @@
 <div class="container-fluid mx-0 my-4 p-0">
-  <h5 class="font-weight-bold">Homes</h5>
-  <ul class="list-inline">
+  <h5 class="flexbox-card-title font-weight-bold">Homes</h5>
+  <div class="flexbox-card d-flex flex-wrap flex-row">
     <% Listing.all.sample(5).each do |home|%>
-    <li class="list-inline-item">
-      <div id="home-card-<%=home.id%>" class="card first p-0 m-2 shadow-sm btn">
+      <div id="home-card-<%=home.id%>" class="homecard card shadow-sm">
 
 
         <!-- Carousel -->
@@ -21,13 +20,13 @@
                     <% if index == 0 %>
                         <div class="carousel-item active">
                           <div class="img-box">
-                            <%=image_tag(photo.thumb_large.url, class: 'd-block w-100', style: 'max-width: 300px; max-height: 200px;')%>
+                            <%=image_tag(photo.thumb_large.url, class: 'd-block w-100 img-fluid')%>
                           </div>
                         </div>
                     <% else %>
                         <div class="carousel-item">
                           <div class="img-box">
-                            <%=image_tag(photo.thumb_large.url, class: 'd-block w-100', style: 'max-width: 300px; max-height: 200px;')%>
+                            <%=image_tag(photo.thumb_large.url, class: 'd-block w-100 img-fluid')%>
                           </div>
                         </div>
                     <% end %>
@@ -74,7 +73,7 @@
 
           <!-- Rating -->
           <div class="rating-box mb-3">
-            <ul id="star-rating" class="list-inline">
+            <ul id="star-rating" class="list-inline d-flex justify-content-center">
               <li class="list-inline-item star"><i data-value='1' id="star-<%=home.id%>" class="tiny-font rate-star fas fa-star"></i></li>
               <li class="list-inline-item star"><i data-value='2' id="star-<%=home.id%>" class="tiny-font rate-star fas fa-star"></i></li>
               <li class="list-inline-item star"><i data-value='3' id="star-<%=home.id%>" class="tiny-font rate-star fas fa-star"></i></li>
@@ -84,7 +83,6 @@
           </div>
         <% end %>
       </div>
-    </li>
     <% end %>
-  </ul>
+  </div>
 </div>

@@ -9,7 +9,9 @@
     <%= render partial: "shared/navbar-index" %>
   <% end %>
 <% end %>
-
+<%=form_tag(dome_index_path, method: :get) do %>
+  <%= text_field_tag(:search, params[:search], class: "searchbox-sm shadow-sm form-control", placeholder: "Search anything...") %>
+<% end %>
 <div id="home-box" class="container-fluid background-keep my-5 p-0">
   <!-- Explore Selldome -->
   <%= render partial: '/home/explore'%>
