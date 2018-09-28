@@ -49,26 +49,27 @@
 
 
         <!-- Details card about listing -->
-        <div class="card-body pb-1" data-toggle='modal' data-target='#home-info-box-<%=home.id%>'>
-          <p class="card-subtitle text-muted"><%=home.property_type%></p>
-          <ul class="list-inline">
-            <li class="list-inline-item"><p class="card-title font-weight-bold mb-2"><%=home.name%></p></li>
+        <%= link_to listing_path(home.id), target: '_blank' do %>
+          <div class="card-body pb-1">
+            <p class="card-subtitle text-muted"><%=home.property_type%></p>
+            <ul class="list-inline">
+              <li class="list-inline-item"><p class="card-title font-weight-bold mb-2"><%=home.name%></p></li>
 
 
-            <!-- If home is verified, this will show -->
-            <% if home.verified %>
-            <li class="list-inline-item">
-              <i id="verified-badge-thumbnail" class="fas fa-check-circle text-success"></i>
-            </li>
-            <% end %>
-          </ul>
-          <ul class="list-inline">
-            <li class="list-inline-item"><i class="fas fa-user"></i> <%=home.guest_number%></li>
-            <li class="list-inline-item"><i class="fas fa-bed"></i> <%=home.room_number%></li>
-            <li class="list-inline-item"><i class="fas fa-bath"></i> <%=home.bathroom_number%></li>
-          </ul>
-          <p class="card-text">From <%=number_to_currency(home.price, unit: "$")%> a night</p>
-        </div>
+              <!-- If home is verified, this will show -->
+              <% if home.verified %>
+              <li class="list-inline-item">
+                <i id="verified-badge-thumbnail" class="fas fa-check-circle text-success"></i>
+              </li>
+              <% end %>
+            </ul>
+            <ul class="list-inline">
+              <li class="list-inline-item"><i class="fas fa-user"></i> <%=home.guest_number%></li>
+              <li class="list-inline-item"><i class="fas fa-bed"></i> <%=home.room_number%></li>
+              <li class="list-inline-item"><i class="fas fa-bath"></i> <%=home.bathroom_number%></li>
+            </ul>
+            <p class="card-text">From <%=number_to_currency(home.price, unit: "$")%> a night</p>
+          </div>
 
           <!-- Rating -->
           <div class="rating-box mb-3">
@@ -80,37 +81,9 @@
               <li class="list-inline-item star"><i data-value='5' id="star-<%=home.id%>" class="tiny-font rate-star far fa-star"></i></li>
             </ul>
           </div>
+        <% end %>
       </div>
     </li>
-
-    
-    <!-- Modal to access more info and link to profile-->
-    <div class="modal fade" id="home-info-box-<%=home.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle"><%=home.name%></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p><%=home.property_type%></p>
-            <p><%=home.description%></p>
-            <p><%=home.address%></p>
-            <p><%=home.state%></p>
-            <p><%=home.city%></p>
-            <p><%=home.zipcode%></p>
-            <p><%=home.country%></p>
-            <p><%=number_to_currency(home.price, unit: '$')%></p>
-            <p><%=home.user.name%></p>
-          </div>
-          <div class="modal-footer">
-            <a href="/listings/<%=home.id%>">View Details</a>
-          </div>
-        </div>
-      </div>
-    </div>
     <% end %>
   </ul>
 </div>

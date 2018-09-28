@@ -29,6 +29,7 @@
 body {
   color: #424242;
   background-color: #fafafa;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #navbar {
@@ -37,10 +38,18 @@ body {
   outline-width: medium;
 }
 
+.navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+}
+
 a {
-  text-decoration: none;
+  text-decoration: none!important;
   color: #424242;
   // font-weight: bold;
+}
+
+a:hover {
+  color: #424242!important;
 }
 
 .background-keep {
