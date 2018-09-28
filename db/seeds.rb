@@ -65,6 +65,7 @@ ActiveRecord::Base.transaction do
                         ]
 
     listing['user_id'] = uids.sample
+    listing['instant_booking'] = false
 
     Listing.create(listing)
   end

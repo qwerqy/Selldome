@@ -52,6 +52,10 @@ Rails.application.routes.draw do
     resource :password,
       controller: "passwords",
       only: [:create, :edit, :update]
+
+    get 'account' => 'account#index', as: 'account_settings'
+    get 'account/security' => 'account#security', as: 'account_settings_security'
+    patch 'account/security/password-update' => 'account#update_password', as: 'account_settings_password_update'
   end
   get "/sign_up" => "users#new", as: "sign_up"
   get "/profile/:id" => "users#show", as: "profile"
@@ -61,13 +65,14 @@ Rails.application.routes.draw do
   get "/:id/remove-photo" => "users#remove_photo", as: "user_remove_photo"
 
   # Superadmin
+  constraints Clearance::Constraints::SignedIn.new { |user| user.superadmin? } do
   get "/admin-panel" => "superadmin#index", as: "admin_panel"
   get "/all-users" => "superadmin#all_users", as: "view_users"
   get "/update-users" => "superadmin#update_users", as: "update_users"
   delete "/delete/:id" => "superadmin#destroy_user", as: "destroy_user"
   get "/update/:id" => "superadmin#edit_user", as: "edit_user"
   patch "/update/:id" => "superadmin#confirm_edit", as: "superadmin_edit_user"
-
+  end
   # Moderator
   get "/moderator-panel" => "moderator#index", as: "moderator_panel"
   get "/unverified_listings" => "moderator#unverified_listings", as: "unverified_listings"
