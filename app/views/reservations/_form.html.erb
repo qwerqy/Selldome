@@ -1,51 +1,150 @@
-<input name="dates" class="form-control my-5" value='' placeholder="Pick a Date">
-<%= form_for [@listing, Reservation.new] do |form| %>
+<div class="input-group mb-4">
+  <input id="date1" name="dates" class="form-control" value='' placeholder="Choose your dates">
+</div>
 
-  <div class="form-group">
-    <%= form.hidden_field :start_time, class: 'form-control', placeholder: 'Start' %>
+<%= form_with scope: :reservation, url: listing_review_booking_path(listing_id: @listing.id), method: :post, local: true do |form| %>
+  <div id="guestNumberBox" class="form-group">
+    <%=form.label "Guest", class: 'tiny-font text-muted'%>
+    <select class="form-control col-6" name='reservation[guest_number]' id='reservation_guest_number'>
+      <% i = 1 %>
+      <% while i <= @listing.guest_number.to_i do%>
+      <option value='<%= i %>'><%= i %></option>
+      <% i += 1 %>
+      <% end %>
+    </select>
   </div>
 
-  <div class="form-group">
-    <%= form.hidden_field :end_time, class: 'form-control', placeholder: 'End' %>
+    <%= form.hidden_field :start_time %>
 
-  </div>
+    <%= form.hidden_field :end_time %>
 
-  <hr/>
+    <%= form.hidden_field :total_bill %>
+
+
+  <ul id="bookingCalculator" class="list-group list-group-flush mb-4">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-6">
+          <div class="">
+            <p class="m-0"><span id="valuePerNight"><%=number_to_currency(@listing.price, unit: '$', precision: 0)%></span> x <span id="nights"></span> nights</p>
+          </div>
+        </div>
+        <div class="col-6 ">
+          <div class="d-flex justify-content-end">
+            <span id="totalSale"></span>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-6">
+          <div class="">
+            <p class="m-0 text-muted">Service fee</p>
+          </div>
+        </div>
+        <div class="col-6 ">
+          <div class="d-flex justify-content-end">
+            <span id="totalFee" class="text-muted"></span>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-6">
+          <div class="">
+            <h5 class="m-0">Total</h5>
+          </div>
+        </div>
+        <div class="col-6 ">
+          <div class="d-flex justify-content-end">
+            <span id="totalBook"></span>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+
   <div class="actions">
-    <%= form.submit "Book", class: "btn btn-danger px-5 mx-auto d-block"%>
+    <%= form.submit "Request a Book", class: "btn btn-danger px-5 mx-auto d-block"%>
   </div>
+
+
 <% end %>
+
 <script>
-var startDate;
-var endDate;
+$(document).ready(function(){
 
-$(function() {
+  $('#bookingCalculator').hide();
+  $('#guestNumberBox').hide();
 
-  $('input[name="dates"]').daterangepicker({
-    autoUpdateInput: false,
-    opens: 'left',
-    minDate: moment(),
-    locale: {
-          cancelLabel: 'Clear'
-      },
-    "applyButtonClasses": "btn-danger"
-  }, function(start, end, label) {
-    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-    startDate = start.format('YYYY-MM-DD');
-    endDate = end.format('YYYY-MM-DD');
+  // Ajax call to get JSON of occupied dates from the back-end. Through Reservations Controller.
+  $.ajax({
+    url: '/listings/<%=@listing.id%>/booked_dates',
+    method: 'GET',
+    dataType: 'JSON',
+    data: { listing_id: <%=@listing.id%> },
+    success: function(result){
+      var occupied_array = [];
+
+      for(i=0;i < result.start_time.length; i++){
+        occupied_array.push({ from: result.start_time[i], to: result.end_time[i] })
+      }
+      $("#date1").flatpickr({
+          mode: "range",
+          minDate: "today",
+          dateFormat: "Y-m-d",
+          disable: occupied_array
+      });
+
+      $('#events_calendar').flatpickr({
+        inline: true,
+        minDate: "today",
+        disable: occupied_array
+      })
+    }
+  })
+  // Calculator Logic. Num takes in variable number based on the price, since our price mutiplies by the number of guests.
+  function calculator(num){
+      $('#totalSale').html('$' + $('#nights').html()*num);
+      var b = $('#totalSale').html().split('').splice(1);
+      $('#totalFee').html('$' + Math.round(b.join('')*0.1));
+      var c = $('#totalFee').html().split('').splice(1);
+      $('#totalBook').html('$' + (parseInt(b.join('')) + parseInt(c.join(''))));
+      // Total bill
+      $('#reservation_total_bill').val($('#totalBook').html().split('').splice(1).join(''))
+    }
+
+  // Everytime a user inputs a new range.
+  // Dates are processed from a string into an actual readable date using momentJS.
+  // They are then being put in as values within hidden fields for submission.
+  $('#date1').change(function(){
+    var startDate = $('#date1').val().split('').splice(0, 10).join('');
+    var endDate = $('#date1').val().split('').splice(14).join('');
+    var price = $('#valuePerNight').html().split('').splice(1).join('')
+    var nights = (moment(endDate) - moment(startDate)) / (1000 * 3600 * 24)
+
     $('input[name="reservation[start_time]"]').val(startDate);
     $('input[name="reservation[end_time]"]').val(endDate);
-  });
-  $('input[name="dates"]').on('apply.daterangepicker', function(ev, picker) {
-      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-  });
+    $('#nights').html(nights)
 
-  $('input[name="dates"]').on('cancel.daterangepicker', function(ev, picker) {
-      $(this).val('');
-      $('input[name="reservation[start_time]"]').val('');
-      $('input[name="reservation[end_time]"]').val('');
-  });
-});
+    calculator(price);
 
+    $('#guestNumberBox').show();
+    $('#bookingCalculator').show();
+  })
+
+  // When the amount of guests changes.
+  $('#reservation_guest_number').change(function(){
+      var x = $('#valuePerNight').html().split('').splice(1);
+      var y = $(this).val()*x.join('');
+
+      calculator(y);
+    })
+})
 
 </script>

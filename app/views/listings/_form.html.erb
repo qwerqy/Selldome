@@ -2,16 +2,15 @@
   <%= render partial: "shared/navbar" %>
 <% end %>
 <%= form_for @listing, url: new_listing_path do |form| %>
+<!-- Name -->
 <div class="text-field form-group col-3 p-0">
   <%= form.label :name, "Name" %>
   <%= form.text_field :name, placeholder: 'What would you like to call your listing?', type: 'name', class: 'form-control' %>
-  <div class="valid-feedback">
-    Looks good!
-  </div>
 </div>
 
 <ul class="list-inline m-0">
   <li class="list-inline-item col-2 p-0">
+    <!-- Place Type -->
     <div class="field form-group">
       <%= form.label :place_type, "Choose One" %>
       <select class="form-control" name='listing[place_type]' id='listing_place_type'>
@@ -28,6 +27,7 @@
   </li>
 
   <li class="list-inline-item col-2 p-0">
+    <!-- Property Type -->
     <div class="field form-group">
       <%= form.label :property_type %>
       <%= form.select :property_type, options_for_select(['Select a property type']), { include_blank: false} , {id: 'listing_property_type', class: "form-control" } %>
@@ -37,6 +37,7 @@
 
 <ul class="list-inline m-0">
   <li class="list-inline-item">
+    <!-- Room Number -->
     <div class="field form-group">
       <%= form.label :room_number, "How many bedrooms are there?" %>
       <select class="form-control col-6" name='listing[room_number]' id='listing_room_number'>
@@ -51,6 +52,7 @@
   </li>
 
   <li class="list-inline-item">
+    <!-- Bathroom Number -->
     <div class="field form-group ml-5">
       <%= form.label :bathroom_number, "How many bathrooms are there?" %>
       <select class="form-control col-6" name='listing[bathroom_number]' id='listing_bathroom_number'>
@@ -66,6 +68,7 @@
 
 <hr/>
 
+<!-- Guest Number -->
 <div class="field form-group">
   <%= form.label :guest_number, "How many guests can stay?" %>
   <select class="form-control col-1 p-0" name='listing[guest_number]' id='listing_guest_number'>
@@ -80,6 +83,7 @@
 
 <hr/>
 
+<!-- Address -->
 <div class="field form-group col-6 p-0">
   <%= form.label :address %>
   <%= form.text_field :address, placeholder: 'Address', type: 'address', class: 'form-control' %>
@@ -87,6 +91,7 @@
 
 <ul class="list-inline m-0">
   <li class="list-inline-item col-2 p-0">
+    <!-- State -->
     <div class="field form-group">
       <%= form.label :state %>
       <%= form.text_field :state, placeholder: 'State', type: 'state', class: 'form-control' %>
@@ -94,6 +99,7 @@
   </li>
 
   <li class="list-inline-item col-2 p-0">
+    <!-- City -->
     <div class="field form-group">
       <%= form.label :city %>
       <%= form.text_field :city, placeholder: 'City', type: 'city', class: 'form-control' %>
@@ -101,12 +107,15 @@
   </li>
 
   <li class="list-inline-item col-2 p-0">
+    <!-- Zipcode -->
     <div class="field form-group">
       <%= form.label :zipcode %>
       <%= form.text_field :zipcode, placeholder: 'Zipcode', type: 'zipcode', class: 'form-control' %>
     </div>
   </li>
 </ul>
+
+<!-- Country -->
 <div class="field form-group col-2 p-0">
   <%= form.label :country %>
   <%= form.country_select :country, priority_countries = ["United States"], options = {}, html_options = {:class => "form-control", :id => "listing_country"} %>
@@ -114,22 +123,40 @@
 
 <hr/>
 
+<!-- Price -->
 <div class="text-field form-group">
   <%= form.label :price, "How much is it per stay?"%>
-  <%= form.text_field :price, placeholder: 'Price', type: 'price', class: 'form-control col-1' %>
+  <%= form.text_field :price, placeholder: 'Price', type: 'price', class: 'form-control' %>
 </div>
 
+<!-- Instant Booking -->
+<%= form.label :instant_booking, "Enable Instant Booking?"%><br/>
+<div class="form-check">
+  <%= form.radio_button :instant_booking, true %>
+  <span class="option p-3">Yes<span>
+</div>
+<div class="form-check">
+  <%= form.radio_button :instant_booking, false %>
+  <span class="option p-3">No<span>
+</div>
 
+<hr/>
+
+
+<!-- Description -->
 <div class="text-field form-group">
   <%= form.label :description, 'Tell us more about your place.' %>
   <%= form.text_area :description, placeholder: 'Describe something about your listing...', type: 'description', class: 'form-control' %>
 </div>
 
+
+<!-- Tag list -->
 <div class='text-field form-group'>
     <%= form.label :tag_list, "Anything else you would like your guests to know?"%><br/>
     <%= form.text_field :tag_list, placeholder: 'No Smoking, Pet Owner, Quiet....', type: 'tag_list', class: 'form-control' %>
 </div>
 
+<!-- Upload Photos -->
 <div class="file-field form-group">
     <%= form.label "Upload some photos of your home."%>
     <%= form.file_field :photos, multiple: true, class: 'form-control-file' %>

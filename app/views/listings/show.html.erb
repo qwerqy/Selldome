@@ -10,7 +10,7 @@
 <div class="cover-photo" style="background-image: url('<%=@listing.photos[0].url%>');">
 <%=link_to "View Photos", view_photos_path(@listing.id), remote:true, class:'view-photos btn btn-outline-light'%>
 <% else %>
-<div class="cover-photo bg-dark" style="background-image: url('assets/default-no-photos.jpg');">
+<div class="cover-photo bg-dark" style="background-image: url('/assets/default2.jpg');">
 <% end %>
 </div>
 
@@ -94,7 +94,7 @@
         <p class="font-weight-bold mt-5">Availability</p>
 
         <div id="events_calendar">
-          <%= render partial: "reservations/calendar", locals: {events: @reservations} %>
+          
         </div>
         <hr/>
         <div id="review-box">
@@ -221,7 +221,7 @@
             <h4 class="card-title font-weight-bold">$<%=@listing.price.to_i%> <span class="tiny-font">per night</span></h4>
             <hr/>
             <%= render partial: 'reservations/form', locals: {events: @reservations} %>
-            
+
           </div>
         </div>
       </div>

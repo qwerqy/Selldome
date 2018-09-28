@@ -2,11 +2,13 @@
    <%= stylesheet_link_tag "users" if controller_name == "users" %>
 </head>
 
-<div class="container" id="signUpBox">
+<%= render partial: 'shared/navbar-index'%>
+
+<div class="container px-5 py-3" id="signUpBox">
   <div id="clearance" class="sign-up">
     <h2><%= t(".title") %></h2>
 
-      <%= render partial: '/users/form', object: form %>
+      <%= render partial: '/users/form', locale: @user %>
 
   </div>
 </div>
