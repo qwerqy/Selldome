@@ -1,4 +1,5 @@
 class Listing < ApplicationRecord
+  include PgSearch
   belongs_to :user
   has_many :reviews
   has_many :reservations
@@ -13,6 +14,8 @@ class Listing < ApplicationRecord
   validates :city, presence: true
   validates :place_type, presence: true
   validates :property_type, presence: true
+
+  multisearchable :against => [:name, :country, :state, :address, :city, :place_type, :property_type, :price, :tag_list]
 
   def self.search(search)
     if search
