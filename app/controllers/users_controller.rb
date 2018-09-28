@@ -27,6 +27,7 @@ class UsersController < Clearance::UsersController
     if @user.update_attributes(user_params)
       redirect_to profile_path
     else
+      flash[:danger] = @user.errors.full_messages.to_sentence
       render :edit
     end
   end
