@@ -64,6 +64,9 @@ class UsersController < Clearance::UsersController
     password = user_params.delete(:password)
     avatar = user_params.delete(:avatar)
     about_me = user_params.delete(:about_me)
+    superadmin = user_params.delete(:superadmin)
+    moderator = user_params.delete(:moderator)
+    customer = user_params.delete(:customer)
 
     Clearance.configuration.user_model.new(user_params).tap do |user|
       user.first_name = first_name
@@ -75,6 +78,9 @@ class UsersController < Clearance::UsersController
       user.password = password
       user.avatar = avatar
       user.about_me = about_me
+      user.superadmin = superadmin
+      user.moderator = moderator
+      user.customer = customer
     end
   end
 
@@ -91,7 +97,10 @@ class UsersController < Clearance::UsersController
           :password,
           :avatar,
           :about_me,
-          :remote_avatar_url
+          :remote_avatar_url,
+          :superadmin,
+          :moderator,
+          :customer
         )
   end
 end
