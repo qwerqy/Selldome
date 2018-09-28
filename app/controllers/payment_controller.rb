@@ -25,7 +25,7 @@ class PaymentController < ApplicationController
     if result.success?
       @reservation.skip_validations = true
       @reservation.update(paid: true)
-      ReservationMailer.booking_email(@reservation.user, @listing.user, @listing.id).deliver!
+      ReservationJob.perform_later(@reservation.user, @listing.user, @listing.id)
 
       redirect_to :root, :flash => { :success => "Transaction successful!" }
     else
