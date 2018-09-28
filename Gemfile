@@ -79,8 +79,11 @@ gem 'momentjs-rails'
 # Braintree
 gem 'braintree'
 
-# Letter Opener 
+# Letter Opener
 gem "letter_opener", :group => :development
+
+# Sidekiq
+gem 'sidekiq'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
