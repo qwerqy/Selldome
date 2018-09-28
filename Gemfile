@@ -85,9 +85,6 @@ gem "letter_opener", :group => :development
 # Sidekiq
 gem 'sidekiq'
 
-# PG_SEARCH
-gem 'pg_search'
-
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
