@@ -10,7 +10,7 @@
   <% end %>
 <% end %>
 <div class="background-keep">
-  <div class="container-fluid mt-4 p-0 row">
+  <div class="edit-profile container-fluid mt-4 p-0 row">
     <div class="card col-3 p-3">
       <%= image_tag(@user.avatar.thumb_large.url, class: "shadow profile-photo-large-rounded mx-auto d-block") if @user.avatar? %>
       <div class="mx-auto d-block mt-3">
@@ -22,6 +22,26 @@
       </div>
     </div>
     <div class="card col-9 p-3">
+      <h5 class="font-weight-bold">Edit Profile</h5>
+
+      <%= render partial: '/users/form-edit'%>
+
+    </div>
+
+  </div>
+
+  <div class="edit-profile-sm container-fluid mt-4 p-0 d-flex flex-wrap flex-col">
+    <div class="card p-3 w-100 mb-2">
+      <%= image_tag(@user.avatar.thumb_large.url, class: "shadow profile-photo-large-rounded mx-auto d-block") if @user.avatar? %>
+      <div class="mx-auto d-block mt-3">
+        <% if @user.avatar? %>
+        <%=link_to "Remove Profile Photo", user_remove_photo_path(@user.id), class: "btn btn-secondary"%>
+        <% else %>
+        <%=link_to "Update Profile Photo", user_upload_photo_path(@user.id), remote: true, data: { target: '#modal-upload-photo', toggle: 'modal' },class: "btn btn-primary"%>
+        <% end %>
+      </div>
+    </div>
+    <div class="card p-3 w-100">
       <h5 class="font-weight-bold">Edit Profile</h5>
 
       <%= render partial: '/users/form-edit'%>

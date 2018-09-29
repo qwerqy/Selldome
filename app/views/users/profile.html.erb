@@ -5,9 +5,14 @@
     <%= render partial: "shared/navbar-index" %>
   <% end %>
 <% end %>
+
+<%=form_tag(dome_index_path, method: :get) do %>
+  <%= text_field_tag(:search, params[:search], class: "searchbox-sm shadow-sm form-control mb-4", placeholder: "Search anything...") %>
+<% end %>
+
 <div class="container mx-auto mt-5">
-  <div class="row">
-    <div class="col-3 ">
+  <div class="row profile-grid">
+    <div class="col-sm-3 ">
         <div class="profile-photo-large mx-auto d-block" style="background-image: url('<%=@user.avatar.url%>');"></div>
           <div class="card mt-3">
             <div class="card-header">
@@ -32,7 +37,7 @@
               </ul>
           </div>
     </div>
-    <div class="col-9">
+    <div class="col-sm-9">
 
       <div class="mb-5">
         <h1 class="m-0">Hello! I'm <%= @user.first_name %>!</h1>
@@ -46,13 +51,13 @@
         <p class=""><%= @user.about_me%></p>
       </div>
 
-      <div>
+      <div class="listings-profile-box">
         <% if @user.listings.any? %>
-        <h2 class="">Listings <span class="secondary-text text-muted">(<%=@user.listings.count%>)</span></h2>
-        <ul class="list-inline">
+        <h2 class="flexbox-card-title">Listings <span class="secondary-text text-muted">(<%=@user.listings.count%>)</span></h2>
+        <hr class="line-sm"/>
+        <div class="flexbox-card d-flex flex-wrap flex-row">
           <% @user.listings.limit(3).each do |listing| %>
             <a href="/listings/<%=listing.id%>">
-              <li class="list-inline-item">
                 <div id="list-card-<%=listing.id%>" class="card p-0 shadow-sm listing-card" style="background-image: url('<%=listing.photos[0]%>');">
                 <!-- Details -->
                   <div id="list-text-<%=listing.id%>" class="py-3 listing-card-text" >
@@ -60,7 +65,6 @@
                     <p class="m-0 text-center text-light"><%=listing.country_name%></p>
                   </div>
                 </div>
-              </li>
             </a>
               <script>
               $('#list-text-<%=listing.id%>').hide();
@@ -72,29 +76,30 @@
               })
               </script>
           <%end%>
-        </ul>
+        </div>
+        <hr class="line-sm"/>
         <%end%>
       </div>
 
       <div>
-        <h2 class="">Reviews <span class="secondary-text text-muted">(<%=Review.where(listing_id: @user.listings.ids).count%>)</span></h2>
-        <h5 class="font-weight-bold">Reviews from Guests</h5>
+        <h2 class="flexbox-card-title">Reviews <span class="secondary-text text-muted">(<%=Review.where(listing_id: @user.listings.ids).count%>)</span></h2>
+        <h5 class="font-weight-bold flexbox-card-title">Reviews from Guests</h5>
 
         <ul class="list-group list-group-flush">
           <% Review.where(listing_id: @user.listings.ids).limit(10).each do |comment| %>
           <li class="list-group-item">
-            <div class="row">
-              <div class="col-2">
+            <div class="row reviews">
+              <div class="col-lg-2">
                 <a href="/profile/<%=comment.user.id%>">
                   <div class="profile-photo m-0 p-0 mx-auto" style='background-image: url("<%=comment.user.avatar.url%>")'></div>
                   <p class="text-center text-muted report-link"><%=comment.user.first_name%></p>
                 </a>
               </div>
-              <div class="col-10 p-0">
-                <p class="mb-5"><%=comment.comment%></p>
+              <div class="col-lg-10 p-0">
+                <p class="mb-5 w-100"><%=comment.comment%></p>
                 <ul class="list-inline">
                   <li class="list-inline-item float-left">
-                    <p class="text-muted report-link">From <%=comment.user.country_name%> <i class="far fa-flag"></i></p>
+                    <p class="country text-muted report-link">From <%=comment.user.country%> <i class="far fa-flag"></i></p>
                   </li>
                   <li class="list-inline-item float-right">
                     <a href="/listings/<%=comment.listing_id%>" class="text-muted report-link"><i class="fas fa-home"></i> <%=comment.listing.name%>, <%=comment.listing.property_type%></p>
@@ -102,6 +107,27 @@
                 </ul>
               </div>
             </div>
+
+            <div class="d-flex flex-row reviews-sm align-items-center">
+              <div class="col-4">
+                <a href="/profile/<%=comment.user.id%>">
+                  <div class="profile-photo m-0 p-0 mx-auto" style='background-image: url("<%=comment.user.avatar.url%>")'></div>
+                  <p class="comment-name-thumbnail text-center text-muted report-link"><%=comment.user.first_name%></p>
+                </a>
+              </div>
+              <div class="col-8 p-0">
+                <p class="mb-5 w-100"><%=comment.comment%></p>
+                <ul class="list-inline">
+                  <li class="list-inline-item float-left">
+                    <p class="country text-muted report-link">From <%=comment.user.country%> <i class="far fa-flag"></i></p>
+                  </li>
+                  <li class="list-inline-item float-right">
+                    <a href="/listings/<%=comment.listing_id%>" class="text-muted report-link"><i class="fas fa-home"></i> <%=comment.listing.name%>, <%=comment.listing.property_type%></p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
           </li>
           <% end %>
         </ul>

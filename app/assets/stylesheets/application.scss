@@ -244,3 +244,238 @@ a:hover {
 #messages-box.dropdown-menu {
   min-width: 400px!important;
 }
+
+.searchbox-sm {
+  display: none;
+}
+
+.homecard {
+  padding: 0;
+  margin: 0.5rem;
+}
+
+.explorecard {
+  margin: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 1rem;
+}
+
+#tagContainer-sm {
+  display: none;
+}
+
+.profile-box-sm {
+  display: none;
+}
+
+.line-sm {
+  display: none;
+}
+
+#account-collapse ul {
+  display: none!important;
+}
+
+.reviews-sm {
+  display: none!important;
+}
+
+.domecard-sm {
+  display: none;
+}
+
+.profile-section-sm {
+  display: none;
+}
+
+.edit-profile-sm {
+  display: none;
+}
+
+.account-index-sm {
+  display: none;
+}
+
+#panel-box {
+  overflow-x: scroll;
+}
+
+
+
+
+
+
+// =================================================================================================
+
+// RESPONSIVENESS
+
+// =================================================================================================
+
+@media (max-width: 576px) {
+  // WELCOME INDEX
+  #landingText h1 {
+    font-size: 2.3rem!important;
+  }
+
+  // SEARCHBOX
+  .searchbox {
+    display: none;
+  }
+  .searchbox-sm {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-top: 1rem;
+    margin-right: auto;
+  }
+
+  // HOME CARDS
+  .flexbox-card {
+    justify-content: center;
+  }
+
+  .flexbox-card-title {
+    text-align: center;
+  }
+
+  .homecard {
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+
+  }
+  #scroll-box h1 {
+    font-size: 2rem!important;
+    text-align: center;
+  }
+  .icon-box {
+    display: none;
+  }
+
+  #explore-box {
+    display: none;
+  }
+
+  #tagContainer-sm {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+  }
+
+  // NAVBAR
+  .profile-box {
+    display: none;
+  }
+
+  .profile-box-sm {
+    display: block;
+  }
+
+  #account-collapse {
+    flex-basis: 100%;
+    flex-grow: 1;
+    align-items: center;
+  }
+
+  #account-collapse ul {
+    display: block!important;
+  }
+
+  #navbar .navbar-brand {
+    text-align: center!important;
+    margin-right: auto;
+    margin-left: auto;
+
+  }
+
+  .line-sm {
+    display: block;
+  }
+
+  .profile-grid .col-sm-3 {
+    margin-bottom: 2rem;
+  }
+
+  .profile-grid .col-sm-3 .card {
+    margin-top: 3rem!important;
+  }
+
+  .listings-profile-box {
+    margin-bottom: 2rem;
+  }
+
+  .mb-5 h1 {
+    font-size: 30px;
+  }
+
+  .country, .country i {
+    display: none;
+  }
+
+  #navbarDropdown ul {
+    margin-top: 1rem;
+  }
+
+  .reviews-sm {
+    display: flex!important;
+  }
+
+  .reviews {
+    display: none;
+  }
+
+  .comment-name-thumbnail {
+    margin-bottom: 0!important;
+  }
+
+  #attrBar li {
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  #attrBar ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .domecard {
+    display: none;
+  }
+
+  .domecard-sm {
+    display: block;
+    height: 150px;
+  }
+
+  .domecard-img-sm {
+    height: 150px;
+  }
+
+  .profile-section {
+    display: none;
+  }
+
+  .profile-section-sm {
+    display: block;
+  }
+
+  .edit-profile {
+    display: none;
+  }
+
+  .edit-profile-sm {
+    display: block;
+  }
+
+  .account-index {
+    display: none;
+  }
+
+  .account-index-sm {
+    display: flex!important;
+  }
+}

@@ -5,6 +5,9 @@
     <%= render partial: "shared/navbar-index" %>
   <% end %>
 <% end %>
+<%=form_tag(dome_index_path, method: :get) do %>
+  <%= text_field_tag(:search, params[:search], class: "searchbox-sm shadow-sm form-control mb-4", placeholder: "Search anything...") %>
+<% end %>
 <div class="background-keep">
   <div class="mt-5 container-fluid p-0">
     <ul class="list-inline">

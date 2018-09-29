@@ -2,47 +2,52 @@
   <%= render partial: "shared/navbar-panel" %>
 <% end %>
 
-<div class="background-keep mt-5">
-  <div class="row">
-    <div class="col-3 ">
-      <div class="card sticky-top sticky-offset">
+<div class="container-fluid mt-5 p-0">
+  <div class="d-flex flex-wrap flex-col">
+    <div class="container-fluid">
+      <div class="card ">
         <div class="card-body">
-          <h3 class="font-weight-bold">Welcome <%=current_user.name%>!</h3>
-          <hr/>
-          <h5 class="text-muted">Dashboard</h5>
-          <hr/>
-          <!-- Users -->
-          <p class="text-muted">Users</p>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <%= link_to 'View Users', view_users_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
+          <ul class="list-inline m-0">
+            <li class="list-inline-item">
+              <h3 class="m-0 font-weight-bold">Welcome <%=current_user.name%>!</h3>
             </li>
-            <li class="list-group-item">
-              <%= link_to 'Update Users', update_users_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
+            <li class="list-inline-item">
+              <h5 class="m-0 text-muted">Dashboard</h5>
             </li>
           </ul>
-          <!-- Listings -->
-          <p class="text-muted mt-3">Listings</p>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <%= link_to 'All Listings', all_listings_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
+        </div>
+      </div>
+      <div class="navbar px-0 navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler m-2" type="button" data-toggle="collapse" data-target="#list-options" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-angle-down"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="list-options">
+          <ul class="list-inline m-0">
+            <li class="list-inline-item">
+              <%= link_to 'View Users', view_users_path, remote: true, data: { target: '#panel-box' }, class: 'text-light p-2' %>
             </li>
-            <li class="list-group-item">
-              <%= link_to 'Unverified Listings', unverified_listings_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
+            <li class="list-inline-item">
+              <%= link_to 'Update Users', update_users_path, remote: true, data: { target: '#panel-box' }, class: 'text-light p-2' %>
             </li>
-            <li class="list-group-item">
-              <%= link_to 'Verified Listing', verified_listings_path, remote: true, data: { target: '#panel-box' }, class: 'btn-link' %>
+            <!-- Listings -->
+            <li class="list-inline-item">
+              <%= link_to 'All Listings', all_listings_path, remote: true, data: { target: '#panel-box' }, class: 'text-light p-2' %>
             </li>
-            <li class="list-group-item">
-              <a id="comments" class="text-muted">Comments</a>
+            <li class="list-inline-item">
+              <%= link_to 'Unverified Listings', unverified_listings_path, remote: true, data: { target: '#panel-box' }, class: 'text-light p-2' %>
+            </li>
+            <li class="list-inline-item">
+              <%= link_to 'Verified Listing', verified_listings_path, remote: true, data: { target: '#panel-box' }, class: 'text-light p-2' %>
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="col-9">
+    <div class="container-fluid">
       <div class="card">
         <div id="panel-box" class="card-body">
+          <p class="text-muted m-0">Choose a list.</p>
         </div>
       </div>
     </div>

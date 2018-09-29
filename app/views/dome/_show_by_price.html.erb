@@ -1,8 +1,7 @@
 <div id="listings">
-  <ul class="list-inline">
+  <div class="flexbox-card d-flex flex-wrap flex-row">
     <% @price.page(params[:page]).each do |home|%>
-    <li class="list-inline-item">
-      <div id="home-card-<%=home.id%>" class="card first p-0 m-2 shadow-sm btn">
+      <div id="home-card-<%=home.id%>" class="domecard card first p-0 m-2 shadow-sm btn">
 
 
         <!-- Carousel -->
@@ -83,10 +82,60 @@
           </div>
         <% end %>
       </div>
-    </li>
+
+      <div id="home-card-<%=home.id%>" class="domecard-sm card p-0 m-2 shadow-sm btn w-100">
+
+        <!-- Details card about listing -->
+        <%= link_to listing_path(home.id), target: '_blank' do %>
+        <div class="row ml-0">
+              <!-- If listing has photos -->
+              <% if home.photos? == true %>
+              <div class="domecard-img-sm col-4" style="background-image: url(<%=home.photos[0].thumb_large.url%>); background-position: center; background-size: cover;">
+              </div>
+
+              <!-- If listing has no photos -->
+              <% else %>
+                <%=image_tag('default2.jpg', class: 'd-block img-fluid w-100')%>
+              <% end %>
+
+            <div class="card-body p-2 col-8">
+              <p class="card-subtitle text-muted"><%=home.property_type%></p>
+              <ul class="list-inline mb-1">
+                <li class="list-inline-item"><p class="card-title font-weight-bold mb-2"><%=home.name%></p></li>
+
+
+                <!-- If home is verified, this will show -->
+                <% if home.verified %>
+                <li class="list-inline-item">
+                  <i id="verified-badge-thumbnail" class="fas fa-check-circle text-success"></i>
+                </li>
+                <% end %>
+              </ul>
+              <ul class="list-inline mb-1">
+                <li class="list-inline-item"><i class="fas fa-user"></i> <%=home.guest_number%></li>
+                <li class="list-inline-item"><i class="fas fa-bed"></i> <%=home.room_number%></li>
+                <li class="list-inline-item"><i class="fas fa-bath"></i> <%=home.bathroom_number%></li>
+              </ul>
+              <p class="card-text m-0">From <%=number_to_currency(home.price, unit: "$")%> a night</p>
+              <!-- Rating -->
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline m-0">
+                  <li class="list-inline-item star"><i data-value='1' id="star-<%=home.id%>" class="tiny-font rate-star fas fa-star"></i></li>
+                  <li class="list-inline-item star"><i data-value='2' id="star-<%=home.id%>" class="tiny-font rate-star fas fa-star"></i></li>
+                  <li class="list-inline-item star"><i data-value='3' id="star-<%=home.id%>" class="tiny-font rate-star fas fa-star"></i></li>
+                  <li class="list-inline-item star"><i data-value='4' id="star-<%=home.id%>" class="tiny-font rate-star far fa-star"></i></li>
+                  <li class="list-inline-item star"><i data-value='5' id="star-<%=home.id%>" class="tiny-font rate-star far fa-star"></i></li>
+                </ul>
+              </div>
+            </div>
+
+
+          </div>
+        <% end %>
+      </div>
     <% end %>
-  </ul>
+  </div>
 </div>
-<div class="nav-link mx-auto d-block">
+<div class="nav-link d-flex flex-row justify-content-center">
 <%= paginate @pagination %>
 </div>

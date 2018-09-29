@@ -15,7 +15,10 @@ class Listing < ApplicationRecord
   validates :place_type, presence: true
   validates :property_type, presence: true
 
-  multisearchable :against => [:name, :country, :state, :address, :city, :place_type, :property_type, :price, :tag_list]
+  multisearchable :against => [:name, :country, :state, :address, :city, :place_type, :property_type, :price, :tag_list], using: [:tsearch, :trigram, :dmetaphone]
+
+  pg_search_scope :search_by_name, :against => :name,
+    using: [:tsearch]
 
   def self.search(search)
     if search
