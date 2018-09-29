@@ -6,9 +6,8 @@ class ReviewController < ApplicationController
 
   def create
     @listing = Listing.find(params[:listing_id])
-    @review = Review.new(review_params)
-    @review.user_id = current_user.id
-    @review.listing_id = @listing.id
+    @review = @listing.reviews.build(review_params)
+    @review.user = current_user
     if @review.save
       flash[:success] = "Thank you for the review!"
       redirect_back(fallback_location: root_path)

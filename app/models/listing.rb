@@ -1,6 +1,7 @@
 class Listing < ApplicationRecord
   include PgSearch
   belongs_to :user
+  delegate :id, :avatar, :first_name, :last_name, :birthday, :email, :phone, :country, :gender, :about_me, to: :user, prefix: true
   has_many :reviews
   has_many :reservations
 
@@ -82,10 +83,6 @@ class Listing < ApplicationRecord
     all_title = ["Look for more Homes","One does not stay for one night!","Who needs a house, when you selldome live in one!","Browse for More!"]
   end
 
-  def self.all_attr
-    all_attr = ["Dates","Guests", "Home Type", "Price", "Instant Book", "More filters"]
-  end
-
   def self.verified?(data)
     if data == true
       "Yes"
@@ -99,6 +96,22 @@ class Listing < ApplicationRecord
      full_country.translations[I18n.locale.to_s] || full_country.name
   end
 
+  def property_from_place_type
+    place = params[:place_type]
+    if place == '1'
+      @property_type = ["Apartment", "Condominium", "Casa particular (Cuba)", "Loft", "Serviced Apartment"]
+    elsif place == '2'
+      @property_type = ["House", "Bungalow", "Cabin", "Casa particular (Cuba)", "Chalet", "Cottage", "Cycladic House", "Dammuso (Italy)", "Dome House", "Earth House", "Farmstay", "Houseboat", "Hut", "Lighthouse", "Pension (South Korea)", "Shepherd's Hut (UK, France)", "Tiny House", "Townhouse", "Trullo (Italy)", "Villa"]
+    elsif place == '3'
+      @property_type = ["Guesthouse","Guest Suite","Farmstay"]
+    elsif place == '4'
+      @property_type = ["Barn", "Boat", "Bus", "Camper/RV", "Campsite", "Castle", "Cave", "Dome House", "Earth House", "Farmstay", "Hut", "Igloo, Island", "Lighthouse", "Pension (South Korea)", "Plane", "Shepherd's Hut (UK, France)", "Tent", "Tinyhouse", "Tipi", "Train", "Treehouse", "Windmill", "Yurt"]
+    elsif place == '5'
+      @property_type = ["Boutique Hotel", "Aparthotel", "Heritage Hotel (India)", "Hostel", "Hotel", "Natural Lodge", "Resort", "Serviced Apartment"]
+    end
+    render json: {property_type: @property_type}
+  end
+  
 private
 
   def remove_image_at_index(index)

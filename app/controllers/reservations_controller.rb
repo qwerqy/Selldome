@@ -25,9 +25,8 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     @listing = Listing.find(params[:listing_id])
-    @reservation = Reservation.new(reservation_params)
-    @reservation.user_id = current_user.id
-    @reservation.listing_id = @listing.id
+    @reservation = @listing.reservations.build(reservation_params)
+    @reservation.user = current_user
     if @reservation.save
       flash[:success] = "You have placed a booking!"
       redirect_back(fallback_location: root_path)
@@ -63,11 +62,9 @@ class ReservationsController < ApplicationController
   end
 
   def review_booking
-    @reservation = Reservation.new(reservation_params)
     @listing = Listing.find(params[:listing_id])
-    @reservation.user_id = current_user.id
-    @reservation.listing_id = @listing.id
-    @reservation.paid = false
+    @reservation = @listing.reservations.build(reservation_params)
+    @reservation.user = current_user
     if @reservation.save
       respond_to do |format|
         format.html
@@ -92,7 +89,6 @@ class ReservationsController < ApplicationController
     render :json => {start_time: start_time, end_time: end_time}
 
   end
-  
   private
     # Use callbacks to share common setup or constraints between actions.
 

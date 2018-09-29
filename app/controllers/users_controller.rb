@@ -10,13 +10,12 @@ class UsersController < Clearance::UsersController
 
   def show
     @user = User.find(params[:id])
-    render template: 'users/profile'
+    render 'users/profile'
   end
 
   def edit
     if current_user
       @user = User.find(params[:id])
-      render template: 'users/edit'
     else
       redirect_to root_path
     end
@@ -34,7 +33,7 @@ class UsersController < Clearance::UsersController
 
   def upload_photo
     @user = User.find(params[:id])
-    render template: 'users/upload-profile-photo'
+    render 'users/upload-profile-photo'
     respond_to do |format|
       format.js
     end
@@ -100,7 +99,9 @@ class UsersController < Clearance::UsersController
           :remote_avatar_url,
           :superadmin,
           :moderator,
-          :customer
+          :customer,
+          :review_ids => [],
+          :listing_ids => []
         )
   end
 end

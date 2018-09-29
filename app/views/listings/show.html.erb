@@ -296,15 +296,17 @@
             </ul>
             <p id="rate-text" class="text-center text-muted m-0"><%=@listing.reviews.count%> people has left a review.</p>
           </div>
-          <%= form_for [@listing, Review.new] do |f|%>
-            <%= f.hidden_field :rating%>
-            <div class="form-group">
-              <%= f.label "Comment", class: 'text-weight-bold'%>
-              <%= f.text_area :comment, class: 'form-control'%>
-            </div>
-            <div class="form-group">
-              <%= f.submit "Leave A Review", class: 'btn btn-secondary'%>
-            </div>
+          <%= form_for @listing, method: 'POST' do |f|%>
+            <%= f.fields_for @review do |p| %>
+              <%= p.hidden_field :rating%>
+                <div class="form-group">
+                  <%= p.label "Comment", class: 'text-weight-bold'%>
+                  <%= p.text_area :comment, class: 'form-control'%>
+                </div>
+              <% end %>
+              <div class="form-group">
+                <%= f.submit "Leave A Review", class: 'btn btn-secondary'%>
+              </div>
           <% end %>
         </div>
 

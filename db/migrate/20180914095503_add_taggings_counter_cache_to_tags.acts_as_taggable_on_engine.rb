@@ -7,10 +7,12 @@ end
 AddTaggingsCounterCacheToTags.class_eval do
   def self.up
     add_column :tags, :taggings_count, :integer, default: 0
-
-    ActsAsTaggableOn::Tag.reset_column_information
-    ActsAsTaggableOn::Tag.find_each do |tag|
-      ActsAsTaggableOn::Tag.reset_counters(tag.id, :taggings)
+    say_with_time("Initialize tag for ActsAsTaggableOn") do
+      ActsAsTaggableOn::Tag.reset_column_information
+      ActsAsTaggableOn::Tag.find_each do |tag|
+        ActsAsTaggableOn::Tag.reset_counters(tag.id, :taggings)
+        say(tag.id + " was updated.")
+      end
     end
   end
 

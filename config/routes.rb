@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   # Listings Routes
   resources :listings, controller: "listings", only: [:create, :show, :update] do
     # Review Route
-    resources :reviews, controller: "review"
+    resources :reviews, controller: "review", only: [:new, :create]
     get 'booked_dates' => 'reservations#booked_dates'
     # Reservations Route
     post 'reservations/review_booking', as: 'review_booking'
@@ -42,15 +42,14 @@ Rails.application.routes.draw do
   delete '/listings/:id/remove-photo/:index' => "listings#remove_photo", as: "listing_remove_photo"
   get '/listings/:id/view-photos' => "listings#view_photos", as: "view_photos"
 
-
-  # Password Route
-  resources :passwords, controller: "passwords", only: [:create, :new]
+  get '/forgot-password' => 'passwords#new', as: 'forgot_password'
+  resources :password, controller: "passwords", only: [:create]
 
   # Users Routes
   resources :users, controller: "users", only: [:create] do
     resource :password,
       controller: "passwords",
-      only: [:create, :edit, :update]
+      only: [:edit, :update]
 
     get 'account' => 'account#index', as: 'account_settings'
     get 'account/security' => 'account#security', as: 'account_settings_security'

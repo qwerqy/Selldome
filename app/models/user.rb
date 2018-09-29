@@ -1,5 +1,10 @@
 class User < ApplicationRecord
   include Clearance::User
+  has_many :authentications, dependent: :destroy
+  has_many :listings, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :reservations, dependent: :destroy
+  delegate :url, to: :avatar, prefix: true
   require 'carrierwave/orm/activerecord'
   mount_uploader :avatar, AvatarUploader
 
@@ -11,10 +16,6 @@ class User < ApplicationRecord
     }
   }
 
-  has_many :authentications, dependent: :destroy
-  has_many :listings, dependent: :destroy
-  has_many :reviews, dependent: :destroy
-  has_many :reservations, dependent: :destroy
 
   validates :password, presence: true, length: { minimum: 8, too_short: "Your password is too short!" }
 

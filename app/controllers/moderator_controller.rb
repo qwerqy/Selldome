@@ -5,7 +5,6 @@ class ModeratorController < ApplicationController
   def index
     if current_user.moderator? || current_user.superadmin?
       @listing = Listing.order(:name).page params[:page]
-      render template: 'moderator/index'
       respond_to do |format|
         format.html
         format.js

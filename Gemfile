@@ -88,6 +88,9 @@ gem 'sidekiq'
 # PG_SEARCH
 gem 'pg_search'
 
+# RBP
+gem 'rails_best_practices'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

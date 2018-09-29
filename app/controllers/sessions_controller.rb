@@ -1,5 +1,4 @@
 class SessionsController < Clearance::SessionsController
-  
   def create_from_omniauth
     auth_hash = request.env["omniauth.auth"]
     authentication = Authentication.find_by_provider_and_uid(auth_hash["provider"], auth_hash["uid"]) ||  Authentication.create_with_omniauth(auth_hash)
@@ -35,22 +34,12 @@ class SessionsController < Clearance::SessionsController
     sign_in(@user) do |status|
       if status.success?
         flash[:success] = "Welcome Back #{@user.name}!"
-        if @user.superadmin?
-          redirect_back_or admin_panel_path
-        elsif @user.moderator?
-          redirect_back_or moderator_panel_path
-        elsif @user.customer?
-          redirect_back_or url_after_create
-        end
+        redirect_to root_url
       else
         flash[:danger] = "Incorrect Login Details!"
         redirect_to root_url
       end
     end
-  end
-
-  def url_after_destroy
-    root_url
   end
 
 end

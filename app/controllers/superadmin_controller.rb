@@ -3,7 +3,7 @@ class SuperadminController < ApplicationController
 
     def index
       if current_user.superadmin?
-        render template: 'superadmin/index'
+        render 'superadmin/index'
       else
         flash[:danger] = "You have no access!"
         redirect_to root_path

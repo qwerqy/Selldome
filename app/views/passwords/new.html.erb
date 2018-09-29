@@ -13,7 +13,7 @@
 
         <p class="card-text"><%= t(".description") %></p>
 
-        <%= form_for :password, url: passwords_path do |form| %>
+        <%= form_for :password, url: password_index_path do |form| %>
           <div class="text-field form-group row">
             <%= form.label "Email", class: 'col-2 col-form-label'%>
             <%= form.text_field :email, type: 'email', class: 'col-6 col-form-control' %>
