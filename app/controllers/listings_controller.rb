@@ -12,6 +12,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
+    @review = @listing.reviews.build
     @reservations = Reservation.where(listing_id: params[:id])
     respond_to do |format|
       format.html
@@ -130,7 +131,8 @@ class ListingsController < ApplicationController
       :tag_list,
       :verified,
       {photos: []},
-      :instant_booking
+      :instant_booking,
+      review_attributes: [:id, :rating, :comment, :user_id]
     )
   end
 end

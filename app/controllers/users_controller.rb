@@ -100,7 +100,9 @@ class UsersController < Clearance::UsersController
           :remote_avatar_url,
           :superadmin,
           :moderator,
-          :customer
+          :customer,
+          :review_ids => [],
+          :listing_ids => []
         )
   end
 end
