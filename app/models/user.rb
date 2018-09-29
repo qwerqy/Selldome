@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :listings, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :reservations, dependent: :destroy
+  delegate :url, to: :avatar, prefix: true
 
   validates :password, presence: true, length: { minimum: 8, too_short: "Your password is too short!" }
 

@@ -1,6 +1,7 @@
 class Listing < ApplicationRecord
   include PgSearch
   belongs_to :user
+  delegate :id, :avatar, :first_name, :last_name, :birthday, :email, :phone, :country, :gender, :about_me, to: :user, prefix: true
   has_many :reviews
   has_many :reservations
 
