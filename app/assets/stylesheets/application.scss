@@ -288,6 +288,10 @@ a:hover {
   display: none;
 }
 
+.edit-profile-sm {
+  display: none;
+}
+
 // RESPONSIVENESS
 @media (max-width: 576px) {
   // WELCOME INDEX
@@ -438,6 +442,14 @@ a:hover {
   }
 
   .profile-section-sm {
+    display: block;
+  }
+
+  .edit-profile {
+    display: none;
+  }
+
+  .edit-profile-sm {
     display: block;
   }
 }
