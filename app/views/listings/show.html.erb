@@ -299,11 +299,10 @@
           <%= form_for @listing, method: 'POST' do |f|%>
             <%= f.fields_for @review do |p| %>
               <%= p.hidden_field :rating%>
-              <div class="form-group">
-                <%= p.label "Comment", class: 'text-weight-bold'%>
-                <%= p.text_area :comment, class: 'form-control'%>
-              </div>
-                <%= p.hidden_field :user_id, value: current_user.id %> 
+                <div class="form-group">
+                  <%= p.label "Comment", class: 'text-weight-bold'%>
+                  <%= p.text_area :comment, class: 'form-control'%>
+                </div>
               <% end %>
               <div class="form-group">
                 <%= f.submit "Leave A Review", class: 'btn btn-secondary'%>
