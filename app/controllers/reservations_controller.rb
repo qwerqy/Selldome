@@ -92,7 +92,6 @@ class ReservationsController < ApplicationController
     render :json => {start_time: start_time, end_time: end_time}
 
   end
-  
   private
     # Use callbacks to share common setup or constraints between actions.
 
