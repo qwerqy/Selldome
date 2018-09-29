@@ -34,13 +34,7 @@ class SessionsController < Clearance::SessionsController
     sign_in(@user) do |status|
       if status.success?
         flash[:success] = "Welcome Back #{@user.name}!"
-        if @user.superadmin?
-          redirect_back_or admin_panel_path
-        elsif @user.moderator?
-          redirect_back_or moderator_panel_path
-        elsif @user.customer?
-          redirect_back_or url_after_create
-        end
+        redirect_to root_url
       else
         flash[:danger] = "Incorrect Login Details!"
         redirect_to root_url
