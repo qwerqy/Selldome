@@ -272,6 +272,14 @@ a:hover {
   display: none;
 }
 
+#account-collapse ul {
+  display: none!important;
+}
+
+.reviews-sm {
+  display: none!important;
+}
+
 // RESPONSIVENESS
 @media (max-width: 576px) {
   // WELCOME INDEX
@@ -336,6 +344,16 @@ a:hover {
     display: block;
   }
 
+  #account-collapse {
+    flex-basis: 100%;
+    flex-grow: 1;
+    align-items: center;
+  }
+
+  #account-collapse ul {
+    display: block!important;
+  }
+
   #navbar .navbar-brand {
     text-align: center!important;
     margin-right: auto;
@@ -345,13 +363,6 @@ a:hover {
 
   .line-sm {
     display: block;
-  }
-
-  .reviews-sm .col-sm-1 {
-    width: auto;
-  }
-  .reviews-sm .col-sm {
-    width: auto;
   }
 
   .profile-grid .col-sm-3 {
@@ -372,5 +383,21 @@ a:hover {
 
   .country, .country i {
     display: none;
+  }
+
+  #navbarDropdown ul {
+    margin-top: 1rem;
+  }
+
+  .reviews-sm {
+    display: flex!important;
+  }
+
+  .reviews {
+    display: none;
+  }
+
+  .comment-name-thumbnail {
+    margin-bottom: 0!important;
   }
 }
