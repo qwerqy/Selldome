@@ -3,19 +3,19 @@
   <div class="card-body">
     <%=form_for @user, url: user_account_settings_password_update_path(@user.id), method: :patch do |f| %>
       <div class="password-field form-group row">
-        <%= f.label 'Old Password', class: 'col-3 col-form-label'%>
+        <%= f.label 'Old Password', class: 'col-lg-4 col-form-label'%>
         <div class="col">
           <%= f.password_field :old_password, class: 'form-control' %>
         </div>
       </div>
       <div class="password-field form-group row">
-        <%= f.label :new_password, class: 'col-3 col-form-label'%>
+        <%= f.label :new_password, class: 'col-lg-4 col-form-label'%>
         <div class="col">
           <%= f.password_field :new_password, class: 'form-control' %>
         </div>
       </div>
       <div class="password-field form-group row">
-        <%= f.label "Confirm Password", class: 'col-3 col-form-label'%>
+        <%= f.label "Confirm Password", class: 'col-lg-4 col-form-label'%>
         <div class="col">
           <%= f.password_field :confirm_password, class: 'form-control' %>
         </div>

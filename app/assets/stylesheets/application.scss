@@ -292,6 +292,10 @@ a:hover {
   display: none;
 }
 
+.account-index-sm {
+  display: none;
+}
+
 // RESPONSIVENESS
 @media (max-width: 576px) {
   // WELCOME INDEX
@@ -451,5 +455,13 @@ a:hover {
 
   .edit-profile-sm {
     display: block;
+  }
+
+  .account-index {
+    display: none;
+  }
+
+  .account-index-sm {
+    display: flex!important;
   }
 }
