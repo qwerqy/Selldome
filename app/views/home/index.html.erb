@@ -23,17 +23,8 @@
   <%= render partial: '/home/top-rated-homes'%>
 </div>
 
-
-
-<script>
-$(window).scroll(function() {
-  if($(window).scrollTop() + $(window).height() == $(document).height()) {
-    $.ajax({
-      url: "/home/load"
-    })
-    .done(function(data){
-      $('#home-box').append(data);
-    })
-  }
-});
-</script>
+<div class="d-flex justify-content-center">
+  <%=link_to home_path, remote: true do %>
+    <i class="display-4 text-danger fas fa-angle-down"></i>
+  <%end%>
+</div>
