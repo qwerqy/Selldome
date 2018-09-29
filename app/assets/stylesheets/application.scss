@@ -284,6 +284,10 @@ a:hover {
   display: none;
 }
 
+.profile-section-sm {
+  display: none;
+}
+
 // RESPONSIVENESS
 @media (max-width: 576px) {
   // WELCOME INDEX
@@ -427,5 +431,13 @@ a:hover {
 
   .domecard-img-sm {
     height: 150px;
+  }
+
+  .profile-section {
+    display: none;
+  }
+
+  .profile-section-sm {
+    display: block;
   }
 }

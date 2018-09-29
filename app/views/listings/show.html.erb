@@ -45,9 +45,11 @@
   </div>
 </div>
 <% end %>
+
+
 <div class="container mx-auto d-block">
   <div class="container-fluid p-0 mt-5">
-    <div class="row">
+    <div class="profile-section row">
       <div class="col-8">
         <div class="row">
           <div class="col">
@@ -94,7 +96,7 @@
         <p class="font-weight-bold mt-5">Availability</p>
 
         <div id="events_calendar">
-          
+
         </div>
         <hr/>
         <div id="review-box">
@@ -225,6 +227,176 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="profile-section-sm w-100">
+          <div class="col">
+            <div class="d-flex justify-content-center">
+              <h1 class="font-weight-bold mb-0 mr-1"><%=@listing.name%></h1>
+              <% if @listing.verified %>
+                <p id="verified-text" class=""><i id="verified-badge" class="fas fa-check-circle text-success"></i> Verified Listing</p>
+              <% end %>
+            </div>
+            <p class="text-center text-muted p-0"><%=@listing.property_type%></p>
+            <p class="text-center text-muted"><%=@listing.state%></p>
+            <ul class="inline-item p-0 d-flex justify-content-center">
+              <li class="list-inline-item"><i class="fas fa-user"></i> <%=@listing.guest_number%> guests</li>
+              <li class="list-inline-item mx-3"><i class="fas fa-bed"></i> <%=@listing.room_number%> Bedrooms</li>
+              <li class="list-inline-item"><i class="fas fa-bath"></i> <%=@listing.bathroom_number%> Bathrooms</li>
+            </ul>
+          </div>
+          <div class="col mt-5">
+            <a href="/profile/<%=@listing.user_id%>"><div class="profile-photo mx-auto" style= "background-image: url('<%=@listing.user.avatar.url%>');"></div></a>
+            <p class="text-muted text-center mt-1"><%=@listing.user.name%></p>
+          </div>
+
+        <div class="card my-5">
+          <div class="card-body">
+            <p class="card-title text-muted">Home Hightlights</p>
+            <ul class="list-inline m-0">
+            <%@listing.tag_list.each do |tag|%>
+              <li class="list-inline-item"><p class="card-text btn btn-outline-secondary"><%=tag%></p></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+
+        <div id="description" class="collapse" aria-labelledby="description" data-parent="#description">
+            <p><%=@listing.description%></p><a role="button" class="collapsed" data-toggle="collapse" href="#collapseExample"
+         aria-expanded="false" aria-controls="collapseExample"></a>
+        </div>
+        <button id="view-more" class="btn btn-link p-0 my-2 font-weight-bold" data-toggle='collapse' data-target='#description' aria-expanded='true' aria-controls= 'description'>
+          Read more about this space.
+        </button></br>
+        <a href="" class="btn btn-link p-0 font-weight-bold text-dark my-4">Contact Host</a>
+        <hr/>
+        <p class="font-weight-bold mt-5">Availability</p>
+
+        <div class="card">
+          <div class="card-body ">
+            <h4 class="card-title font-weight-bold">$<%=@listing.price.to_i%> <span class="tiny-font">per night</span></h4>
+            <hr/>
+            <%= render partial: 'reservations/form-sm', locals: {events: @reservations} %>
+          </div>
+        </div>
+        <hr/>
+        <div id="review-box">
+          <% if @listing.reviews.any? %>
+          <h3 class="text-center font-weight-bold"><%=@listing.reviews.count%> Reviews</h3>
+          <% else %>
+          <h3 class="text-center font-weight-bold">No Reviews yet.</h3>
+          <% end %>
+          <div class="rating-box my-4">
+            <ul id="star-rating" class="d-flex justify-content-center list-inline">
+              <li class="list-inline-item star"><i data-value='1' id="star-<%=@listing.id%>" class="rate-star far fa-star"></i></li>
+              <li class="list-inline-item star"><i data-value='2' id="star-<%=@listing.id%>" class="rate-star far fa-star"></i></li>
+              <li class="list-inline-item star"><i data-value='3' id="star-<%=@listing.id%>" class="rate-star far fa-star"></i></li>
+              <li class="list-inline-item star"><i data-value='4' id="star-<%=@listing.id%>" class="rate-star far fa-star"></i></li>
+              <li class="list-inline-item star"><i data-value='5' id="star-<%=@listing.id%>" class="rate-star far fa-star"></i></li>
+            </ul>
+            <p id="rate-text" class="text-center text-muted m-0"><%=@listing.reviews.count%> people has left a review.</p>
+          </div>
+          <%= form_for [@listing, Review.new] do |f|%>
+            <%= f.hidden_field :rating%>
+            <div class="form-group">
+              <%= f.label "Comment", class: 'text-weight-bold'%>
+              <%= f.text_area :comment, class: 'form-control'%>
+            </div>
+            <div class="form-group">
+              <%= f.submit "Leave A Review", class: 'btn btn-secondary'%>
+            </div>
+          <% end %>
+        </div>
+
+
+
+
+        <hr/>
+
+        <% @listing.reviews.all.limit(10).each do |comment| %>
+        <div class="card p-3">
+          <div class="d-flex flex-row">
+            <div class="mr-3">
+              <a href="/profile/<%=comment.user_id%>"><div class="profile-thumbnail m-0 p-0 " style='background-image: url("<%=comment.user.avatar.url%>")'></div></a>
+            </div>
+            <div>
+              <p class="font-weight-bold m-0 align-top"><%=comment.user.name%></p>
+              <p class="text-muted m-0 align-top"><%=Time.now.strftime("%B %Y")%></p>
+              <% if comment.rating == 0 %>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                </ul>
+              </div>
+
+              <% elsif comment.rating == 1 %>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                </ul>
+              </div>
+
+              <% elsif comment.rating == 2 %>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                </ul>
+              </div>
+
+              <% elsif comment.rating == 3 %>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                </ul>
+              </div>
+
+              <% elsif comment.rating == 4 %>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                </ul>
+              </div>
+
+              <% elsif comment.rating == 5 %>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font rate-star fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font rate-star fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font rate-star fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font rate-star fas fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font rate-star fas fa-star"></i></li>
+                </ul>
+              </div>
+              <% end %>
+            </div>
+          </div>
+          <hr/>
+          <p class=""><%=comment.comment%></p>
+        </div>
+        <hr/>
+      <% end %>
+
+
     </div>
   </div>
 </div>

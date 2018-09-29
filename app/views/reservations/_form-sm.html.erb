@@ -1,5 +1,5 @@
 <div class="input-group mb-4">
-  <input name="dates" class="date1 form-control" value='' placeholder="Choose your dates">
+  <input name="dates" class="date1-sm form-control" value='' placeholder="Choose your dates">
 </div>
 
 <%= form_with scope: :reservation, url: listing_review_booking_path(listing_id: @listing.id), method: :post, local: true do |form| %>
@@ -94,7 +94,7 @@ $(document).ready(function(){
       for(i=0;i < result.start_time.length; i++){
         occupied_array.push({ from: result.start_time[i], to: result.end_time[i] })
       }
-      $(".date1").flatpickr({
+      $(".date1-sm").flatpickr({
           mode: "range",
           minDate: "today",
           dateFormat: "Y-m-d",
@@ -122,9 +122,9 @@ $(document).ready(function(){
   // Everytime a user inputs a new range.
   // Dates are processed from a string into an actual readable date using momentJS.
   // They are then being put in as values within hidden fields for submission.
-  $('.date1').change(function(){
-    var startDate = $('.date1').val().split('').splice(0, 10).join('');
-    var endDate = $('.date1').val().split('').splice(14).join('');
+  $('.date1-sm').change(function(){
+    var startDate = $('.date1-sm').val().split('').splice(0, 10).join('');
+    var endDate = $('.date1-sm').val().split('').splice(14).join('');
     var price = $('.valuePerNight').html().split('').splice(1).join('')
     var nights = (moment(endDate) - moment(startDate)) / (1000 * 3600 * 24)
 
