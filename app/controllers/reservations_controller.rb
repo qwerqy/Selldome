@@ -62,10 +62,6 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def test
-    render template: 'reservations/review_booking'
-  end
-
   def review_booking
     @reservation = Reservation.new(reservation_params)
     @listing = Listing.find(params[:listing_id])
@@ -96,12 +92,7 @@ class ReservationsController < ApplicationController
     render :json => {start_time: start_time, end_time: end_time}
 
   end
-
-  def construction
-    @listing = Listing.find(7)
-    @reservation = Reservation.find(1)
-    render template: "reservations/review_booking_construction"
-  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
 

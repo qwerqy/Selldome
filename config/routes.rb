@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get '/construction' => "reservations#construction"
   get 'welcome/index'
   root 'welcome#index'
 
