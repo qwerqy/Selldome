@@ -280,6 +280,10 @@ a:hover {
   display: none!important;
 }
 
+.domecard-sm {
+  display: none;
+}
+
 // RESPONSIVENESS
 @media (max-width: 576px) {
   // WELCOME INDEX
@@ -399,5 +403,29 @@ a:hover {
 
   .comment-name-thumbnail {
     margin-bottom: 0!important;
+  }
+
+  #attrBar li {
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  #attrBar ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .domecard {
+    display: none;
+  }
+
+  .domecard-sm {
+    display: block;
+    height: 150px;
+  }
+
+  .domecard-img-sm {
+    height: 150px;
   }
 }
