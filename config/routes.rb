@@ -71,6 +71,7 @@ Rails.application.routes.draw do
   delete "/delete/:id" => "superadmin#destroy_user", as: "destroy_user"
   get "/update/:id" => "superadmin#edit_user", as: "edit_user"
   patch "/update/:id" => "superadmin#confirm_edit", as: "superadmin_edit_user"
+  get "/admin/search" => "superadmin#search", as: "search_user"
   end
   # Moderator
   get "/moderator-panel" => "moderator#index", as: "moderator_panel"
@@ -82,6 +83,7 @@ Rails.application.routes.draw do
   get "/moderator-edit-listing/:id" => "moderator#edit_listing", as: "moderator_edit_listing"
   get "/moderator-delete-listing/:id" => "moderator#delete_listing", as: "moderator_delete_listing"
   delete "/moderator-delete-listing/:id" => "moderator#destroy_listing", as: "moderator_destroy_listing"
+  get "/moderator/search" => 'moderator#search', as: 'search_listing'
 
   # Sessions Routes
   resource :session, controller: "sessions", only: [:create]

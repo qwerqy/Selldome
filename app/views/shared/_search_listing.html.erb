@@ -1,10 +1,10 @@
-<h5 class="font-weight-bold mb-4 text-center">Verified Listings</h5>
+<h5 class="font-weight-bold mb-4 text-center">Search by:<%=params[:search]%></h5>
 <%=form_tag(search_listing_path , method: :get, remote:true, class: "d-flex justify-content-center") do %>
 <%= text_field_tag(:search, params[:search], class: "shadow-sm form-control m-3 mb-5  w-50", placeholder: "Search by Name") %>
 <% end %>
 
 <div class="d-flex flex-row">
-  <div class="px-2  tiny-font font-weight-bold">ID</div>
+  <div class="px-2  tiny-font flex-shrink-1 font-weight-bold">ID</div>
   <div class="px-2  tiny-font col-2 font-weight-bold">Name</div>
   <div class="px-2  tiny-font col-2 font-weight-bold">Property Type</div>
   <div class="px-2  tiny-font col-1 font-weight-bold">Country</div>
@@ -14,18 +14,24 @@
   <div class="px-2  tiny-font col-1 font-weight-bold">Verified</div>
 </div>
 <hr/>
-<% Listing.where(verified: true).each do |listing|%>
+<% Listing.search_by_name(params[:search]).each do |listing|%>
   <%= link_to view_listing_path(listing.id), remote: true, data: { target: "#listing-modal", toggle: 'modal' } do %>
   <div class="d-flex flex-row">
-    <div class="px-2  tiny-font font-weight-bold"><%=listing.id%></div>
+    <div class="px-2  tiny-font flex-shrink-1 font-weight-bold"><%=listing.id%></div>
     <div class="px-2  tiny-font col-2"><%=listing.name%></div>
     <div class="px-2  tiny-font col-2"><%=listing.property_type%></div>
     <div class="px-2  tiny-font col-1"><%=listing.country%></div>
     <div class="px-2  tiny-font col-1"><%=listing.state%></div>
     <div class="px-2  tiny-font col-1"><%=number_to_currency(listing.price, unit: '$')%></div>
     <div class="px-2  tiny-font col-2"><%=listing.user.name%></div>
-    <div class="px-2 tiny-font col-1">Verified</div>
+    <div class="px-2 tiny-font col-1">
+      <% if listing.verified? %>
+        <p class="font-weight-bold text-success">Verified</p>
+      <% else %>
+        <p class="font-weight-bold text-warning">Not Verified</p>
+      <% end %>
+    </div>
   </div>
-  <%end%>
+  <% end %>
 <hr/>
 <% end %>

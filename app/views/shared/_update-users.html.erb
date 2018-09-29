@@ -1,33 +1,33 @@
-<h3 class="font-weight-bold mb-4">All Users</h3>
-<div class="row">
-  <div class="col-1 font-weight-bold">ID</div>
-  <div class="col-1 font-weight-bold">First Name</div>
-  <div class="col-1 font-weight-bold">Last Name</div>
-  <div class="col-2 font-weight-bold">Birthday</div>
-  <div class="col-2 font-weight-bold">Email</div>
-  <div class="col-1 font-weight-bold">Phone</div>
-  <div class="col-2 font-weight-bold">Country</div>
-  <div class="col-2 font-weight-bold">Remove</div>
+<h5 class="font-weight-bold mb-4 text-center">Update Users</h5>
+<%=form_tag(search_user_path , method: :get, remote:true, class: "d-flex justify-content-center") do %>
+<%= text_field_tag(:search, params[:search], class: "shadow-sm form-control m-3 mb-5  w-50", placeholder: "Search anything...") %>
+<% end %>
+<div class="d-flex flex-row">
+  <div class="px-2  tiny-font font-weight-bold">ID</div>
+  <div class="px-2  tiny-font col-2 font-weight-bold">First Name</div>
+  <div class="px-2  tiny-font col-2 font-weight-bold">Last Name</div>
+  <div class="px-2  tiny-font col-1 font-weight-bold">Birthday</div>
+  <div class="px-2  tiny-font col-3 font-weight-bold">Email</div>
+  <div class="px-2  tiny-font col-2 font-weight-bold">Phone</div>
+  <div class="px-2  tiny-font col-1 font-weight-bold">Country</div>
+  <div class="px-2  tiny-font col-1 font-weight-bold">Edit</div>
 </div>
 <hr/>
 <% User.order(:updated_at).each do |user|%>
-<div class="row">
-  <div class="col-1"><a href='/users/<%=user.id%>'><%=user.id%></a></div>
-  <div class="col-1"><%=user.first_name%></div>
-  <div class="col-1"><%=user.last_name%></div>
-  <div class="col-2"><%=user.birthday%></div>
-  <div class="col-2"><%=user.email%></div>
-  <div class="col-1"><%=user.phone%></div>
-  <div class="col-2"><%=user.country%></div>
-  <div class="col-2">
-    <ul class="list-inline">
-      <li class="list-inline-item">
+<div class="d-flex flex-row">
+  <div class="px-2 tiny-font"><a href='/users/<%=user.id%>'><%=user.id%></a></div>
+  <div class="px-2 tiny-font  col-2"><%=user.first_name%></div>
+  <div class="px-2 tiny-font  col-2"><%=user.last_name%></div>
+  <div class="px-2 tiny-font  col-1"><%=user.birthday%></div>
+  <div class="px-2 tiny-font  col-3"><%=user.email%></div>
+  <div class="px-2 tiny-font  col-2"><%=user.phone%></div>
+  <div class="px-2 tiny-font  col-1"><%=user.country%></div>
+  <div class="px-2 tiny-font col-1">
+
         <%= link_to 'Edit', edit_user_path(user.id), remote: true, data: { target: "#user-modal", toggle: 'modal' }, class: 'btn-link' %>
-      </li>
-      <li class="list-inline-item">
-        <%= button_to 'Delete', destroy_user_path(user.id),  method: "delete", remote: true , data: {confirm: "Are you sure about deleting #{user.name}?"}, class: 'btn btn-link' %>
-      </li>
-    </ul>
+
+        <%= link_to 'Delete', destroy_user_path(user.id),  method: "delete", remote: true , data: {confirm: "Are you sure about deleting #{user.name}?"}, class: 'btn-link' %>
+
   </div>
 </div>
 </div>

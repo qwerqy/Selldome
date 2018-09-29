@@ -1,7 +1,9 @@
-<h5 class="font-weight-bold mb-4 text-center">All Users</h5>
-<%=form_tag(search_user_path , method: :get, remote:true, class: "d-flex justify-content-center") do %>
-<%= text_field_tag(:search, params[:search], class: "shadow-sm form-control m-3 mb-5  w-50", placeholder: "Search anything...") %>
-<% end %>
+<h5 class="font-weight-bold mb-4 text-center">Search Result: "<%=params[:search]%>"</h5>
+
+  <%=form_tag(search_user_path , method: :get, remote:true, class: "d-flex justify-content-center") do %>
+  <%= text_field_tag(:search, params[:search], class: "shadow-sm form-control m-3 mb-5  w-50", placeholder: "Search anything...") %>
+  <% end %>
+
 <div class="d-flex flex-row">
   <div class="px-2  tiny-font font-weight-bold">ID</div>
   <div class="px-2  tiny-font col-2 font-weight-bold">First Name</div>
@@ -13,7 +15,7 @@
   <div class="px-2  tiny-font col-1 font-weight-bold">Profile</div>
 </div>
 <hr/>
-<% User.order(created_at: :desc).each do |user|%>
+<% User.search_by_full_name(params[:search]).each do |user|%>
 <div class="d-flex flex-row">
   <div class="px-2 tiny-font "><a href='/users/<%=user.id%>'><%=user.id%></a></div>
   <div class="px-2 tiny-font  col-2"><%=user.first_name%></div>

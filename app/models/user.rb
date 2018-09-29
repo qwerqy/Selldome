@@ -3,6 +3,14 @@ class User < ApplicationRecord
   require 'carrierwave/orm/activerecord'
   mount_uploader :avatar, AvatarUploader
 
+  include PgSearch
+  pg_search_scope :search_by_full_name, :against => [:first_name, :last_name],
+  using: {
+    tsearch: {
+      prefix: true
+    }
+  }
+
   has_many :authentications, dependent: :destroy
   has_many :listings, dependent: :destroy
   has_many :reviews, dependent: :destroy

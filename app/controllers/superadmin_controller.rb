@@ -69,6 +69,17 @@ class SuperadminController < ApplicationController
       end
     end
 
+    def search
+      if current_user.superadmin?
+        respond_to do |format|
+          format.js
+        end
+      else
+        flash[:danger] = "You have no access!"
+        redirect_to root_path
+      end
+    end
+
 private
 
   def user_params
