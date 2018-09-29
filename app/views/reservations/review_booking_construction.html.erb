@@ -1,0 +1,95 @@
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-white">
+  <a class="navbar-brand font-weight-bold" href="/">Selldome</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+
+<div class="container mt-5">
+  <div class="row">
+    <div id="reservation-basket" class="col-lg-8 mb-4">
+      <%= render partial: 'reservations/review_stay_details', locale: [@reservation, @listing] %>
+    </div>
+    <div class='col-lg-4'>
+      <div class="card">
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <h5 class="font-weight-bold"><%=@listing.name%></h5>
+              <p class="tiny-font text-muted m-0 mb-1"><%=@listing.property_type%></p>
+              <div class="rating-box">
+                <ul id="star-rating" class="list-inline">
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                  <li class="list-inline-item"><i class="text-muted tiny-font far fa-star"></i></li>
+                </ul>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <p class="mb-1"><i class="fas fa-user-alt"></i> <%=@reservation.guest_number%> Guest(s)</p>
+              <p class=""><i class="fas fa-calendar"></i> <%=@reservation.start_time.strftime("%b %-d")%> - <%=@reservation.end_time.strftime("%b %-d")%></p>
+            </li>
+            <li class="list-group-item pl-0">
+              <ul id="bookingCalculator" class="list-group list-group-flush mb-4">
+                <li class="list-group-item">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="">
+                        <p class="m-0"><span id="valuePerNight"><%=number_to_currency(@listing.price, unit: '$', precision: 0)%></span> x <span id="nights"><%=@reservation.days%></span></p>
+                      </div>
+                    </div>
+                    <div class="col-6 ">
+                      <div class="d-flex justify-content-end">
+                        <span id="totalSale">$<%=(@reservation.guest_number*@listing.price.to_i)*(@reservation.end_time.day-@reservation.start_time.day)%></span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="list-group-item ">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="">
+                        <p class="m-0 text-muted">Service fee</p>
+                      </div>
+                    </div>
+                    <div class="col-6 ">
+                      <div class="d-flex justify-content-end">
+                        <span id="totalFee" class="text-muted"></span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="list-group-item ">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="">
+                        <h5 class="m-0">Total</h5>
+                      </div>
+                    </div>
+                    <div class="col-6 ">
+                      <div class="d-flex justify-content-end">
+                        <span id="totalBook"><%=number_to_currency(@listing.price)%></span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+var b = $('#totalSale').html().split('').splice(1);
+$('#totalFee').html('$' + Math.round(b.join('')*0.1));
+var c = $('#totalFee').html().split('').splice(1);
+$('#totalBook').html('$' + (parseInt(b.join('')) + parseInt(c.join(''))));
+</script>

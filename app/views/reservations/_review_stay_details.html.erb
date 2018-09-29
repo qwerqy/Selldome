@@ -9,29 +9,32 @@
 
 <h4 class="font-weight-bold"><%=@reservation.days%> in <%=@listing.name%></h4>
 
-<div class="row mt-2 mb-5">
-  <div class="col-6">
+<div class="d-flex flex-row mt-2 mb-5">
+  <div class="flex-grow-1">
     <div class="container">
       <div class="row">
-        <div class="col-2 bg-secondary text-light text-center p-2">
+        <div class="col-sm-2 shadow-sm bg-secondary text-light text-center p-2">
           <p class="m-0 tiny-font"><%=I18n.t("date.abbr_month_names")[@reservation.start_time.month].upcase%></p>
           <p class="m-0"><%=@reservation.start_time.day%></p>
         </div>
-        <div class="col-8 bg-light p-2">
+        <div class="col-sm-8 bg-white shadow-sm p-2">
           <p class="m-0">Check In</p>
           <p class="m-0">Before 12pm</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-6">
+  <div class="d-flex align-items-center">
+    <i class="text-muted display-4 fas fa-arrow-right mx-3"></i>
+  </div>
+  <div class="flex-grow-1">
     <div class="container">
-      <div class="row">
-        <div class="col-2 bg-secondary text-light text-center p-2">
+      <div class="row justify-content-end">
+        <div class="col-sm-2 shadow-sm bg-secondary text-light text-center p-2">
           <p class="m-0 tiny-font"><%=I18n.t("date.abbr_month_names")[@reservation.end_time.month].upcase%></p>
           <p class="m-0"><%=@reservation.end_time.day%></p>
         </div>
-        <div class="col-8 bg-light p-2">
+        <div class="col-sm-8 bg-white shadow-sm p-2">
           <p class="m-0">Check In</p>
           <p class="m-0">Before 12pm</p>
         </div>
