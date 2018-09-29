@@ -2,12 +2,11 @@ class ListingsController < ApplicationController
   before_action :require_login
   def my_index
     @user = current_user
-    render template: 'listings/index'
+    render 'listings/index'
   end
 
   def new
     @listing = Listing.new
-    render template: 'listings/new'
   end
 
   def show
@@ -27,13 +26,12 @@ class ListingsController < ApplicationController
       redirect_to my_listings_path
     else
       flash[:danger] = @listing.errors.full_messages.to_sentence
-      render template: "listings/new"
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def edit
     @listing = Listing.find(params[:id])
-    render template: 'listings/edit'
   end
 
   def update
@@ -43,7 +41,7 @@ class ListingsController < ApplicationController
       redirect_to listing_path(@listing.id)
     else
       flash[:danger] = "Update Failed!"
-      render :edit
+      redirect_back(fallback_location: root_path)
     end
   end
 
