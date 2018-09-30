@@ -91,6 +91,8 @@ gem 'pg_search'
 # RBP
 gem 'rails_best_practices'
 
+gem 'rails_12factor'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
