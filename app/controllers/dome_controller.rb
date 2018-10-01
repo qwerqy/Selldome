@@ -10,7 +10,7 @@ class DomeController < ApplicationController
 
   def show_all
     @all_listings = Listing.all
-    @pagination = Listing.order(:created_at).page params[:page]
+    @pagination = @all_listings.page params[:page]
     respond_to do |format|
       format.html { render 'dome/index' }
       format.js
@@ -19,7 +19,7 @@ class DomeController < ApplicationController
 
   def show_place_type
     @place_type = Listing.where("place_type = ?", params[:place_type])
-    @pagination = Listing.where(place_type: params[:place_type]).page params[:page]
+    @pagination = @place_type.page params[:page]
     respond_to do |format|
       format.html { render 'dome/index' }
       format.js
@@ -28,7 +28,7 @@ class DomeController < ApplicationController
 
   def show_by_guests
     @guest_number = Listing.where("guest_number >= :one AND guest_number <= :two", {one: params[:no1], two: params[:no2]})
-    @pagination = Listing.where(guest_number: params[:no1]..params[:no2]).page params[:page]
+    @pagination = @guest_number.page params[:page]
     respond_to do |format|
       format.js
     end
@@ -36,7 +36,7 @@ class DomeController < ApplicationController
 
   def show_by_price
     @price = Listing.where("price >= :start AND price <= :end", {start: params[:no1], end: params[:no2]})
-    @pagination = Listing.where(price: params[:no1]..params[:no2]).page params[:page]
+    @pagination = @price.page params[:page]
     respond_to do |format|
       format.html { render 'dome/index'}
       format.js
