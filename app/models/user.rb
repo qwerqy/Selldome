@@ -47,4 +47,10 @@ class User < ApplicationRecord
     full_country = ISO3166::Country[country]
     full_country.translations[I18n.locale.to_s] || full_country.name
   end
+
+  def update_password(new_password, confirm_password)
+    if new_password == confirm_password
+      self.update(password: new_password)
+    end
+  end
 end

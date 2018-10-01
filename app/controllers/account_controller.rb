@@ -16,11 +16,11 @@ class AccountController < ApplicationController
   def update_password
     @user = User.find(params[:user_id])
     if @user.authenticated?(params[:user][:old_password])
-      if params[:user][:new_password] == params[:user][:confirm_password]
-        @user.update(password: params[:user][:new_password])
+      if @user.update_password(params[:user][:new_password], params[:user][:confirm_password])
+        flash[:success] = "Password Updated!"
         redirect_back(fallback_location: root_path)
       else
-        flash[:danger] = "Password does not match with confirmation"
+        flash[:danger] = "Password does not match"
         redirect_back(fallback_location: root_path)
       end
     else
