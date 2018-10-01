@@ -93,7 +93,9 @@ gem 'rails_best_practices'
 
 gem 'rails_12factor'
 
-gem 'skylight', :group => :production
+group :production, :development do
+  gem 'skylight'
+end
 
 gem 'unicorn'
 
