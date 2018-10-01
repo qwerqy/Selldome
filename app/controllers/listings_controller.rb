@@ -10,7 +10,7 @@ class ListingsController < ApplicationController
   end
 
   def show
-    @listing = Listing.find(params[:id])
+    @listing = Listing.includes(:reviews, :reservations).find(params[:id])
     @review = @listing.reviews.build
     @reservations = Reservation.where(listing_id: params[:id])
     respond_to do |format|
