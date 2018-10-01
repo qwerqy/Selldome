@@ -83,3 +83,5 @@ production:
   database: selldome_production
   username: selldome
   password: <%= ENV['SELLDOME_DATABASE_PASSWORD'] %>
+  url:  <%= ENV["DATABASE_URL"] %>
+  pool: <%= ENV["DB_POOL"] || ENV['RAILS_MAX_THREADS'] || 5 %>

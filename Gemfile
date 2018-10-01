@@ -95,6 +95,8 @@ gem 'rails_12factor'
 
 gem 'skylight'
 
+gem 'unicorn'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
