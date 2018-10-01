@@ -1,23 +1,25 @@
-<%= form_for :session, url: session_path do |form| %>
-  <div class="text-field form-group">
-    <%= form.label :email %>
-    <%= form.text_field :email, type: 'email', class: 'form-control' %>
-  </div>
+<% cache(action_suffix: "primary") do %>
+  <%= form_for :session, url: session_path do |form| %>
+    <div class="text-field form-group">
+      <%= form.label :email %>
+      <%= form.text_field :email, type: 'email', class: 'form-control' %>
+    </div>
 
-  <div class="password-field form-group">
-    <%= form.label :password %>
-    <%= form.password_field :password, class: 'form-control' %>
-  </div>
+    <div class="password-field form-group">
+      <%= form.label :password %>
+      <%= form.password_field :password, class: 'form-control' %>
+    </div>
 
-  <div class="submit-field list-inline">
-    <%= form.submit 'Sign In', class: 'btn btn-primary list-inline-item'%>
-    <%= link_to "Sign in with Google", "/auth/google_oauth2", class: 'btn btn-danger list-inline-item' %>
-  </div>
+    <div class="submit-field list-inline">
+      <%= form.submit 'Sign In', class: 'btn btn-primary list-inline-item'%>
+      <%= link_to "Sign in with Google", "/auth/google_oauth2", class: 'btn btn-danger list-inline-item' %>
+    </div>
 
-  <div class="other-links list-inline mt-3">
-    <% if Clearance.configuration.allow_sign_up? %>
-      <%= link_to 'Sign Up', sign_up_path , remote: true, data: { target: '#signUpBox', toggle: 'modal' }, class: 'list-inline-item'%>
-    <% end %>
-      <%= link_to t(".forgot_password"), forgot_password_path, class: 'list-inline-item' , data: {turbolinks: "false"}%>
-  </div>
+    <div class="other-links list-inline mt-3">
+      <% if Clearance.configuration.allow_sign_up? %>
+        <%= link_to 'Sign Up', sign_up_path , remote: true, data: { target: '#signUpBox', toggle: 'modal' }, class: 'list-inline-item'%>
+      <% end %>
+        <%= link_to t(".forgot_password"), forgot_password_path, class: 'list-inline-item' , data: {turbolinks: "false"}%>
+    </div>
+  <% end %>
 <% end %>
