@@ -1,8 +1,3 @@
-# Admin Account
-User.create(first_name: 'SuperAdmin', last_name: 'Amin', email: 'superadmin@selldome.com', gender: 1, country: 'MY', password: '123123', superadmin: true)
-
-# Mod Account
-User.create(first_name: 'Moderator', last_name: 'Amin', email: 'moderator@selldome.com', gender: 1, country: 'MY', password: '123123', moderator: true)
 
 # Seed Users
 user = {}
