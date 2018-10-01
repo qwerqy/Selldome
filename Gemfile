@@ -93,6 +93,8 @@ gem 'rails_best_practices'
 
 gem 'rails_12factor'
 
+gem 'skylight'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
