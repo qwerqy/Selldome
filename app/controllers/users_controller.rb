@@ -23,7 +23,8 @@ class UsersController < Clearance::UsersController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
+      flash[:success] = "Succesfully Updated"
       redirect_to profile_path
     else
       flash[:danger] = @user.errors.full_messages.to_sentence
@@ -93,9 +94,9 @@ class UsersController < Clearance::UsersController
           :birthday,
           :email,
           :phone,
-          :password,
           :avatar,
           :about_me,
+          :password,
           :remote_avatar_url,
           :superadmin,
           :moderator,
