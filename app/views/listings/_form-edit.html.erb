@@ -6,12 +6,18 @@
 <div class="card p-5 mt-5 mb-2">
   <h1 class="text-center">Listing Photos</h1>
   <div class="d-flex flex-row justify-content-center">
-    <% @listing.photos.each_with_index do |photo, index| %>
-    <div class="d-flex flex-column">
-      <div class="background-wrap photo-500 mb-2" style="background-image: url('<%=photo.url%> ');"></div>
-      <%=link_to "Remove Photo", listing_remove_photo_path(@listing.id, index), method: 'delete', data: { confirm: "Are you sure you want to delete this image?" }, class: "mx-auto btn btn-outline-secondary"%>
+    <div class="justify-content-center d-flex flex-row flex-wrap">
+      <% @listing.photos.each_with_index do |photo, index| %>
+      <ul class="list-group">
+        <li class="list-group-item border-0">
+          <%=image_tag(photo.thumb_large.url, class: "img-fluid")%>
+        </li>
+        <li class="list-group-item mx-auto border-0">
+          <%=link_to "Remove Photo", listing_remove_photo_path(@listing.id, index), method: 'delete', data: { confirm: "Are you sure you want to delete this image?" }, class: "text-center btn btn-outline-secondary"%>
+        </li>
+      </ul>
+      <% end %>
     </div>
-    <% end %>
   </div>
 </div>
 

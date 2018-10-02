@@ -69,7 +69,7 @@ class ListingsController < ApplicationController
 
   def remove_photo
     @listing = Listing.find(params[:id])
-    remove_image_at_index(params[:index].to_i)
+    @listing.remove_image_at_index(params[:index].to_i)
     if @listing.save
       flash[:success] = "Photo removed"
       redirect_back(fallback_location: root_path)

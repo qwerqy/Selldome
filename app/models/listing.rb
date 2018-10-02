@@ -96,16 +96,14 @@ class Listing < ApplicationRecord
      full_country.translations[I18n.locale.to_s] || full_country.name
   end
 
-private
-
   def remove_image_at_index(index)
-  remain_photos = @listing.photos
-      if index == 0 && @listing.photos.size == 1
-          @listing.remove_photos!
+  remain_photos = self.photos
+      if index == 0 && self.photos.size == 1
+          self.remove_photos!
       else
           deleted_photo = remain_photos.delete_at(index)
           deleted_photo.try(:remove!)
-          @listing.photos = remain_photos
+          self.photos = remain_photos
       end
   end
 end
