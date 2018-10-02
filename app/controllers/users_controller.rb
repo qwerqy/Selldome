@@ -8,6 +8,18 @@ class UsersController < Clearance::UsersController
     end
   end
 
+  def create
+    @user = user_from_params
+
+    if @user.save
+      sign_in @user
+      redirect_back_or url_after_create
+    else
+      flash[:danger] = @user.errors.full_messages.to_sentence + ". Try again."
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   def show
     @user = User.find(params[:id])
     render 'users/profile'
