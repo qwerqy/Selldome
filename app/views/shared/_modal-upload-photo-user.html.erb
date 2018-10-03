@@ -5,7 +5,7 @@
   </button>
   </div>
 <div class="modal-body">
-  <%= form_for @user , url: user_path do |f|%>
+  <%= form_for :user , url: user_edit_path, method: 'PATCH' do |f|%>
   <div class="form-group">
     <%=f.label :avatar, "Upload via Computer:"%>
     <%=f.file_field :avatar, class: 'form-control-file'%>
