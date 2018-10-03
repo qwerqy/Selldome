@@ -17,7 +17,9 @@ class User < ApplicationRecord
   }
 
 
-  validates :password, presence: true, length: { minimum: 8, too_short: "Your password is too short!" }, :if => :password
+
+ validates :password, presence: true, length: { minimum: 8, too_short: "Your password is too short!" }, if: :password
+
 
  def self.create_with_auth_and_hash(authentication, auth_hash)
    user = self.create!(

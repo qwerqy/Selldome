@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
 
   # Listings Routes
-  resources :listings, controller: "listings", only: [:create, :show, :update] do
+  resources :listings, controller: "listings", only: [:show] do
     # Review Route
     resources :reviews, controller: "review", only: [:new, :create]
     get 'booked_dates' => 'reservations#booked_dates'

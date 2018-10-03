@@ -35,9 +35,9 @@ class UsersController < Clearance::UsersController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
-      flash[:success] = "Succesfully Updated"
-      redirect_to profile_path
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile successfully updated!"
+      redirect_back(fallback_location: profile_path)
     else
       flash[:danger] = @user.errors.full_messages.to_sentence
       render :edit
@@ -46,7 +46,6 @@ class UsersController < Clearance::UsersController
 
   def upload_photo
     @user = User.find(params[:id])
-    render 'users/upload-profile-photo'
     respond_to do |format|
       format.js
     end
