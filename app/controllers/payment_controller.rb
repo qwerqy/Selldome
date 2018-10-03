@@ -23,7 +23,6 @@ class PaymentController < ApplicationController
      )
 
     if result.success?
-      @reservation.skip_validations = true
       @reservation.update(paid: true)
       ReservationJob.perform_later(@reservation.user, @listing.user, @listing.id)
 
