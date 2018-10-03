@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   get "/admin/search" => "superadmin#search", as: "search_user"
   end
   # Moderator
+  constraints Clearance::Constraints::SignedIn.new { |user| user.moderator? || user.superadmin? } do
   get "/moderator-panel" => "moderator#index", as: "moderator_panel"
   get "/unverified_listings" => "moderator#unverified_listings", as: "unverified_listings"
   post "/unverified_listings/:id/verify/:verified" => "moderator#verify"
@@ -83,7 +84,7 @@ Rails.application.routes.draw do
   get "/moderator-delete-listing/:id" => "moderator#delete_listing", as: "moderator_delete_listing"
   delete "/moderator-delete-listing/:id" => "moderator#destroy_listing", as: "moderator_destroy_listing"
   get "/moderator/search" => 'moderator#search', as: 'search_listing'
-
+  end
   # Sessions Routes
   resource :session, controller: "sessions", only: [:create]
   get "/sign_in" => "sessions#new", as: "sign_in"

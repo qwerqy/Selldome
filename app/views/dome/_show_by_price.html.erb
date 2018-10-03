@@ -97,13 +97,10 @@
               <% else %>
                 <%=image_tag('default2.jpg', class: 'd-block img-fluid w-100')%>
               <% end %>
-
             <div class="card-body p-2 col-8">
               <p class="card-subtitle text-muted"><%=home.property_type%></p>
               <ul class="list-inline mb-1">
                 <li class="list-inline-item"><p class="card-title font-weight-bold mb-2"><%=home.name%></p></li>
-
-
                 <!-- If home is verified, this will show -->
                 <% if home.verified %>
                 <li class="list-inline-item">
@@ -128,8 +125,6 @@
                 </ul>
               </div>
             </div>
-
-
           </div>
         <% end %>
       </div>

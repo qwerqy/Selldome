@@ -17,7 +17,9 @@ class User < ApplicationRecord
   }
 
 
-  validates :password, presence: true, length: { minimum: 8, too_short: "Your password is too short!" }, if: :password
+
+ validates :password, presence: true, length: { minimum: 8, too_short: "Your password is too short!" }, if: :password
+
 
  def self.create_with_auth_and_hash(authentication, auth_hash)
    user = self.create!(
@@ -26,7 +28,6 @@ class User < ApplicationRecord
      birthday: auth_hash["info"]["birthday"],
      email: auth_hash["info"]["email"],
      phone: auth_hash["info"]["phone"],
-     remote_avatar_url: auth_hash["info"]["image"],
      password: SecureRandom.hex(10)
    )
    user.authentications << authentication
@@ -46,5 +47,11 @@ class User < ApplicationRecord
  def country_name
     full_country = ISO3166::Country[country]
     full_country.translations[I18n.locale.to_s] || full_country.name
+  end
+
+  def update_password(new_password, confirm_password)
+    if new_password == confirm_password
+      self.update(password: new_password)
+    end
   end
 end

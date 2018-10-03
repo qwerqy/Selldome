@@ -93,6 +93,12 @@ gem 'rails_best_practices'
 
 gem 'rails_12factor'
 
+group :production, :development do
+  gem 'skylight'
+end
+
+gem 'unicorn'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

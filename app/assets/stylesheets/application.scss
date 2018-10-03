@@ -289,7 +289,7 @@ a:hover {
 }
 
 .edit-profile-sm {
-  display: none;
+  display: none!important;
 }
 
 .account-index-sm {
@@ -468,7 +468,7 @@ a:hover {
   }
 
   .edit-profile-sm {
-    display: block;
+    display: block!important;
   }
 
   .account-index {

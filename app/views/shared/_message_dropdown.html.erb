@@ -12,6 +12,7 @@
     <div class="dropdown-divider"></div>
   <% end %>
 <% end %>
+
 <% current_user.reservations.order(created_at: :desc).each do |reservation|%>
   You have booked <a class="font-weight-bold" href="/listings/<%=reservation.listing_id%>"><%=reservation.listing_name%></a> for <%=reservation.days%>!
   <p class="m-0 tiny-font text-muted"><%=reservation.created_at%></p>
@@ -21,5 +22,4 @@
     <%=link_to listing_reservation_payment_new_path(reservation_id: reservation.id, listing_id: reservation.listing_id) do %>
     <p class="tiny-font text-muted">Unpaid</p>
     <% end %>
-  <% end %>
 <% end %>

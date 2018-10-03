@@ -10,7 +10,7 @@ class ListingsController < ApplicationController
   end
 
   def show
-    @listing = Listing.find(params[:id])
+    @listing = Listing.includes(:reviews, :reservations).find(params[:id])
     @review = @listing.reviews.build
     @reservations = Reservation.where(listing_id: params[:id])
     respond_to do |format|
@@ -69,7 +69,7 @@ class ListingsController < ApplicationController
 
   def remove_photo
     @listing = Listing.find(params[:id])
-    remove_image_at_index(params[:index].to_i)
+    @listing.remove_image_at_index(params[:index].to_i)
     if @listing.save
       flash[:success] = "Photo removed"
       redirect_back(fallback_location: root_path)
@@ -90,6 +90,22 @@ class ListingsController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def property_from_place_type
+    place = params[:place_type]
+    if place == '1'
+      @property_type = ["Apartment", "Condominium", "Casa particular (Cuba)", "Loft", "Serviced Apartment"]
+    elsif place == '2'
+      @property_type = ["House", "Bungalow", "Cabin", "Casa particular (Cuba)", "Chalet", "Cottage", "Cycladic House", "Dammuso (Italy)", "Dome House", "Earth House", "Farmstay", "Houseboat", "Hut", "Lighthouse", "Pension (South Korea)", "Shepherd's Hut (UK, France)", "Tiny House", "Townhouse", "Trullo (Italy)", "Villa"]
+    elsif place == '3'
+      @property_type = ["Guesthouse","Guest Suite","Farmstay"]
+    elsif place == '4'
+      @property_type = ["Barn", "Boat", "Bus", "Camper/RV", "Campsite", "Castle", "Cave", "Dome House", "Earth House", "Farmstay", "Hut", "Igloo, Island", "Lighthouse", "Pension (South Korea)", "Plane", "Shepherd's Hut (UK, France)", "Tent", "Tinyhouse", "Tipi", "Train", "Treehouse", "Windmill", "Yurt"]
+    elsif place == '5'
+      @property_type = ["Boutique Hotel", "Aparthotel", "Heritage Hotel (India)", "Hostel", "Hotel", "Natural Lodge", "Resort", "Serviced Apartment"]
+    end
+    render json: {property_type: @property_type}
   end
 
   private
