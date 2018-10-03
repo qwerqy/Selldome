@@ -8,7 +8,7 @@
   <div id="clearance" class="sign-up">
     <h2><%= t(".title") %></h2>
 
-      <%= render partial: '/users/form', locale: @user %>
+      <%= render partial: '/users/form', locals: {user: @user} %>
 
   </div>
 </div>

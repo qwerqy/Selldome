@@ -24,7 +24,7 @@
     <div class="card col-9 p-3">
       <h5 class="font-weight-bold">Edit Profile</h5>
 
-      <%= render partial: '/users/form-edit'%>
+      <%= render partial: '/users/form-edit', locals: {user: @user}%>
 
     </div>
 
