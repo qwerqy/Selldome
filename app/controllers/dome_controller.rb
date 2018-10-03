@@ -2,9 +2,11 @@ class DomeController < ApplicationController
   before_action :require_login
   def index
     @pagination = Listing.order(:created_at).page params[:page]
-    @listings = Listing.search(params[:search])
+    @listings = PgSearch.multisearch(params[:search]).map do |m|
+                  Listing.find(m.id)
+                end
     respond_to do |format|
-      format.html
+    format.html
     end
   end
 
