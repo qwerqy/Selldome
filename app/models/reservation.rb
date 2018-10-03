@@ -2,7 +2,9 @@ class Reservation < ApplicationRecord
   attr_accessor :skip_validations
   belongs_to :listing
   belongs_to :user
-
+  delegate :id, :avatar, :name, :first_name, :last_name, :birthday, :email, :phone, :country, :gender, :about_me, to: :user, prefix: true
+  delegate :name, to: :listing, prefix: true
+  
   validates :start_time , presence: true
   validates :end_time , presence: true
   validates :listing_id , uniqueness: { scope: :user,
