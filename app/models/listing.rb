@@ -111,7 +111,6 @@ class Listing < ApplicationRecord
     end
     render json: {property_type: @property_type}
   end
-  
 private
 
   def remove_image_at_index(index)
